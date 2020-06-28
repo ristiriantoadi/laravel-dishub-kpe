@@ -35,6 +35,9 @@
                         <a class="nav-link active" href="{{url('/kendaraans')}}">
                             <i class="fas fa-edit"></i>
                             <span>Edit Data</span></a>
+                        <a class="nav-link active" href="{{url('/delete')}}">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Delete Data</span></a>
                         <a class="nav-link active" href="{{url('/print')}}">
                             <i class="fas fa-print"></i>
                             <span>Print</span></a>

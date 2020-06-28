@@ -46,7 +46,7 @@
             <li class="nav-item dropdown no-arrow" role="presentation">
             <li class="nav-item dropdown no-arrow">
                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                    <span class="d-none d-lg-inline mr-2 text-gray-600 small">Admin</span>
+                    <span class="d-none d-lg-inline mr-2 text-gray-600 small">{{ auth()->user()->name }}</span>
                     <img class="border rounded-circle img-profile" src="{{ asset('HalLogin/img/loglogin.png') }}">
                 </a>
                 <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
@@ -125,15 +125,15 @@
         </div>
         <div class="col-md-6 col-xl-3 mb-4">
             <div class="card shadow border-left-warning py-2">
-                <a href="{{url('/dashboard')}}">
+                <a href="{{url('/delete')}}">
                     <div class="card-body">
                         <div class="row align-items-center no-gutters">
                             <div class="col mr-2">
                                 <div class="text-uppercase text-warning font-weight-bold text-xs mb-1">
-                                    <span>Dashboard</span></div>
+                                    <span>Delete</span></div>
                                 <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
                             </div>
-                            <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
+                            <div class="col-auto"><i class="fas fa-times-circle fa-2x text-gray-300"></i></div>
                         </div>
                     </div>
                 </a>

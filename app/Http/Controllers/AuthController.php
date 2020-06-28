@@ -26,12 +26,13 @@ class AuthController extends Controller
         if(Auth::attempt($user_data)){
             return redirect('/dashboard');
         } 
-        return redirect('/dashboard');
+        return redirect('/login');
     }
 
     public function logout()
     {   
-        return view('/login');
+        Auth::logout();
+        return redirect('/login');
     }
 
 }

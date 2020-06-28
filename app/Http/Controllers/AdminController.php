@@ -39,7 +39,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $password = Hash::make('$request->password');
+        $password = Hash::make($request->password);
         //$password = $request->password;
 
         $random = Str::random(60);

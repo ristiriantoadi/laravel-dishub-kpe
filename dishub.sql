@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jun 2020 pada 11.44
+-- Waktu pembuatan: 28 Jun 2020 pada 19.50
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -77,10 +77,8 @@ CREATE TABLE `kendaraans` (
 --
 
 INSERT INTO `kendaraans` (`id`, `nopol`, `nouji`, `merk`, `thpembuatan`, `norangka`, `nomesin`, `dayaangkutorang`, `dayaangkutbarang`, `trayek`, `namaperusahaan`, `alamatperusahaan`, `namapemilik`, `nosk`, `kodeperusahaan`, `masaberlaku`, `tglawalsk`, `tglakhirsk`, `updated_at`, `created_at`) VALUES
-(19, '3', '4', '4', '4', '4', '5', '4', '4', '4', '4', '4', 'HasanLL', '4', '4', '0000-00-00', '0004-04-04', '0044-04-04', '2020-06-26 03:16:51', '2020-06-25 10:18:04'),
 (20, '1', '4', '4', '4', '4', '4', '4', '4', '4', '4', '4', 'LOLLL', '4', '4', '0000-00-00', '0004-04-04', '0044-04-04', '2020-06-26 00:31:46', '2020-06-25 10:18:45'),
 (23, '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', 'TaYO', '9', '9', '0000-00-00', '0009-09-09', '0009-09-09', '2020-06-26 00:32:06', '2020-06-25 11:00:32'),
-(25, '12', '9', '9', '9', '9', '00', '9', '9', '9', '9', '9', 'HAHAL', '99', '9', '0000-00-00', '0009-09-09', '0009-09-09', '2020-06-26 03:17:42', '2020-06-25 23:32:20'),
 (26, '109', '8', '8', '8', '8', '8', '8', '8', '8', '8', '8', 'LOL', '8', '8', '0000-00-00', '0008-08-08', '0008-08-08', '2020-06-27 15:46:42', '2020-06-26 03:18:34'),
 (27, '26', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '9', '0000-00-00', '0009-09-09', '0009-09-09', '2020-06-26 03:19:07', '2020-06-26 03:19:07'),
 (29, '1221', '1221', 'dc', '2010', '1221', '1221', '1221 orang', '1221', 'sumbawa', 'tes', 'eev', 'sdcscd', '1212', '111', '0000-00-00', '2020-06-27', '2020-06-30', '2020-06-27 07:46:31', '2020-06-27 07:46:31'),
@@ -123,8 +121,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'I Gede Bagus Wirawan', 'changgusde@yahoo.com', NULL, '$2y$10$PVOqS9KJkLe0B4KbtzOauuVnB7NlDeXUGiByHz4Xh02AaKTLzxfNS', 'xAMJ1Iii0gQdUxrorDZkv8qWOfPIxXs305kZGuqxNIm38WLgxiSLxdKC61Ih', '2020-06-27 16:40:36', '2020-06-27 16:40:36'),
-(2, 'I Gede Bagus Wirawan', 'gusdechang24@gmail.com', NULL, '$2y$10$Cke/jKwitwO1Q9l64MJgn.ppcFMtamOygCEABCLMn6ZZ.6hLq0Zpi', '7epcRYA96MVuPPtxfPwq2BzAYB7ORLidVTRlcHBKhOmykuccgog29IxoVFhq', '2020-06-27 17:46:30', '2020-06-27 17:46:30');
+(3, 'Admin Dishub', 'dishub@gmail.com', NULL, '$2y$10$Rs5/fXkreysfIKLMTfK2U.wZ/Dk.QVugTFCxr4neLXKg0jlEaWpXa', '7HuLGOgt6Hnym7RtoYC5sFo8UDbyTLbnYyBahzJXItzgWeUYrONlYlg4Ng2b', '2020-06-28 08:47:25', '2020-06-28 08:47:25');
 
 --
 -- Indexes for dumped tables
@@ -180,7 +177,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

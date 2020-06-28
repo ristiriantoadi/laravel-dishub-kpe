@@ -1,6 +1,6 @@
 @extends('layout/admin')
 
-@section('title', 'Edit Data')
+@section('title', 'Hapus Data')
 
 @section('container')
 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
@@ -9,7 +9,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <form action="/kendaraans/cari" method="GET"
+        <form action="/delete/cari" method="GET"
             class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Nomor Mesin ..."
@@ -29,7 +29,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right p-3 animated--grow-in" role="menu"
                     aria-labelledby="searchDropdown">
-                    <form class="form-inline mr-auto navbar-search w-100" action="/kendaraans/cari" method="GET">
+                    <form class="form-inline mr-auto navbar-search w-100" action="/delete/cari" method="GET">
                         <div class="input-group">
                             <input class="bg-light form-control border-0 small" type="text"
                                 placeholder="Cari Nomor Mesin ..." name="cari" value="{{ old('cari') }}">
@@ -67,7 +67,7 @@
 
 <div class="container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-        <h3 class="text-dark mb-0">Edit Data</h3>
+        <h3 class="text-dark mb-0">Delete Data</h3>
     </div>
 
     @if (session('status'))
@@ -96,9 +96,9 @@
 
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                         data-target="#exampleModalLong{{$loop->iteration}}">
-                        Edit
+                        Delete
                     </button>
 
                     <!-- Modal -->
@@ -107,7 +107,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Data
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Data
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -120,8 +120,8 @@
                                     <div class="row">
 
                                         <div class="col">
-                                            <form method="post" action="/kendaraans/{{ $k->id }}">
-                                                @method('patch')
+                                            <form method="post" action="/delete/{{ $k->id }}">
+                                                @method('delete')
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="nopol">TNKB / NOPOL</label>
@@ -315,7 +315,7 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-danger">Dalete Data</button>
                                 </div>
                                 </form>
                                 <!--END FORM-->
