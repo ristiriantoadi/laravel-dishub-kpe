@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div class="login-clean" style="background:url('home/img/bgfix.jpg')no-repeat center center;background-size:cover;">
+    <div class="login-clean"
+        style="background:url('home/img/tesaja.jpg')no-repeat center center;background-size:cover;">
         <form method="post" action="/postlogin">
             <h2 class="sr-only">Login Form</h2>
             <div class="illustration">
@@ -27,7 +28,7 @@
             <div class="form-group">
                 <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
-            <a class="forgot" href="#">Lupa Email atau password?</a>
+            <a class="forgot" href="{{ url('/') }}">Kembali</a>
         </form>
     </div>
     <div class="footer-basic">

@@ -46,10 +46,10 @@ class DataController extends Controller
     public function search(Request $request)
     {
         $cari = $request->cari;
-
+        
         $kendaraans = Kendaraan::where('nomesin', $cari)->get();
 
-        return view('index', ['kendaraans' => $kendaraans]);
+        return view('index', ['kendaraans' => $kendaraans, 'cari' => $cari]);
     }
 
     public function create()

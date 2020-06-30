@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Validator;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class KendaraanController extends Controller
 {
@@ -14,7 +15,7 @@ class KendaraanController extends Controller
     public function index()
     {
         $kendaraans = DB::table('kendaraans')->paginate(10);
-        
+
         return view('kendaraans/index', ['kendaraans' => $kendaraans]);
     }
 
@@ -22,28 +23,28 @@ class KendaraanController extends Controller
 	{
 		// menangkap data pencarian
 		$cari = $request->cari;
- 
+
     		// mengambil data dari table pegawai sesuai pencarian data
         $kendaraans = DB::table('kendaraans')
             ->where('nomesin','like',"%".$cari."%")
             ->paginate();
- 
+
     		// mengirim data pegawai ke view index
 		return view('kendaraans/index',['kendaraans' => $kendaraans]);
- 
+
     }
 
     public function cetak_pdf(Request $request)
-    {   
+    {
         $id = $request->id;
-
         $kendaraans = Kendaraan::where('id', $id)->get();
 
+         // return view('cetak_pdf',['kendaraans'=>$kendaraans]);
         $pdf = PDF::loadview('cetak_pdf',['kendaraans'=>$kendaraans]);
-        return $pdf->download('Kartu-Kendaraan-pdf');
-        
+        return $pdf->stream('Kartu-Kendaraan-pdf');
     }
-    
+
+
     public function create()
     {
         //
@@ -68,19 +69,19 @@ class KendaraanController extends Controller
      */
     public function show( Kendaraan $kendaraan)
     {
-        
+
     }
 
-   
+
     public function edit(Kendaraan $kendaraan)
     {
-        
+
     }
 
-    
+
     public function update(Request $request, Kendaraan $kendaraan)
     {
-        
+
         Validator::make($request->all(),
             [
             'nopol' => 'required',
@@ -127,7 +128,7 @@ class KendaraanController extends Controller
             return redirect('/kendaraans')->with('status', 'Data Kendaraan Berhasil Diubah!');
     }
 
-    
+
     public function destroy(Kendaraan $kendaraan)
     {
         return $kendaraan;

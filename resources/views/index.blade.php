@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>Dinas Perhubungan Provinsi NTB</title>
     <link rel="stylesheet" href="home/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
@@ -45,12 +45,12 @@
     </nav>
 
     <header class="masthead text-white text-center"
-        style="background:url('home/img/bgfix.jpg')no-repeat center center;background-size:cover;">
+        style="background:url('home/img/tesaja.jpg')no-repeat center center;background-size:cover;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-xl-9 mx-auto">
-                    <h1 class="mb-5">DINAS PERHUBUNGAN NUSA TENGGARA BARAT</h1>
+                    <h1 class="mb-5">DINAS PERHUBUNGAN PROVINSI NUSA TENGGARA BARAT</h1>
                     <h2 class="mb-5">SISTEM INFORMASI KARTU PENGAWASAN ELEKTRONIK</h2>
                 </div>
                 <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
@@ -59,7 +59,7 @@
                         <div class="form-row">
                             <div class="col-12 col-md-9 mb-2 mb-md-0">
                                 <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
-                                    type="text" placeholder="Masukan Nomer Kendaraan...">
+                                    type="text" placeholder="Masukan Nomer Mesin...">
                             </div>
                             <div class="col-12 col-md-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">CEK</button>
@@ -75,6 +75,7 @@
                 @foreach($kendaraans as $p)
                 <input type="hidden" value="{{ $masa_sk = $p->masaberlaku }}">
 
+
                 @if($sekarang > $masa_sk)
                 <div class="alert alert-danger" role="alert">
                     Nomor Mesin <b>{{$p->nomesin}}</b> <b>TIDAK AKTIF</b>
@@ -87,7 +88,7 @@
                     </br>
                     Trayek : <b>{{$p->trayek}}</b>
                     </br>
-                    Masa Berlaku S/D : <b>{{$p->masaberlaku}}</b>
+                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
                 </div>
                 @else
                 <div class="alert alert-success" role="alert">
@@ -101,11 +102,24 @@
                     </br>
                     Trayek : <b>{{$p->trayek}}</b>
                     </br>
-                    Masa Berlaku S/D : <b>{{$p->masaberlaku}}</b>
+                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
                 </div>
                 @endif
 
                 @endforeach
+
+                <!--
+                @if($cari != "")
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Nomer Mesin <strong>TIDAK DITEMUKAN!</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+                -->
+
+
             </div>
         </div>
     </header>
@@ -153,7 +167,7 @@
                         <li class="list-inline-item"><a href="mailto:dishub@ntbprov.go.id">Email</a></li>
                         <li class="list-inline-item"><span>⋅</span></li>
                         <li class="list-inline-item"><a href="#">Tanggal :
-                                {{ $sekarang = date('d-m-Y') }}</a></li>
+                                {{ date('d-m-Y') }}</a></li>
                     </ul>
                     <p class="text-muted small mb-4 mb-lg-0">© DISHUB NTB 2020.</p>
                 </div>

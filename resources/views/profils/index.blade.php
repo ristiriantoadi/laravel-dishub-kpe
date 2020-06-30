@@ -35,19 +35,11 @@
         <h3 class="text-dark mb-0">Profil Admin</h3>
     </div>
 
-    @if (session('status'))
-    <div class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
-        {{ session('status') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-    </div>
-    @endif
-
     <div class="row">
 
         <div class="col">
             <div class="d-sm-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-dark mb-0">Admin</h4>
+                <h4 class="text-dark mb-0">Daftar Admin</h4>
             </div>
             @foreach($admin as $a)
             <form method="post" action="/profils">
@@ -60,15 +52,6 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="text" class="form-control @error('password') is-invalid @enderror" id="password"
-                        name="password" aria-describedby="password" placeholder="Masukan Nomor Uji"
-                        value="{{ $a->password }}">
-                    @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
             </form>
             @endforeach
         </div>
@@ -76,6 +59,15 @@
             <div class="d-sm-flex justify-content-between align-items-center mb-3">
                 <h4 class="text-dark mb-0">Tambah Admin</h4>
             </div>
+
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('status') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            @endif
+
             <form method="post" action="/profils">
                 @csrf
                 <div class="form-group">

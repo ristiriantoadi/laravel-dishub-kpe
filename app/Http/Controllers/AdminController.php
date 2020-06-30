@@ -52,7 +52,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return redirect('/profils');
+        return redirect('/profils')->with('status', 'Admin Berhasil Ditambahkan!');
     }
 
     
