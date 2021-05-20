@@ -83,6 +83,7 @@
         $(document).ready(function() {
             $('#datalol').DataTable();
         });
+        console.log("this is a test")
         </script>
 </body>
 
