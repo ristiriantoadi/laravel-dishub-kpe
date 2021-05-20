@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -136,8 +136,7 @@ body {
                 <tr>
                     <td rowspan="5" class="barcode text-center">
                         <div class="visible-print text-center">
-                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(105)->generate(url("
-                                /") ."?cari=" . $p->nomesin)) !!} ">
+                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(105)->generate('https://kpe.dishub.ntbprov.go.id/' .'?cari=' . $p->nomesin)) !!} ">
                         </div>
                     </td>
                     <td colspan="2" class="text-left">
@@ -177,25 +176,25 @@ body {
             <table id="table3">
                 <tbody>
                     <tr>
-                        <td class="table3td-1">a.n. KEPALA DINAS PERHUBUNGAN</td>
+                        <td class="table3td-1">KEPALA DINAS PERHUBUNGAN</td>
                     </tr>
                     <tr>
                         <td class="table3td-1">PROVINSI NUSA TENGGARA BARAT</td>
                     </tr>
                     <tr>
-                        <td class="table3td-1">KEPALA BIDANG ANGKUTAN DARAT</td>
+                        <td class="table3td-1"></td>
                     </tr>
                     <tr>
                         <td height="50px"></td>
                     </tr>
                     <tr>
-                        <td class="table3td-1"><u>IZZUDIN MAHILI, S.STP., MM.</u></td>
+                        <td class="table3td-1"><u>LALU MOH. FAOZAL</u></td>
                     </tr>
                     <tr>
-                        <td class="table3td-2">Pembina (IV/a)</td>
+                        <td class="table3td-2">Pembina Utama Madya (IV/d)</td>
                     </tr>
                     <tr>
-                        <td class="table3td-2">NIP. 19771025 199612 1 002</td>
+                        <td class="table3td-2">NIP. 19661231 198608 1 007</td>
                     </tr>
                 </tbody>
             </table>

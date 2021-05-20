@@ -20,6 +20,7 @@ Route::get('/print/cari', 'DataController@cari')->middleware('auth');
 Route::get('/', 'DataController@search');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');
 Route::get('/cetak_pdf', 'KendaraanController@cetak_pdf')->middleware('auth');
+Route::get('/cetak_pdf2', 'KendaraanController@cetak_pdf2')->middleware('auth');
 Route::get('/kendaraans/cari', 'KendaraanController@cari')->middleware('auth');
 Route::patch('/kendaraans/{kendaraan}', 'KendaraanController@update')->middleware('auth');
 //delete

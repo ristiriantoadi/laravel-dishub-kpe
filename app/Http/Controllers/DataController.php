@@ -23,7 +23,7 @@ class DataController extends Controller
     
     public function index(Request $request)
     {
-        $kendaraans = DB::table('kendaraans')->paginate(10);
+        $kendaraans = DB::table('kendaraans')->paginate(15);
         
         return view('print', ['kendaraans' => $kendaraans]);
     }
@@ -36,6 +36,8 @@ class DataController extends Controller
     		// mengambil data dari table pegawai sesuai pencarian data
         $kendaraans = DB::table('kendaraans')
             ->where('nomesin','like',"%".$cari."%")
+			->orWhere('nopol','like',"%".$cari."%")
+			->orWhere('namaperusahaan','like',"%".$cari."%")
             ->paginate();
  
     		// mengirim data pegawai ke view index
@@ -62,12 +64,12 @@ class DataController extends Controller
         
         Validator::make($request->all(),
             [
-            'nopol' => 'required|unique:kendaraans',
+            'nopol' => 'required',
             'nomor_uji' => 'required',
             'merk' => 'required',
             'tahun_pembuatan' => 'required',
             'nomor_rangka' => 'required',
-            'nomor_mesin' => 'required',
+            'nomesin' => 'required|unique:kendaraans',
             'daya_orang' => 'required',
             'daya_barang' => 'required',
             'trayek' => 'required',
@@ -90,7 +92,7 @@ class DataController extends Controller
             'merk' => $request->merk,
             'thpembuatan' => $request->tahun_pembuatan,
             'norangka' => $request->nomor_rangka,
-            'nomesin' => $request->nomor_mesin,
+            'nomesin' => $request->nomesin,
             'dayaangkutorang' => $request->daya_orang,
             'dayaangkutbarang' => $request->daya_barang,
             'trayek' => $request->trayek,

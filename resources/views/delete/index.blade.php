@@ -12,7 +12,7 @@
         <form action="/delete/cari" method="GET"
             class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-                <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Nomor Mesin ..."
+                <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Data Kendaraan ..."
                     value="{{ old('cari') }}" name="cari">
                 <div class="input-group-append">
                     <button class="btn btn-primary py-0" type="submit">
@@ -32,7 +32,7 @@
                     <form class="form-inline mr-auto navbar-search w-100" action="/delete/cari" method="GET">
                         <div class="input-group">
                             <input class="bg-light form-control border-0 small" type="text"
-                                placeholder="Cari Nomor Mesin ..." name="cari" value="{{ old('cari') }}">
+                                placeholder="Cari Data Kendaraan ..." name="cari" value="{{ old('cari') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary py-0" type="submit">
                                     <i class="fas fa-search"></i>
@@ -69,7 +69,10 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Delete Data</h3>
     </div>
-
+	
+	<div class="card shadow border-left-primary py-2">
+    	<div class="card-body">
+			
     @if (session('status'))
     <div class="alert alert-success alert-dismissible fade show col-md-4" role="alert">
         {{ session('status') }}
@@ -77,13 +80,15 @@
             <span aria-hidden="true">&times;</span>
     </div>
     @endif
-
+	
+	<div class="table-responsive">
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">No</th>
+                <th scope="col">Nama Perusahaan</th>
                 <th scope="col">Nomor Mesin</th>
-                <th scope="col">Nama Pemilik</th>
+                <th scope="col">TNKB / NOPOL</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -91,8 +96,9 @@
             @foreach($kendaraans as $k)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
+                <td>{{ $k->namaperusahaan }}</td>
                 <td>{{ $k->nomesin }}</td>
-                <td>{{ $k->namapemilik }}</td>
+                <td>{{ $k->nopol }}</td>
 
                 <td>
                     <!-- Button trigger modal -->
@@ -327,6 +333,7 @@
             @endforeach
         </tbody>
     </table>
+	</div> <!-- tutup responsive -->
 
     <div class="row">
         <div class="col-md-3">
@@ -355,6 +362,9 @@
             </li>
         </ul>
     </nav>
-
+	
+	</div>
+	</div>
+		
 </div>
 @endsection

@@ -15,7 +15,7 @@ class DeleteController extends Controller
      */
     public function index()
     {
-        $kendaraans = DB::table('kendaraans')->paginate(10);
+        $kendaraans = DB::table('kendaraans')->paginate(15);
         
         return view('delete/index', ['kendaraans' => $kendaraans]);
     }
@@ -28,6 +28,8 @@ class DeleteController extends Controller
     		// mengambil data dari table pegawai sesuai pencarian data
         $kendaraans = DB::table('kendaraans')
             ->where('nomesin','like',"%".$cari."%")
+			->orWhere('nopol','like',"%".$cari."%")
+			->orWhere('namaperusahaan','like',"%".$cari."%")
             ->paginate();
  
     		// mengirim data pegawai ke view index
@@ -94,6 +96,6 @@ class DeleteController extends Controller
     public function destroy(Kendaraan $kendaraan)
     {
         Kendaraan::destroy($kendaraan->id);
-        return redirect('/delete')->with('status','Data Mahasiswa Berhasil Dihapus!');
+        return redirect('/delete')->with('status','Data Kendaraan Berhasil Dihapus!');
     }
 }

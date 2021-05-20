@@ -5,6 +5,10 @@
 @section('container')
 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
     <div class="container-fluid">
+		
+		<button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button">
+            <i class="fas fa-bars"></i>
+        </button>
 
         <ul class="nav navbar-nav flex-nowrap ml-auto">
             <li class="nav-item dropdown no-arrow mx-1" role="presentation"></li>
@@ -39,6 +43,9 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Input Data</h3>
     </div>
+	
+	<div class="card shadow border-left-primary py-2">
+    	<div class="card-body">
 
     @if (session('status'))
     <div class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
@@ -97,11 +104,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="nomor_mesin">NOMOR MESIN</label>
-                    <input type="text" class="form-control @error('nomor_mesin') is-invalid @enderror" id="nomor_mesin"
-                        name="nomor_mesin" aria-describedby="nomor_mesin" placeholder="Masukan Nomor Mesin"
-                        value="{{ old('nomor_mesin') }}">
-                    @error('nomor_mesin')
+                    <label for="nomesin">NOMOR MESIN</label>
+                    <input type="text" class="form-control @error('nomesin') is-invalid @enderror" id="nomesin"
+                        name="nomesin" aria-describedby="nomesin" placeholder="Masukan Nomor Mesin"
+                        value="{{ old('nomesin') }}">
+                    @error('nomesin')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -207,5 +214,9 @@
             </form>
         </div>
     </div>
-</div class="mb-3">
+		
+	</div>
+	</div>
+		
+</div>
 @endsection
