@@ -44,10 +44,10 @@
                         <a class="nav-link active" href="{{url('/print')}}">
                             <i class="fas fa-print"></i>
                             <span>Print</span></a>
-                        <a class="nav-link active" href="{{url('/notifikasi')}}">
+                        <a class="nav-link active" href="{{url('/expired/kartu')}}">
                             <i class="fas fa-print"></i>
-                            <span>Kartu Expired</span> | <span class="badge badge-danger">4</span></a>
-                        <a class="nav-link active" href="{{url('/notifikasi')}}">
+                            <span>Kartu Expired</span> | <span class="badge badge-warning">4</span></a>
+                        <a class="nav-link active" href="{{url('/expired/sk')}}">
                             <i class="fas fa-print"></i>
                             <span>SK Expired</span> | <span class="badge badge-light">0</span></a>
                         <!--

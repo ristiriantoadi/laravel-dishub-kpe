@@ -17,11 +17,11 @@ Route::post('/input', 'DataController@store')->middleware('auth');
 Route::get('/print', 'DataController@index')->middleware('auth');
 Route::get('/print/cari', 'DataController@cari')->middleware('auth');
 
-// notifikasi
-Route::get('/notifikasi', 'NotificationController@index')->middleware('auth');
-// Route::get('/hello', function () {
-//     return 'yes';
-// });
+// kartu dan sk expired
+Route::get('/expired/kartu', 'NotificationController@kartuExpired')->middleware('auth');
+Route::get('/expired/sk', 'NotificationController@skExpired')->middleware('auth');
+
+
 Route::get('/routeparam/{key}', 'NotificationController@parameterMethod');
 
 Route::get('/', 'DataController@search');
