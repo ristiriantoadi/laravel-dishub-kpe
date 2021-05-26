@@ -17,6 +17,13 @@ Route::post('/input', 'DataController@store')->middleware('auth');
 Route::get('/print', 'DataController@index')->middleware('auth');
 Route::get('/print/cari', 'DataController@cari')->middleware('auth');
 
+// notifikasi
+Route::get('/notifikasi', 'NotificationController@index')->middleware('auth');
+// Route::get('/hello', function () {
+//     return 'yes';
+// });
+Route::get('/routeparam/{key}', 'NotificationController@parameterMethod');
+
 Route::get('/', 'DataController@search');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');
 Route::get('/cetak_pdf', 'KendaraanController@cetak_pdf')->middleware('auth');

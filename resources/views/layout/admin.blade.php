@@ -44,6 +44,12 @@
                         <a class="nav-link active" href="{{url('/print')}}">
                             <i class="fas fa-print"></i>
                             <span>Print</span></a>
+                        <a class="nav-link active" href="{{url('/notifikasi')}}">
+                            <i class="fas fa-print"></i>
+                            <span>Kartu Expired</span> | <span class="badge badge-danger">4</span></a>
+                        <a class="nav-link active" href="{{url('/notifikasi')}}">
+                            <i class="fas fa-print"></i>
+                            <span>SK Expired</span> | <span class="badge badge-light">0</span></a>
                         <!--
                         <a class="nav-link active" href="index.html">
                             <i class="icon ion-android-settings"></i>
