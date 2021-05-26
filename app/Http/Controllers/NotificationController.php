@@ -13,11 +13,13 @@ class NotificationController extends Controller
 
     public function kartuExpired(Request $request)
     {        
-        return "kartu expired";
+        // return "kartu expired";
+        return view('expired/kartu_expired');
     }
 
     public function skExpired(Request $request){        
-        return "sk expired";
+        // return "sk expired";
+        return view('expired/sk_expired');
     }
 
     public function parameterMethod(Request $request, $key){
