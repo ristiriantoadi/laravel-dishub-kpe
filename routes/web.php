@@ -20,7 +20,7 @@ Route::get('/print/cari', 'DataController@cari')->middleware('auth');
 // kartu dan sk expired
 Route::get('/expired/kartu', 'NotificationController@kartuExpired')->middleware('auth');
 Route::get('/expired/sk', 'NotificationController@skExpired')->middleware('auth');
-
+Route::get('/testnotif', 'NotificationController@testNotif')->middleware('auth');
 
 Route::get('/routeparam/{key}', 'NotificationController@parameterMethod');
 
