@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Validator;
+// use App\Helpers\Helper;
 
 class DataController extends Controller
 {
 
     public function dashboard()
     {
+        //do notification
+        check_status_sk();
         return view('dashboard');
     }
 
