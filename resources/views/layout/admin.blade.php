@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+
 </head>
 
 <body id="page-top">
@@ -46,10 +46,10 @@
                             <span>Print</span></a>
                         <a class="nav-link active" href="{{url('/expired/kartu')}}">
                             <i class="fas fa-print"></i>
-                            <span>Kartu Expired</span> | <span class="badge badge-warning">4</span></a>
+                            <span>Kartu Expired</span> | <span class="badge @if ($kartu_expired_notif_length>0) badge-warning @else badge-light  @endif">{{$kartu_expired_notif_length}}</span></a>
                         <a class="nav-link active" href="{{url('/expired/sk')}}">
                             <i class="fas fa-print"></i>
-                            <span>SK Expired</span> | <span class="badge badge-light">0</span></a>
+                            <span>SK Expired</span> | <span class="badge @if ($sk_expired_notif_length>0) badge-warning @else badge-light  @endif">{{$sk_expired_notif_length}}</span></a>
                         <!--
                         <a class="nav-link active" href="index.html">
                             <i class="icon ion-android-settings"></i>

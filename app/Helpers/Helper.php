@@ -90,6 +90,24 @@ if (!function_exists('get_notifications')) {
                 $id_kendaraan = $notification->data["kendaraan_id"];
                 $kendaraan = Kendaraan::find($id_kendaraan);
                 array_push($kendaraans,$kendaraan);
+            
+                $notification->markAsRead();
+            }
+        }
+        return $kendaraans;        
+    }
+}
+
+if (!function_exists('get_unread_notifications')) {
+    function get_unread_notifications($type){
+        $user = Auth::user();
+        $kendaraans = [];
+        foreach ($user->unreadNotifications as $notification) {
+            if($notification->type == $type){
+                //get kendaraan
+                $id_kendaraan = $notification->data["kendaraan_id"];
+                $kendaraan = Kendaraan::find($id_kendaraan);
+                array_push($kendaraans,$kendaraan);
             }
         }
         return $kendaraans;        
