@@ -50,5 +50,21 @@ class NotificationController extends Controller
         return "key: ".$key;
     }
 
+    public function checkExpired(Request $request)
+    {
+        $kendaraans = Kendaraan::all();
+        foreach ($kendaraans as $kendaraan) {
+            // code to be executed;
+            check_status_sk($kendaraan);
+            check_status_kartu($kendaraan);
+        }
+        return "ok";
+        // $kendaraans = get_notifications("App\Notifications\KartuExpired");
+        // $kendaraans_kartu_expired_notifications_length = 0;
+
+
+        // return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length]);
+    }
+
 
 }
