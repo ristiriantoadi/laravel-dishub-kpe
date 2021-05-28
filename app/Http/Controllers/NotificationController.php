@@ -8,6 +8,7 @@ use App\Kendaraan;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use Illuminate\Support\Facades\View;
+use App\Helpers\Helper;
 
 class NotificationController extends Controller
 {
