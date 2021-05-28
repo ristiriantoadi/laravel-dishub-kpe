@@ -19,15 +19,8 @@ class NotificationController extends Controller
     public function kartuExpired(Request $request)
     {
         $kendaraans = get_notifications("App\Notifications\KartuExpired");
-        // count(get_unread_notifications("App\Notifications\KartuExpired"));
-        // View::share('key', 'value');
-
-        // $kendaraans_sk_expired_notifications_length = count(get_unread_notifications("App\Notifications\SkExpired"));
-        // $kendaraans_kartu_expired_notifications_length = count(get_unread_notifications("App\Notifications\KartuExpired"));
         $kendaraans_kartu_expired_notifications_length = 0;
 
-        // View::share('sk_expired_notif_length', $kendaraans_sk_expired_notifications_length);
-        // View::share('kartu_expired_notif_length', $kendaraans_kartu_expired_notifications_length);
 
         return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length]);
     }

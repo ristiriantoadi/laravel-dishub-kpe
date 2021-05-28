@@ -115,7 +115,7 @@ class KendaraanController extends Controller
             'akhir' => 'required',
             ]
         )->validate();
-
+        
         Kendaraan::where('id', $kendaraan->id)
             ->update([
             'nopol' => $request->nopol,
@@ -137,6 +137,10 @@ class KendaraanController extends Controller
             'tglakhirsk' => $request->akhir
             ]);
 
+            //get kendaraan
+            $kendaraan = Kendaraan::find($kendaraan->id);
+            check_status_sk($kendaraan);
+            check_status_kartu($kendaraan);
             return redirect('/kendaraans')->with('status', 'Data Kendaraan Berhasil Diubah!');
     }
 

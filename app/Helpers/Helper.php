@@ -35,10 +35,10 @@ if (!function_exists('update_status')) {
 
 if (!function_exists('notification')) {
     function notification($old_status,$current_status,$type,$kendaraan){
+        $user = Auth::user();
         if($old_status == "belum_expired"){
             if($current_status != "belum_expired"){
                 //add notif
-                $user = Auth::user();
                 if($type == "status_sk"){
                     $user->notify(new SkExpired($kendaraan));
                 }else{
@@ -48,7 +48,17 @@ if (!function_exists('notification')) {
         }
         else{
             if($current_status == "belum_expired"){
-                // remove_from_notification(record)
+                error_log("belum_expired get called");
+                // remove_from_notification(record) / remove notification
+                foreach ($user->notifications as $notification) {
+                    // echo $notification->type;
+                    $id_kendaraan =  $notification->data["kendaraan_id"];
+                    if ($kendaraan->id == $id_kendaraan){
+                        $user->notifications()->where('id', $notification->id)->get()->first()->delete();
+                        // $notification->delete();
+                        return;
+                    }
+                }
             }
         }
     }
@@ -92,6 +102,9 @@ if (!function_exists('get_notifications')) {
                 array_push($kendaraans,$kendaraan);
             
                 $notification->markAsRead();
+            }
+            if($notification->data["kendaraan_id"] == 2051){
+                error_log("notification: ".$notification);
             }
         }
         return $kendaraans;        
