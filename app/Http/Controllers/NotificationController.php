@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Kendaraan;
+use App\User;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use Illuminate\Support\Facades\View;
