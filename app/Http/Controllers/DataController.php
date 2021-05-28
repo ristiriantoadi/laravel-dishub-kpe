@@ -15,12 +15,12 @@ class DataController extends Controller
     public function dashboard()
     {
         //do notification
-        $kendaraans = Kendaraan::all();
-        foreach ($kendaraans as $kendaraan) {
-            // code to be executed;
-            check_status_sk($kendaraan);
-            check_status_kartu($kendaraan);
-        } 
+        // $kendaraans = Kendaraan::all();
+        // foreach ($kendaraans as $kendaraan) {
+        //     // code to be executed;
+        //     check_status_sk($kendaraan);
+        //     check_status_kartu($kendaraan);
+        // } 
         return view('dashboard');
     }
 
