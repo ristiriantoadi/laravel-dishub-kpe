@@ -6,6 +6,24 @@ use App\Notifications\SkExpired;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Auth;
 
+if (!function_exists('days_diff')) {
+    function days_diff($first_date,$second_date){
+        // $current_date = time();
+        $datediff = $first_date - $second_date;
+        $datediff = round($datediff / (60 * 60 * 24));
+        return $datediff;
+        // if($datediff<0){
+        //     return "expired";
+        // }
+        // else if($datediff<=30){
+        //     return "menjelang_expired";
+        // }
+        // else{
+        //     return "belum_expired";
+        // }
+    }
+}
+
 if (!function_exists('update_status')) {
     function update_status($expired_date){
         $current_date = time();

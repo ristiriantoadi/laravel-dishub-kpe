@@ -104,9 +104,12 @@
                     <td>{{$k->masaberlaku}}</td>
                     <td>
                         @if ($k->status_kartu == "expired")
-                            <button type="button" class="btn status-badge expired"><i class="fas fa-exclamation-circle"></i> Expired</button>
+                            <button type="button" class="btn status-badge expired"><i class="fas fa-exclamation-circle"></i>Expired</button>
                         @elseif ($k->status_kartu == "menjelang_expired")
-                        <button type="button" class="btn status-badge menjelang-expired"><i class="fas fa-exclamation-circle"></i> 10 hari menjelang expired</button>
+                            @php
+                                $diff = days_diff(strtotime($k->masaberlaku),time())        
+                            @endphp
+                            <button type="button" class="btn status-badge menjelang-expired"><i class="fas fa-exclamation-circle"></i> {{$diff}} hari menjelang expired</button>
                         @endif
                     </td>
                 </tr>
