@@ -15,7 +15,14 @@ class DataController extends Controller
     public function dashboard()
     {
         //do notification
-        check_status_sk();
+        $kendaraans = Kendaraan::all();
+        foreach ($kendaraans as $kendaraan) {
+            // code to be executed;
+            check_status_sk($kendaraan);
+            check_status_kartu($kendaraan);
+        } 
+        // check_status_sk();
+        // check_status_kartu();
         return view('dashboard');
     }
 
