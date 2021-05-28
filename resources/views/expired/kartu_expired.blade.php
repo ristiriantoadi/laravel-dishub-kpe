@@ -101,15 +101,21 @@
                     <td>{{$k->namaperusahaan}}</td>
                     <td>{{$k->nomesin}}</td>
                     <td>{{$k->nopol}}</td>
-                    <td>{{$k->masaberlaku}}</td>
+                    <td>
+                        @if ($k->masaberlaku)
+                            {{$k->masaberlaku}}
+                        @else
+                            -
+                        @endif
+                    </td>
                     <td>
                         @if ($k->status_kartu == "expired")
-                            <button type="button" class="btn status-badge expired"><i class="fas fa-exclamation-circle"></i>Expired</button>
+                            @include('expired.status_badge_expired')
                         @elseif ($k->status_kartu == "menjelang_expired")
                             @php
                                 $diff = days_diff(strtotime($k->masaberlaku),time())        
                             @endphp
-                            <button type="button" class="btn status-badge menjelang-expired"><i class="fas fa-exclamation-circle"></i> {{$diff}} hari menjelang expired</button>
+                            @include('expired.status_badge_menjelang_expired')
                         @endif
                     </td>
                 </tr>

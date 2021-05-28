@@ -12,15 +12,6 @@ if (!function_exists('days_diff')) {
         $datediff = $first_date - $second_date;
         $datediff = round($datediff / (60 * 60 * 24));
         return $datediff;
-        // if($datediff<0){
-        //     return "expired";
-        // }
-        // else if($datediff<=30){
-        //     return "menjelang_expired";
-        // }
-        // else{
-        //     return "belum_expired";
-        // }
     }
 }
 
@@ -65,23 +56,27 @@ if (!function_exists('notification')) {
 
 if (!function_exists('check_status_sk')) {
     function check_status_sk($kendaraan){
-        $old_status=$kendaraan->status_sk;
-        $kendaraan->status_sk=update_status(strtotime($kendaraan->tglakhirsk));
-        $kendaraan->save();
+        if($kendaraan->tglakhirsk){
+            $old_status=$kendaraan->status_sk;
+            $kendaraan->status_sk=update_status(strtotime($kendaraan->tglakhirsk));
+            $kendaraan->save();
 
-        $current_status = $kendaraan->status_sk;
-        notification($old_status,$current_status,"status_sk",$kendaraan);
+            $current_status = $kendaraan->status_sk;
+            notification($old_status,$current_status,"status_sk",$kendaraan);
+        }
     }
 }
  
 if (!function_exists('check_status_kartu')) {
     function check_status_kartu($kendaraan){
-        $old_status = $kendaraan->status_kartu;
-        $kendaraan->status_kartu=update_status(strtotime($kendaraan->masaberlaku));
-        $kendaraan->save();
-
-        $current_status = $kendaraan->status_kartu;
-        notification($old_status,$current_status,"status_kartu",$kendaraan);
+        if($kendaraan->masaberlaku){
+            $old_status = $kendaraan->status_kartu;
+            $kendaraan->status_kartu=update_status(strtotime($kendaraan->masaberlaku));
+            $kendaraan->save();
+    
+            $current_status = $kendaraan->status_kartu;
+            notification($old_status,$current_status,"status_kartu",$kendaraan);
+        }
     }
 }
 
