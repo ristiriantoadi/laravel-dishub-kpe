@@ -3,6 +3,7 @@
 // namespace App\Helpers;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
+use App\Kendaraan;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('update_status')) {
@@ -61,7 +62,23 @@ if (!function_exists('check_status_kartu')) {
         $kendaraan->status_kartu=update_status(strtotime($kendaraan->masaberlaku));
         $kendaraan->save();
 
-        $current_status = $kendaraan->status_sk;
+        $current_status = $kendaraan->status_kartu;
         notification($old_status,$current_status,"status_kartu",$kendaraan);
+    }
+}
+
+if (!function_exists('get_notifications')) {
+    function get_notifications($type){
+        $user = Auth::user();
+        $kendaraans = [];
+        foreach ($user->notifications as $notification) {
+            if($notification->type == $type){
+                //get kendaraan
+                $id_kendaraan = $notification->data["kendaraan_id"];
+                $kendaraan = Kendaraan::find($id_kendaraan);
+                array_push($kendaraans,$kendaraan);
+            }
+        }
+        return $kendaraans;        
     }
 }

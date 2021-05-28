@@ -95,54 +95,70 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <td colspan="6" style="font-weight:600">Rabu, 26 Mei 2021</td>
-            <tr>
-                <th scope="row">1</th>
-                <td>Adi Sobri</td>
-                <td>4D31-046759</td>
-                <td>DR 7779 KZ</td>
-                <td>2021-02-10</td>
-                <td>
-                    <button type="button" style="background-color:#f5a003;color:#ffffff;font-weight:600;font-size:95%" class="btn"><i class="fas fa-exclamation-circle"></i> 30 hari menjelang expired</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Adi Sobri</td>
-                <td>4D31-046759</td>
-                <td>DR 7779 KZ</td>
-                <td>2021-02-10</td>
-                <td>
-                    <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 14 hari menjelang expired</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6" style="font-weight:600">Selasa, 25 Mei 2021</td>
-            <tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Adi Sobri</td>
-                <td>4D31-046759</td>
-                <td>DR 7779 KZ</td>
-                <td>2021-02-10</td>
-                <td>
-                    <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 7 hari menjelang expired</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="6" style="font-weight:600">Senin, 24 Mei 2021</td>
-            <tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Adi Sobri</td>
-                <td>4D31-046759</td>
-                <td>DR 7779 KZ</td>
-                <td>2021-02-10</td>
-                <td>
-                    <button type="button" style="font-size:95%;background-color:#fe0000;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> Expired</button>
-                </td>
-            </tr>
+            @foreach($kendaraans as $k)
+                <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{$k->namaperusahaan}}</td>
+                    <td>{{$k->nomesin}}</td>
+                    <td>{{$k->nopol}}</td>
+                    <td>{{$k->masaberlaku}}</td>
+                    <td>
+                        @if ($k->status_kartu == "expired")
+                            <button type="button" class="btn status-badge expired"><i class="fas fa-exclamation-circle"></i> Expired</button>
+                        @elseif ($k->status_kartu == "menjelang_expired")
+                        <button type="button" class="btn status-badge menjelang-expired"><i class="fas fa-exclamation-circle"></i> 10 hari menjelang expired</button>
+                        @endif
+                    </td>
+                </tr>
+                <!-- <tr>
+                <td colspan="6" style="font-weight:600">Rabu, 26 Mei 2021</td>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Adi Sobri</td>
+                    <td>4D31-046759</td>
+                    <td>DR 7779 KZ</td>
+                    <td>2021-02-10</td>
+                    <td>
+                        <button type="button" style="background-color:#f5a003;color:#ffffff;font-weight:600;font-size:95%" class="btn"><i class="fas fa-exclamation-circle"></i> 30 hari menjelang expired</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Adi Sobri</td>
+                    <td>4D31-046759</td>
+                    <td>DR 7779 KZ</td>
+                    <td>2021-02-10</td>
+                    <td>
+                        <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 14 hari menjelang expired</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="font-weight:600">Selasa, 25 Mei 2021</td>
+                <tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Adi Sobri</td>
+                    <td>4D31-046759</td>
+                    <td>DR 7779 KZ</td>
+                    <td>2021-02-10</td>
+                    <td>
+                        <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 7 hari menjelang expired</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="font-weight:600">Senin, 24 Mei 2021</td>
+                <tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Adi Sobri</td>
+                    <td>4D31-046759</td>
+                    <td>DR 7779 KZ</td>
+                    <td>2021-02-10</td>
+                    <td>
+                        <button type="button" style="font-size:95%;background-color:#fe0000;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> Expired</button>
+                    </td>
+                </tr> -->
+            @endforeach
         </tbody>
     </table>
 	</div> <!-- tutup responsive -->

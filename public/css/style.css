@@ -1,0 +1,17 @@
+.status-badge{
+    font-size:95%;
+    color:#ffffff;
+    font-weight:600;
+}
+
+.expired{
+    background-color:#fe0000;
+}
+
+.menjelang-expired{
+    background-color:#f5a003;
+}
+
+.belum-expired{
+
+}
