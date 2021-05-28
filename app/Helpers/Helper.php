@@ -5,6 +5,7 @@ use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 if (!function_exists('days_diff')) {
     function days_diff($first_date,$second_date){
@@ -35,28 +36,33 @@ if (!function_exists('update_status')) {
 
 if (!function_exists('notification')) {
     function notification($old_status,$current_status,$type,$kendaraan){
-        $user = Auth::user();
+        // $user = Auth::user();
+        $users = User::all();
         if($old_status == "belum_expired"){
             if($current_status != "belum_expired"){
-                //add notif
-                if($type == "status_sk"){
-                    $user->notify(new SkExpired($kendaraan));
-                }else{
-                    $user->notify(new KartuExpired($kendaraan));
+                //add notifications
+                foreach ($users as $user) {
+                    if($type == "App\Notifications\SkExpired"){
+                        $user->notify(new SkExpired($kendaraan));
+                    }else{
+                        $user->notify(new KartuExpired($kendaraan));
+                    }
                 }
             }
         }
         else{
             if($current_status == "belum_expired"){
-                error_log("belum_expired get called");
-                // remove_from_notification(record) / remove notification
-                foreach ($user->notifications as $notification) {
-                    // echo $notification->type;
-                    $id_kendaraan =  $notification->data["kendaraan_id"];
-                    if ($kendaraan->id == $id_kendaraan){
-                        $user->notifications()->where('id', $notification->id)->get()->first()->delete();
-                        // $notification->delete();
-                        return;
+                // remove_from_notification(record) / remove notifications / delete notifications
+                foreach ($users as $user) {
+                    foreach ($user->notifications as $notification) {
+                        if($notification->type == $type){
+                            $id_kendaraan =  $notification->data["kendaraan_id"];
+                            if ($kendaraan->id == $id_kendaraan){
+                                $user->notifications()->where('id', $notification->id)->get()->first()->delete();
+                                break;
+                            // return;
+                            }
+                        }
                     }
                 }
             }
@@ -72,7 +78,7 @@ if (!function_exists('check_status_sk')) {
             $kendaraan->save();
 
             $current_status = $kendaraan->status_sk;
-            notification($old_status,$current_status,"status_sk",$kendaraan);
+            notification($old_status,$current_status,"App\Notifications\SkExpired",$kendaraan);
         }
     }
 }
@@ -85,7 +91,7 @@ if (!function_exists('check_status_kartu')) {
             $kendaraan->save();
     
             $current_status = $kendaraan->status_kartu;
-            notification($old_status,$current_status,"status_kartu",$kendaraan);
+            notification($old_status,$current_status,"App\Notifications\KartuExpired",$kendaraan);
         }
     }
 }
