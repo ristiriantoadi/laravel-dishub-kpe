@@ -75,9 +75,11 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">SK Expired</h3>
     </div>
-    
-    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export"])
-	
+    @if (isset($tanggalPencarian))
+        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export?tanggalNotif=".$tanggalPencarian])
+    @else
+        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export"])
+    @endif	
     <div class="card shadow border-left-primary py-2">
     <div class="card-body">
 
