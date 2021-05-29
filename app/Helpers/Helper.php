@@ -97,9 +97,13 @@ if (!function_exists('check_status_kartu')) {
 }
 
 if (!function_exists('get_notifications')) {
-    function get_notifications($type){
+    function get_notifications($type,$tanggal=null){
         $user = Auth::user();
         $kendaraans = [];
+        if($tanggal){
+            // $user->notifications = $user->notifications()->where('created_at', $tanggal)->get();
+            $user->notifications = $user->notifications()->whereDate('created_at', '=', $tanggal)->get();
+        }
         foreach ($user->notifications as $notification) {
             if($notification->type == $type){
                 //get kendaraan
@@ -116,6 +120,28 @@ if (!function_exists('get_notifications')) {
         return $kendaraans;        
     }
 }
+
+// if (!function_exists('get_notifications_by_tanggal')) {
+//     function get_notifications_by_tanggal($tanggal,$type){
+//         $user = Auth::user();
+//         $kendaraans = [];
+//         // $user->notifications = $user->notifications()->where('created_at', $notification->id)->get()
+//         foreach ($user->notifications as $notification) {
+//             if($notification->type == $type){
+//                 //get kendaraan
+//                 $id_kendaraan = $notification->data["kendaraan_id"];
+//                 $kendaraan = Kendaraan::find($id_kendaraan);
+//                 array_push($kendaraans,$kendaraan);
+            
+//                 $notification->markAsRead();
+//             }
+//             if($notification->data["kendaraan_id"] == 2051){
+//                 error_log("notification: ".$notification);
+//             }
+//         }
+//         return $kendaraans;        
+//     }
+// }
 
 if (!function_exists('get_unread_notifications')) {
     function get_unread_notifications($type){
