@@ -76,7 +76,7 @@
         <h3 class="text-dark mb-0">SK Expired</h3>
     </div>
     
-    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari'])
+    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export"])
 	
     <div class="card shadow border-left-primary py-2">
     <div class="card-body">

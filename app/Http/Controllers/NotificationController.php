@@ -8,6 +8,8 @@ use App\Kendaraan;
 use App\User;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
+use App\Exports\KartuExpiredExport;
+use App\Exports\SkExpiredExport;
 use Illuminate\Support\Facades\View;
 
 use App\Exports\UsersExport;
@@ -171,6 +173,28 @@ class NotificationController extends Controller
         return "ok";
     }
 
+    public function exportExpired(Request $request,$type){
+        if($type == "kartu"){
+            $type = "App\Notifications\KartuExpired";
+        }else{
+            $type = "App\Notifications\SkExpired";
+        }
+
+        $tanggalNotif=null;
+        if($request->has('tanggalNotif')){
+            $tanggalNotif = $request->tanggalNotif;
+        }
+        $kendaraans = get_notifications($type,$tanggalNotif);
+
+        if($type == "App\Notifications\KartuExpired"){
+            $export = new KartuExpiredExport($kendaraans);    
+            return Excel::download($export, 'Kartu Expired.xlsx');
+        }else{
+            $export = new SkExpiredExport($kendaraans);
+            return Excel::download($export, 'SK Expired.xlsx');
+        }
+    }
+
     public function cariExpired(Request $request,$type)
     {
         if($type == "kartu"){
@@ -183,15 +207,8 @@ class NotificationController extends Controller
         if($request->has('tanggalNotif')){
             $tanggalNotif = $request->tanggalNotif;
         }
-
-        if($tanggalNotif){
-            //search by tanggal
-            $kendaraans = get_notifications($type,$tanggalNotif);
-        }else{
-            //return everything
-            $kendaraans = get_notifications($type,null);
-        }
-
+        $kendaraans = get_notifications($type,$tanggalNotif);
+        
         $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggalNotif];
 
         if($type == "App\Notifications\KartuExpired"){
@@ -199,8 +216,6 @@ class NotificationController extends Controller
         }else{
             return view('expired/sk_expired',$data);
         }
-        
-
     }
 
     public function exportExcel(Request $request){

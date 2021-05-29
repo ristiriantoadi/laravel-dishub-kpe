@@ -77,7 +77,7 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Kartu Expired</h3>
     </div>
-    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/kartu/cari'])
+    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/kartu/cari','url_export'=>"/expired/kartu/export?tanggalNotif"])
 	<div class="card shadow border-left-primary py-2">
     <div class="card-body">
 
