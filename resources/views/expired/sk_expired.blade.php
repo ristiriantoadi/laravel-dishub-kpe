@@ -2,6 +2,12 @@
 
 @section('title', 'SK Expired')
 
+@php
+    if (file_exists("app/Helpers/Helper.php")){
+        include "app/Helpers/Helper.php";
+    }
+@endphp
+
 @section('container')
 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
     <div class="container-fluid">

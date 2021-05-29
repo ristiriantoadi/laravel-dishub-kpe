@@ -6,7 +6,9 @@ use Closure;
 use Illuminate\Support\Facades\View;
 use Auth;
 
-include "app/Helpers/Helper.php";
+if (file_exists("app/Helpers/Helper.php")){
+    include "app/Helpers/Helper.php";
+}
 
 class NotificationsLength
 {

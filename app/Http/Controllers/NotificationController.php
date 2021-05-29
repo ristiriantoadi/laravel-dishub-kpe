@@ -9,7 +9,10 @@ use App\User;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use Illuminate\Support\Facades\View;
-include "app/Helpers/Helper.php";
+
+if (file_exists("app/Helpers/Helper.php")){
+    include "app/Helpers/Helper.php";
+}
 // use App\Helpers\Helper;
 
 // helper functions
