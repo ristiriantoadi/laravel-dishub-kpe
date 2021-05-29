@@ -115,6 +115,9 @@
                     <td>{{$k->nopol}}</td>
                     <td>
                         @if ($k->masaberlaku)
+                            @php
+                                $k->masaberlaku = date("d-m-Y", strtotime($k->masaberlaku));  
+                            @endphp
                             {{$k->masaberlaku}}
                         @else
                             -
@@ -125,7 +128,11 @@
                             @include('expired.status_badge_expired')
                         @elseif ($k->status_kartu == "menjelang_expired")
                             @php
-                                $diff = days_diff(strtotime($k->masaberlaku),time())        
+                                if(isset($tanggalPencarian)){
+                                    $diff = days_diff(strtotime($k->masaberlaku),strtotime($tanggalPencarian));
+                                }else{
+                                    $diff = days_diff(strtotime($k->masaberlaku),time());
+                                }        
                             @endphp
                             @include('expired.status_badge_menjelang_expired')
                         @endif

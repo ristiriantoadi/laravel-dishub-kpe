@@ -114,6 +114,9 @@
                     <td>{{$k->nopol}}</td>
                     <td>
                         @if ($k->tglawalsk)
+                            @php
+                                $k->tglawalsk = date("d-m-Y", strtotime($k->tglawalsk));
+                            @endphp
                             {{$k->tglawalsk}}
                         @else
                             -
@@ -121,6 +124,9 @@
                     </td>
                     <td>
                         @if ($k->tglakhirsk)
+                            @php
+                                $k->tglakhirsk = date("d-m-Y", strtotime($k->tglakhirsk));
+                            @endphp
                             {{$k->tglakhirsk}}
                         @else
                             -

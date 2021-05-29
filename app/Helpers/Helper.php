@@ -17,8 +17,26 @@ if (!function_exists('days_diff')) {
 }
 
 if (!function_exists('update_status')) {
-    function update_status($expired_date){
+    function update_status($expired_date){ // change status
         $current_date = time();
+        $datediff = $expired_date - $current_date;
+        $datediff = round($datediff / (60 * 60 * 24));
+        
+        if($datediff<0){
+            return "expired";
+        }
+        else if($datediff<=30){
+            return "menjelang_expired";
+        }
+        else{
+            return "belum_expired";
+        }
+    }
+}
+
+if (!function_exists('update_status_on_specified_date')) {
+    function update_status_on_specified_date($expired_date,$specified_date){ // change status
+        $current_date = $specified_date;
         $datediff = $expired_date - $current_date;
         $datediff = round($datediff / (60 * 60 * 24));
         
@@ -101,9 +119,34 @@ if (!function_exists('get_notifications')) {
         $user = Auth::user();
         $kendaraans = [];
         if($tanggal){
-            // $user->notifications = $user->notifications()->where('created_at', $tanggal)->get();
-            $user->notifications = $user->notifications()->whereDate('created_at', '=', $tanggal)->get();
+            // $user->notifications = $user->notifications()->whereDate('created_at', '=', $tanggal)->get();
+            // get all kendaraans and change its status based on the $tanggal, but dont save to database 
+            $kendaraans_object =  Kendaraan::all();
+            foreach($kendaraans_object as $kendaraan){ 
+                $status_kendaraan=null;
+                if($type == "App\Notifications\KartuExpired"){
+                    //change status_kartu
+                    if($kendaraan->masaberlaku){
+                        $kendaraan->status_kartu = update_status_on_specified_date(strtotime($kendaraan->masaberlaku),strtotime($tanggal));
+                        $status_kendaraan = $kendaraan->status_kartu;
+                    }
+                }else{
+                    //change status_sk
+                    if($kendaraan->tglakhirsk){
+                        $kendaraan->status_sk = update_status_on_specified_date(strtotime($kendaraan->tglakhirsk),strtotime($tanggal));
+                        $status_kendaraan = $kendaraan->status_sk;
+                    }
+                }
+
+                if(isset($status_kendaraan)){
+                    if($status_kendaraan == "menjelang_expired" or $status_kendaraan == "expired"){
+                        array_push($kendaraans,$kendaraan);
+                    }
+                }
+            }
+            return $kendaraans;
         }
+
         foreach ($user->notifications as $notification) {
             if($notification->type == $type){
                 //get kendaraan
