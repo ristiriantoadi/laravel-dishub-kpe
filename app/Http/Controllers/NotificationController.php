@@ -135,7 +135,7 @@ class NotificationController extends Controller
         $kendaraans_kartu_expired_notifications_length = 0;
 
 
-        return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length]);
+        return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length,'url'=>"hello"]);
     }
 
     public function skExpired(Request $request){        

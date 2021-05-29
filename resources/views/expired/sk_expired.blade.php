@@ -15,7 +15,7 @@
             <i class="fas fa-bars"></i>
         </button>
 
-        <form action="/kendaraans/cari" method="GET"
+        <form action="/expired/sk/cari" method="GET"
             class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Data Kendaraan ..."
@@ -75,8 +75,10 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">SK Expired</h3>
     </div>
+    
+    @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari'])
 	
-	<div class="card shadow border-left-primary py-2">
+    <div class="card shadow border-left-primary py-2">
     <div class="card-body">
 
     @if (session('status'))
