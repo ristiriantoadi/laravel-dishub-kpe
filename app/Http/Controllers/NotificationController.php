@@ -179,11 +179,11 @@ class NotificationController extends Controller
             $type = "App\Notifications\SkExpired";
         }
 
-        $tanggalNotif=null;
-        if($request->has('tanggalNotif')){
-            $tanggalNotif = $request->tanggalNotif;
+        $tanggal=null;
+        if($request->has('tanggal')){
+            $tanggal = $request->tanggal;
         }
-        $kendaraans = get_notifications($type,$tanggalNotif);
+        $kendaraans = get_notifications($type,$tanggal);
 
         if($type == "App\Notifications\KartuExpired"){
             $export = new KartuExpiredExport($kendaraans);    
@@ -202,13 +202,13 @@ class NotificationController extends Controller
             $type = "App\Notifications\SkExpired";
         }
 
-        $tanggalNotif=null;
-        if($request->has('tanggalNotif')){
-            $tanggalNotif = $request->tanggalNotif;
+        $tanggal=null;
+        if($request->has('tanggal')){
+            $tanggal = $request->tanggal;
         }
-        $kendaraans = get_notifications($type,$tanggalNotif);
+        $kendaraans = get_notifications($type,$tanggal);
         
-        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggalNotif];
+        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal];
 
         if($type == "App\Notifications\KartuExpired"){
             return view('expired/kartu_expired',$data);

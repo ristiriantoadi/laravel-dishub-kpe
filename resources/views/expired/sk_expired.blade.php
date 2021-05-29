@@ -76,7 +76,7 @@
         <h3 class="text-dark mb-0">SK Expired</h3>
     </div>
     @if (isset($tanggalPencarian))
-        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export?tanggalNotif=".$tanggalPencarian])
+        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export?tanggal=".$tanggalPencarian])
     @else
         @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/sk/cari','url_export'=>"/expired/sk/export"])
     @endif	

@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="exampleFormControlFile1">Tanggal notifikasi</label>
             <div style="display:flex">
-                    <input type="date" name="tanggalNotif" class="form-control" id="exampleFormControlFile1" value="<?php if (isset($tanggalPencarian)){echo $tanggalPencarian;} ?>">
+                    <input type="date" name="tanggal" class="form-control" id="exampleFormControlFile1" value="<?php if (isset($tanggalPencarian)){echo $tanggalPencarian;} ?>">
                     <button class="btn btn-primary py-0" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
