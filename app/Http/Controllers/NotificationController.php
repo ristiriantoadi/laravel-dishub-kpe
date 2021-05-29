@@ -10,6 +10,9 @@ use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use Illuminate\Support\Facades\View;
 
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 if (file_exists("app/Helpers/Helper.php")){
     include "app/Helpers/Helper.php";
 }
@@ -198,6 +201,10 @@ class NotificationController extends Controller
         }
         
 
+    }
+
+    public function exportExcel(Request $request){
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 
 }
