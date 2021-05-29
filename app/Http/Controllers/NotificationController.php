@@ -189,10 +189,12 @@ class NotificationController extends Controller
             $kendaraans = get_notifications($type,null);
         }
 
+        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggalNotif];
+
         if($type == "App\Notifications\KartuExpired"){
-            return view('expired/kartu_expired',['kendaraans' => $kendaraans]);
+            return view('expired/kartu_expired',$data);
         }else{
-            return view('expired/sk_expired',['kendaraans' => $kendaraans]);
+            return view('expired/sk_expired',$data);
         }
         
 
