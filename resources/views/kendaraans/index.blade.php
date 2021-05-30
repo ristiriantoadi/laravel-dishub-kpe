@@ -95,6 +95,9 @@
         <tbody>
             @foreach($kendaraans as $k)
             <tr>
+                @php
+                    $loop->iteration = get_table_row_number($loop->iteration,$kendaraans->perPage(),$kendaraans->currentPage());
+                @endphp
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $k->namaperusahaan }}</td>
                 <td>{{ $k->nomesin }}</td>

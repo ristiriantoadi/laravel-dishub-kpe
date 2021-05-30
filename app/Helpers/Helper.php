@@ -157,6 +157,12 @@ if (!function_exists('check_status_kartu')) {
     }
 }
 
+if (!function_exists('get_table_row_number')) {
+    function get_table_row_number($iteration,$perPage,$currentPage){
+        return $perPage*($currentPage-1)+$iteration;
+    }
+}
+
 if (!function_exists('get_notifications')) {
     function get_notifications($type,$tanggal=null){
         $user = Auth::user();
