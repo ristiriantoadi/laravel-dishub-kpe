@@ -19,10 +19,18 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination mt-3">
                     <li class="page-item">
-                        @if (isset($tanggalPencarian))
-                            {{ $kendaraans->appends(['tanggal' => $tanggalPencarian])->links() }}
-                        @elseif (isset($keyword))
-                            {{ $kendaraans->appends(['keyword' => $keyword])->links() }}
+                        @php
+                            $queryString=[];
+                            if(isset($tanggalPencarian)){
+                                $queryString['tanggal']=$tanggalPencarian;
+                            }
+                            if(isset($keyword)){
+                                $queryString['keyword']=$keyword;
+                            }
+                        @endphp
+                        
+                        @if(count($queryString) > 0)
+                            {{ $kendaraans->appends($queryString)->links() }}
                         @else
                             {{ $kendaraans->links() }}
                         @endif
