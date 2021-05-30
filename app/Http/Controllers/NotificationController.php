@@ -202,7 +202,7 @@ class NotificationController extends Controller
                 if($kendaraan->nopol == $keyword){
                     return true;
                 }
-                if($kendaraan->namaperusahaan == $keyword){
+                if(strtolower($kendaraan->namaperusahaan) == strtolower($keyword)){
                     return true;
                 }
                 return false;
@@ -251,7 +251,7 @@ class NotificationController extends Controller
                 if($kendaraan->nopol == $keyword){
                     return true;
                 }
-                if($kendaraan->namaperusahaan == $keyword){
+                if(strtolower($kendaraan->namaperusahaan) == strtolower($keyword)){
                     return true;
                 }
                 return false;
