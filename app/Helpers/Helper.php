@@ -164,7 +164,7 @@ if (!function_exists('get_notifications')) {
         if($tanggal){
             // get all kendaraans and change its status based on the $tanggal, but dont save to database 
             $kendaraans_object =  Kendaraan::all()->sortByDesc("id");
-            ;
+            
             foreach($kendaraans_object as $kendaraan){ 
                 $status_kendaraan=null;
                 if($type == "App\Notifications\KartuExpired"){
@@ -183,7 +183,17 @@ if (!function_exists('get_notifications')) {
 
                 if(isset($status_kendaraan)){
                     if($status_kendaraan == "menjelang_expired" or $status_kendaraan == "expired"){
-                        array_push($kendaraans,$kendaraan);
+                        //for kartu_expired, you need to check status_sk too
+                        if($type == "App\Notifications\KartuExpired"){
+                            //update status_sk
+                            if($kendaraan->tglakhirsk){
+                                $kendaraan->status_sk = update_status_on_specified_date(strtotime($kendaraan->tglakhirsk),strtotime($tanggal));
+                            }
+
+                            if($kendaraan->status_sk == "belum_expired" ){
+                                array_push($kendaraans,$kendaraan);
+                            }
+                        }
                     }
                 }
             }
