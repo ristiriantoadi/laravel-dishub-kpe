@@ -128,7 +128,12 @@
                             @include('expired.status_badge_expired')
                         @elseif ($k->status_sk == "menjelang_expired")
                             @php
-                                $diff = days_diff(strtotime($k->tglakhirsk),time())        
+                                if(isset($tanggalPencarian)){
+                                    $diff = days_diff(strtotime($k->tglakhirsk),strtotime($tanggalPencarian));
+                                }else{
+                                    $diff = days_diff(strtotime($k->tglakhirsk),time());
+                                }        
+                                $diff = abs($diff);
                             @endphp
                             @include('expired.status_badge_menjelang_expired')
                         @endif

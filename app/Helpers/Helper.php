@@ -12,7 +12,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 if (!function_exists('days_diff')) {
     function days_diff($first_date,$second_date){
         $datediff = $first_date - $second_date;
-        $datediff = round($datediff / (60 * 60 * 24));
+        // $datediff = round($datediff / (60 * 60 * 24));
+        $datediff = ceil($datediff / (60 * 60 * 24));
         return $datediff;
     }
 }
@@ -199,6 +200,8 @@ if (!function_exists('get_notifications')) {
                             if($kendaraan->status_sk == "belum_expired" ){
                                 array_push($kendaraans,$kendaraan);
                             }
+                        }else{
+                            array_push($kendaraans,$kendaraan);
                         }
                     }
                 }

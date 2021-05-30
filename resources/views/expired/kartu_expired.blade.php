@@ -118,6 +118,7 @@
                                             }else{
                                                 $diff = days_diff(strtotime($k->masaberlaku),time());
                                             }        
+                                            $diff = abs($diff);
                                         @endphp
                                         @include('expired.status_badge_menjelang_expired')
                                     @endif
