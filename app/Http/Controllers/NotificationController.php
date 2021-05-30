@@ -139,14 +139,14 @@ class NotificationController extends Controller
         $kendaraans = get_notifications("App\Notifications\KartuExpired",null);
         $kendaraans_kartu_expired_notifications_length = 0;
 
-        return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length]);
+        return view('expired/kartu_expired',['kendaraans' => $kendaraans,'kartu_expired_notif_length' => $kendaraans_kartu_expired_notifications_length,'url'=>'/expired/kartu/cari','url_export'=>'/expired/kartu/export']);
     }
 
     public function skExpired(Request $request){        
         $kendaraans = get_notifications("App\Notifications\SkExpired",null);
         $kendaraans_sk_expired_notifications_length = 0;
        
-        return view('expired/sk_expired',['kendaraans' => $kendaraans,'sk_expired_notif_length'=> $kendaraans_sk_expired_notifications_length]);
+        return view('expired/sk_expired',['kendaraans' => $kendaraans,'sk_expired_notif_length'=> $kendaraans_sk_expired_notifications_length,'url'=>'/expired/sk/cari','url_export'=>'/expired/sk/export']);
     }
 
     public function testNotif(Request $request){        
@@ -194,25 +194,50 @@ class NotificationController extends Controller
         }
     }
 
+    //cari expired / expire cari / expired cari
     public function cariExpired(Request $request,$type)
     {
+        $request->fullUrl();
         if($type == "kartu"){
-            $type = "App\Notifications\KartuExpired";
+            $type_notification = "App\Notifications\KartuExpired";
         }else{
-            $type = "App\Notifications\SkExpired";
+            $type_notification = "App\Notifications\SkExpired";
         }
 
+        //get by tanggal
         $tanggal=null;
         if($request->has('tanggal')){
             $tanggal = $request->tanggal;
         }
-        $kendaraans = get_notifications($type,$tanggal);
-        
-        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal];
+        $kendaraans = get_notifications($type_notification,$tanggal);
 
-        if($type == "App\Notifications\KartuExpired"){
+        //search by kendaraan fields
+        if($request->has('keyword')){
+            $keyword = $request->keyword;
+            $kendaraans=array_filter($kendaraans,function($kendaraan) use ($keyword){
+                //search by nomesin, nopol, or namaperusahaan.
+                if($kendaraan->nomesin == $keyword){
+                    return true;
+                }
+                if($kendaraan->nopol == $keyword){
+                    return true;
+                }
+                if($kendaraan->namaperusahaan == $keyword){
+                    return true;
+                }
+                return false;
+            });
+        }
+        
+        // $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal,'url'=>'/expired/'.$type.'/cari','url_export'=>'/expired/'.$type.'/export'];
+        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal,'url'=>'/expired/kartu/cari','url_export'=>'/expired/kartu/export'];
+
+        if($type_notification == "App\Notifications\KartuExpired"){
+            // $data['url'] = "/expired/".$type."/cari";
             return view('expired/kartu_expired',$data);
         }else{
+            // $data['url'] = '/expired/sk/cari';
+            // $data['url_export'] = 
             return view('expired/sk_expired',$data);
         }
     }

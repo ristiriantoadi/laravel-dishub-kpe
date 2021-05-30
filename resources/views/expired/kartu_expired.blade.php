@@ -14,21 +14,8 @@
         <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button">
             <i class="fas fa-bars"></i>
         </button>
-
-        <form action="/expired/kartu/cari" method="GET"
-            class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Data Kendaraan ..."
-                    value="{{ old('cari') }}" name="cari">
-                <input class="bg-light form-control border-0 small" type="text" placeholder="Cari Data Kendaraan ..."
-                    value="{{ old('cari') }}" name="cari">
-                <div class="input-group-append">
-                    <button class="btn btn-primary py-0" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+             
+        @include('expired.form_cari_field_kendaraan_expired')
 
         <ul class="nav navbar-nav flex-nowrap ml-auto">
             <li class="nav-item dropdown d-sm-none no-arrow">
@@ -77,11 +64,9 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-4">
         <h3 class="text-dark mb-0">Kartu Expired</h3>
     </div>
-    @if (isset($tanggalPencarian))
-        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/kartu/cari','url_export'=>"/expired/kartu/export?tanggal=".$tanggalPencarian])
-    @else
-        @include('expired.form_tanggal_pencarian_expired',['url' => '/expired/kartu/cari','url_export'=>"/expired/kartu/export"])
-    @endif
+
+    @include('expired.form_tanggal_pencarian_expired')
+
 	<div class="card shadow border-left-primary py-2">
     <div class="card-body">
 

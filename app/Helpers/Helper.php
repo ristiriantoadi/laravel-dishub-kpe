@@ -16,6 +16,13 @@ if (!function_exists('days_diff')) {
     }
 }
 
+if (!function_exists('search_fields')) {
+    function search_fields($kendaraan){
+        
+    }
+}
+
+
 if (!function_exists('update_status')) {
     function update_status($expired_date){ // change status
         $current_date = time();

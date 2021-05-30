@@ -24,7 +24,7 @@ class KendaraanController extends Controller
 		// menangkap data pencarian
 		$cari = $request->cari;
 
-    		// mengambil data dari table pegawai sesuai pencarian data
+    	// mengambil data dari table pegawai sesuai pencarian data
         $kendaraans = DB::table('kendaraans')
             ->where('nomesin','like',"%".$cari."%")
 			->orWhere('nopol','like',"%".$cari."%")
