@@ -7,20 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Validator;
-// use App\Helpers\Helper;
 
 class DataController extends Controller
 {
 
     public function dashboard()
     {
-        //do notification
-        // $kendaraans = Kendaraan::all();
-        // foreach ($kendaraans as $kendaraan) {
-        //     // code to be executed;
-        //     check_status_sk($kendaraan);
-        //     check_status_kartu($kendaraan);
-        // } 
         return view('dashboard');
     }
 

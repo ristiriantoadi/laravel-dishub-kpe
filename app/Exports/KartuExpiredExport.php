@@ -2,8 +2,6 @@
 
 namespace App\Exports;
 
-// use Maatwebsite\Excel\Concerns\FromCollection;
-
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -51,7 +49,6 @@ class KartuExpiredExport implements FromArray, WithHeadings, WithMapping
     public function map($kendaraan): array
     {
         return [
-            // nopol,nouji,merk,thpembuatan,norangka,nomesin,dayaangkutorang,dayaangkutbarang,trayek,namaperusahaan,alamatperusahaan,namapemilik,nosk,kodeperusahaan,masaberlaku,tglawalsk,tglakhirsk,status_sk,status_kartu
             $kendaraan->nopol,
             $kendaraan->nouji,
             $kendaraan->merk,

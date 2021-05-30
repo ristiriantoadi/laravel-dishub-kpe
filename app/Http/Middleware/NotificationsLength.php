@@ -21,8 +21,7 @@ class NotificationsLength
      */
     public function handle($request, Closure $next)
     {
-        // $response = $next($request);
-
+     
         View::share('sk_expired_notif_length', 0);
         View::share('kartu_expired_notif_length', 0);
         

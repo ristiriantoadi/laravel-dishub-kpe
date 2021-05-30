@@ -1,6 +1,5 @@
 <?php
 
-// namespace App\Helpers;
 use App\Notifications\KartuExpired;
 use App\Notifications\SkExpired;
 use App\Kendaraan;
@@ -12,7 +11,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 if (!function_exists('days_diff')) {
     function days_diff($first_date,$second_date){
-        // $current_date = time();
         $datediff = $first_date - $second_date;
         $datediff = round($datediff / (60 * 60 * 24));
         return $datediff;
@@ -75,7 +73,7 @@ if (!function_exists('update_status_on_specified_date')) {
 
 if (!function_exists('notification')) {
     function notification($old_status,$current_status,$type,$kendaraan){
-        // $user = Auth::user();
+        
         $users = User::all();
         if($old_status == "belum_expired"){
             if($current_status != "belum_expired"){
@@ -99,7 +97,6 @@ if (!function_exists('notification')) {
                             if ($kendaraan->id == $id_kendaraan){
                                 $user->notifications()->where('id', $notification->id)->get()->first()->delete();
                                 break;
-                            // return;
                             }
                         }
                     }
@@ -140,7 +137,6 @@ if (!function_exists('get_notifications')) {
         $user = Auth::user();
         $kendaraans = [];
         if($tanggal){
-            // $user->notifications = $user->notifications()->whereDate('created_at', '=', $tanggal)->get();
             // get all kendaraans and change its status based on the $tanggal, but dont save to database 
             $kendaraans_object =  Kendaraan::all()->sortByDesc("id");
             ;
@@ -185,28 +181,6 @@ if (!function_exists('get_notifications')) {
         return $kendaraans;        
     }
 }
-
-// if (!function_exists('get_notifications_by_tanggal')) {
-//     function get_notifications_by_tanggal($tanggal,$type){
-//         $user = Auth::user();
-//         $kendaraans = [];
-//         // $user->notifications = $user->notifications()->where('created_at', $notification->id)->get()
-//         foreach ($user->notifications as $notification) {
-//             if($notification->type == $type){
-//                 //get kendaraan
-//                 $id_kendaraan = $notification->data["kendaraan_id"];
-//                 $kendaraan = Kendaraan::find($id_kendaraan);
-//                 array_push($kendaraans,$kendaraan);
-            
-//                 $notification->markAsRead();
-//             }
-//             if($notification->data["kendaraan_id"] == 2051){
-//                 error_log("notification: ".$notification);
-//             }
-//         }
-//         return $kendaraans;        
-//     }
-// }
 
 if (!function_exists('get_unread_notifications')) {
     function get_unread_notifications($type){

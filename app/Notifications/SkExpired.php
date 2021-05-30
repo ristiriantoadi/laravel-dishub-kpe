@@ -56,7 +56,6 @@ class SkExpired extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
             'kendaraan_id' => $this->kendaraan->id,
         ];
     }
