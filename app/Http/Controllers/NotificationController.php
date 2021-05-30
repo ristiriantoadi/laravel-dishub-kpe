@@ -185,6 +185,24 @@ class NotificationController extends Controller
         }
         $kendaraans = get_notifications($type,$tanggal);
 
+        //search by kendaraan fields
+        if($request->has('keyword')){
+            $keyword = $request->keyword;
+            $kendaraans=array_filter($kendaraans,function($kendaraan) use ($keyword){
+                //search by nomesin, nopol, or namaperusahaan.
+                if($kendaraan->nomesin == $keyword){
+                    return true;
+                }
+                if($kendaraan->nopol == $keyword){
+                    return true;
+                }
+                if($kendaraan->namaperusahaan == $keyword){
+                    return true;
+                }
+                return false;
+            });
+        }
+
         if($type == "App\Notifications\KartuExpired"){
             $export = new KartuExpiredExport($kendaraans);    
             return Excel::download($export, 'Kartu Expired.xlsx');
@@ -197,7 +215,11 @@ class NotificationController extends Controller
     //cari expired / expire cari / expired cari
     public function cariExpired(Request $request,$type)
     {
-        $request->fullUrl();
+        error_log("url: ".$request->fullUrl());
+        if(count(explode("?",$request->fullUrl())) == 2){
+            $queryString=explode("?",$request->fullUrl())[1];
+            error_log("query string: ".$queryString);
+        }
         if($type == "kartu"){
             $type_notification = "App\Notifications\KartuExpired";
         }else{
@@ -229,8 +251,11 @@ class NotificationController extends Controller
             });
         }
         
-        // $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal,'url'=>'/expired/'.$type.'/cari','url_export'=>'/expired/'.$type.'/export'];
-        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal,'url'=>'/expired/kartu/cari','url_export'=>'/expired/kartu/export'];
+        $data = ['kendaraans' => $kendaraans,'tanggalPencarian'=>$tanggal,'url'=>'/expired/'.$type.'/cari','url_export'=>'/expired/'.$type.'/export'];
+        
+        if(isset($queryString)){
+            $data['url_export'] .= "?".$queryString;
+        }
 
         if($type_notification == "App\Notifications\KartuExpired"){
             // $data['url'] = "/expired/".$type."/cari";
