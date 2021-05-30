@@ -65,8 +65,10 @@ class NotificationController extends Controller
         $kendaraans = Kendaraan::all();
         foreach ($kendaraans as $kendaraan) {
             // code to be executed;
-            check_status_sk($kendaraan);
+            // REMEMBER: it have to be in THIS order
             check_status_kartu($kendaraan);
+            check_status_sk($kendaraan);
+            
         }
         return "ok";
     }

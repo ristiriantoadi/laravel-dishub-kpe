@@ -23,8 +23,6 @@ Route::get('/expired/sk', 'NotificationController@skExpired')->middleware('auth'
 Route::get('/expired/{type}/cari', 'NotificationController@cariExpired');
 Route::get('/expired/{type}/export', 'NotificationController@exportExpired');
 Route::get('/cek_expired','NotificationController@checkExpired');
-Route::get('/test_excel', 'NotificationController@exportExcel'); // excel
-
 
 Route::get('/', 'DataController@search');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');

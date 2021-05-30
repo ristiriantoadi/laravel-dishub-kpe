@@ -71,6 +71,24 @@ if (!function_exists('update_status_on_specified_date')) {
     }
 }
 
+if (!function_exists('delete_notifications')) {
+    function delete_notifications($id_kendaraan,$type){
+        $users = User::all();
+        foreach ($users as $user) {
+            foreach ($user->notifications as $notification) {
+                if($notification->type == $type){
+                    $notification_kendaraan_id =  $notification->data["kendaraan_id"];
+                    if ($notification_kendaraan_id == $id_kendaraan){
+                        $user->notifications()->where('id', $notification->id)->get()->first()->delete();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 if (!function_exists('notification')) {
     function notification($old_status,$current_status,$type,$kendaraan){
         
@@ -81,6 +99,12 @@ if (!function_exists('notification')) {
                 foreach ($users as $user) {
                     if($type == "App\Notifications\SkExpired"){
                         $user->notify(new SkExpired($kendaraan));
+                        //if sk_expired, that means kartu also expired
+                        //to avoid redundancy in the notifications table, remove kartu_expired 
+                        //notification
+                        
+                        //delete kartuExpired notif for EVERY USER, for this particular kendaraan
+                        delete_notifications($kendaraan->id,"App\Notifications\KartuExpired");
                     }else{
                         $user->notify(new KartuExpired($kendaraan));
                     }
@@ -90,17 +114,18 @@ if (!function_exists('notification')) {
         else{
             if($current_status == "belum_expired"){
                 // remove_from_notification(record) / remove notifications / delete notifications
-                foreach ($users as $user) {
-                    foreach ($user->notifications as $notification) {
-                        if($notification->type == $type){
-                            $id_kendaraan =  $notification->data["kendaraan_id"];
-                            if ($kendaraan->id == $id_kendaraan){
-                                $user->notifications()->where('id', $notification->id)->get()->first()->delete();
-                                break;
-                            }
-                        }
-                    }
-                }
+                delete_notifications($kendaraan->id,$type);
+                // foreach ($users as $user) {
+                //     foreach ($user->notifications as $notification) {
+                //         if($notification->type == $type){
+                //             $id_kendaraan =  $notification->data["kendaraan_id"];
+                //             if ($kendaraan->id == $id_kendaraan){
+                //                 $user->notifications()->where('id', $notification->id)->get()->first()->delete();
+                //                 break;
+                //             }
+                //         }
+                //     }
+                // }
             }
         }
     }
