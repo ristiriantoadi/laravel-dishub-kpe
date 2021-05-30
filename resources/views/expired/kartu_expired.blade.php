@@ -68,115 +68,89 @@
     @include('expired.form_tanggal_pencarian_expired')
 
 	<div class="card shadow border-left-primary py-2">
-    <div class="card-body">
-
-    @if (session('status'))
-    <div class="alert alert-success alert-dismissible fade show col-md-4" role="alert">
-        {{ session('status') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-    </div>
-    @endif
-
-	<div class="table-responsive">
-    <table style="width:100%" class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama Perusahaan</th>
-                <th scope="col">Nomor Mesin</th>
-                <th scope="col">TNKB / NOPOL</th>
-                <th scope="col">Masa Berlaku</th>
-                <th scope="col">Status</th>
-                <!-- <th scope="col">Aksi</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($kendaraans as $k)
-                <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$k->namaperusahaan}}</td>
-                    <td>{{$k->nomesin}}</td>
-                    <td>{{$k->nopol}}</td>
-                    <td>
-                        @if ($k->masaberlaku)
-                            @php
-                                $k->masaberlaku = date("d-m-Y", strtotime($k->masaberlaku));  
-                            @endphp
-                            {{$k->masaberlaku}}
-                        @else
-                            -
-                        @endif
-                    </td>
-                    <td>
-                        @if ($k->status_kartu == "expired")
-                            @include('expired.status_badge_expired')
-                        @elseif ($k->status_kartu == "menjelang_expired")
-                            @php
-                                if(isset($tanggalPencarian)){
-                                    $diff = days_diff(strtotime($k->masaberlaku),strtotime($tanggalPencarian));
-                                }else{
-                                    $diff = days_diff(strtotime($k->masaberlaku),time());
-                                }        
-                            @endphp
-                            @include('expired.status_badge_menjelang_expired')
-                        @endif
-                    </td>
-                </tr>
-                <!-- <tr>
-                <td colspan="6" style="font-weight:600">Rabu, 26 Mei 2021</td>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Adi Sobri</td>
-                    <td>4D31-046759</td>
-                    <td>DR 7779 KZ</td>
-                    <td>2021-02-10</td>
-                    <td>
-                        <button type="button" style="background-color:#f5a003;color:#ffffff;font-weight:600;font-size:95%" class="btn"><i class="fas fa-exclamation-circle"></i> 30 hari menjelang expired</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Adi Sobri</td>
-                    <td>4D31-046759</td>
-                    <td>DR 7779 KZ</td>
-                    <td>2021-02-10</td>
-                    <td>
-                        <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 14 hari menjelang expired</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" style="font-weight:600">Selasa, 25 Mei 2021</td>
-                <tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Adi Sobri</td>
-                    <td>4D31-046759</td>
-                    <td>DR 7779 KZ</td>
-                    <td>2021-02-10</td>
-                    <td>
-                        <button type="button" style="font-size:95%;background-color:#f5a003;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> 7 hari menjelang expired</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" style="font-weight:600">Senin, 24 Mei 2021</td>
-                <tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Adi Sobri</td>
-                    <td>4D31-046759</td>
-                    <td>DR 7779 KZ</td>
-                    <td>2021-02-10</td>
-                    <td>
-                        <button type="button" style="font-size:95%;background-color:#fe0000;color:#ffffff;font-weight:600" class="btn"><i class="fas fa-exclamation-circle"></i> Expired</button>
-                    </td>
-                </tr> -->
-            @endforeach
-        </tbody>
-    </table>
-	</div> <!-- tutup responsive -->
-
-	</div>
+        <div class="card-body">
+            @if (session('status'))
+            <div class="alert alert-success alert-dismissible fade show col-md-4" role="alert">
+                {{ session('status') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            @endif
+            <div class="table-responsive">
+                <table style="width:100%" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Perusahaan</th>
+                            <th scope="col">Nomor Mesin</th>
+                            <th scope="col">TNKB / NOPOL</th>
+                            <th scope="col">Masa Berlaku</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($kendaraans as $k)
+                            <tr>
+                                <th scope="row">{{$loop->iteration}}</th>
+                                <td>{{$k->namaperusahaan}}</td>
+                                <td>{{$k->nomesin}}</td>
+                                <td>{{$k->nopol}}</td>
+                                <td>
+                                    @if ($k->masaberlaku)
+                                        @php
+                                            $k->masaberlaku = date("d-m-Y", strtotime($k->masaberlaku));  
+                                        @endphp
+                                        {{$k->masaberlaku}}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($k->status_kartu == "expired")
+                                        @include('expired.status_badge_expired')
+                                    @elseif ($k->status_kartu == "menjelang_expired")
+                                        @php
+                                            if(isset($tanggalPencarian)){
+                                                $diff = days_diff(strtotime($k->masaberlaku),strtotime($tanggalPencarian));
+                                            }else{
+                                                $diff = days_diff(strtotime($k->masaberlaku),time());
+                                            }        
+                                        @endphp
+                                        @include('expired.status_badge_menjelang_expired')
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div> <!-- tutup responsive -->
+            <!-- <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Halaman
+                            <span class="badge badge-primary badge-pill">{{ $kendaraans->currentPage() }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Jumlah Data
+                            <span class="badge badge-primary badge-pill">{{ $kendaraans->total() }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Data Per Halaman
+                            <span class="badge badge-primary badge-pill">{{ $kendaraans->perPage() }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>           
+            <nav aria-label="Page navigation example">
+                <ul class="pagination mt-3">
+                    <li class="page-item">
+                        {{ $kendaraans->links() }}
+                    </li>
+                </ul>
+            </nav>                      -->
+            @include('components.pagination')
+        </div>
 	</div>
 </div>
 @endsection

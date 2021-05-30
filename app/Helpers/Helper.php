@@ -6,6 +6,9 @@ use App\Notifications\SkExpired;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 if (!function_exists('days_diff')) {
     function days_diff($first_date,$second_date){
@@ -19,6 +22,17 @@ if (!function_exists('days_diff')) {
 if (!function_exists('search_fields')) {
     function search_fields($kendaraan){
         
+    }
+}
+
+if (!function_exists('paginate')) {
+    function paginate($items, $perPage = 15, $page = null, $options = []){
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }
 
