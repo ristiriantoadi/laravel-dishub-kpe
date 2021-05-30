@@ -142,7 +142,8 @@ if (!function_exists('get_notifications')) {
         if($tanggal){
             // $user->notifications = $user->notifications()->whereDate('created_at', '=', $tanggal)->get();
             // get all kendaraans and change its status based on the $tanggal, but dont save to database 
-            $kendaraans_object =  Kendaraan::all();
+            $kendaraans_object =  Kendaraan::all()->sortByDesc("id");
+            ;
             foreach($kendaraans_object as $kendaraan){ 
                 $status_kendaraan=null;
                 if($type == "App\Notifications\KartuExpired"){
