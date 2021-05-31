@@ -8,12 +8,14 @@ use App\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('upload_pdf')) {
     function upload_pdf($kendaraan,$berkasPdf){
-        $savePath = "public/berkas_kendaraan/".$kendaraan->id;
+        $savePath = "berkas_kendaraan/".$kendaraan->id;
         $filename = $berkasPdf->getClientOriginalName();
-        $berkasPdf->storeAs($savePath,$filename);
+        Storage::disk('public')->put($savePath."/".$filename, file_get_contents($berkasPdf));
+        // $berkasPdf->storeAs($savePath,$filename);
         $publicPathToFile = "/storage/"."berkas_kendaraan/".$kendaraan->id."/".$filename;
         $kendaraan->berkas_pdf = $publicPathToFile;
         $kendaraan->save();
