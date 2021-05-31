@@ -33,7 +33,7 @@ class DeleteController extends Controller
             ->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('delete/index',['kendaraans' => $kendaraans]);
+		return view('delete/index',['kendaraans' => $kendaraans,'cari'=>$cari]);
  
     }
     

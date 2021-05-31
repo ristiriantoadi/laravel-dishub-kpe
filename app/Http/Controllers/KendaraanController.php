@@ -32,7 +32,7 @@ class KendaraanController extends Controller
             ->paginate();
 
     		// mengirim data pegawai ke view index
-		return view('kendaraans/index',['kendaraans' => $kendaraans]);
+		return view('kendaraans/index',['kendaraans' => $kendaraans,'cari'=>$cari]);
 
     }
 

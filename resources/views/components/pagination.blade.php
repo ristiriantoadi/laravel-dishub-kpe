@@ -27,6 +27,9 @@
                             if(isset($keyword)){
                                 $queryString['keyword']=$keyword;
                             }
+                            if(isset($cari)){
+                                $queryString['cari']=$cari;
+                            }
                         @endphp
                         
                         @if(count($queryString) > 0)
