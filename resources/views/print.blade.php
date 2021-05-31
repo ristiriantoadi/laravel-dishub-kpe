@@ -95,6 +95,9 @@
         <tbody>
             @foreach($kendaraans as $k)
             <tr>
+                @php
+                    $loop->iteration = get_table_row_number($loop->iteration,$kendaraans->perPage(),$kendaraans->currentPage());
+                @endphp
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $k->namaperusahaan }}</td>
                 <td>{{ $k->nomesin }}</td>
@@ -562,35 +565,8 @@
         </tbody>
     </table>
 	</div> <!-- tutup responsive -->
-
-	<div class="row">
-        <div class="col-md-3">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Halaman
-                    <span class="badge badge-primary badge-pill">{{ $kendaraans->currentPage() }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Jumlah Data
-                    <span class="badge badge-primary badge-pill">{{ $kendaraans->total() }}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Data Per Halaman
-                    <span class="badge badge-primary badge-pill">{{ $kendaraans->perPage() }}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination mt-3">
-            <li class="page-item">
-                {{ $kendaraans->links() }}
-            </li>
-        </ul>
-    </nav>
     
+    @include('components.pagination')
 
 	</div>
 	</div>

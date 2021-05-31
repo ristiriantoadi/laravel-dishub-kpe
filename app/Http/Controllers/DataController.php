@@ -41,7 +41,7 @@ class DataController extends Controller
             ->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('print',['kendaraans' => $kendaraans]);
+		return view('print',['kendaraans' => $kendaraans,'cari'=>$cari]);
  
     }
 
