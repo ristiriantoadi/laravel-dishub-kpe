@@ -136,12 +136,24 @@ class KendaraanController extends Controller
             'tglawalsk' => $request->awal,
             'tglakhirsk' => $request->akhir
             ]);
+        
+        //get kendaraan
+        $kendaraan = Kendaraan::find($kendaraan->id);
+        
 
-            //get kendaraan
-            $kendaraan = Kendaraan::find($kendaraan->id);
-            check_status_kartu($kendaraan);
-            check_status_sk($kendaraan);
-            return redirect('/kendaraans')->with('status', 'Data Kendaraan Berhasil Diubah!');
+        //upload berkas pdf
+        if($request->file("berkas_pdf")){
+            $savePath = "public/berkas_kendaraan/".$kendaraan->id;
+            $filename = $request->file('berkas_pdf')->getClientOriginalName();
+            $request->file('berkas_pdf')->storeAs($savePath,$filename);
+            $publicPathToFile = "/storage/"."berkas_kendaraan/".$kendaraan->id."/".$filename;
+            $kendaraan->berkas_pdf = $publicPathToFile;
+            $kendaraan->save();
+        }
+
+        check_status_kartu($kendaraan);
+        check_status_sk($kendaraan);
+        return redirect('/kendaraans')->with('status', 'Data Kendaraan Berhasil Diubah!');
     }
 
 

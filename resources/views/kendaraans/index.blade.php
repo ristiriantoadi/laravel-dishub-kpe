@@ -129,7 +129,7 @@
                                     <div class="row">
 
                                         <div class="col">
-                                            <form method="post" action="/kendaraans/{{ $k->id }}">
+                                            <form enctype="multipart/form-data" method="post" action="/kendaraans/{{ $k->id }}">
                                                 @method('patch')
                                                 @csrf
                                                 <div class="form-group">
@@ -216,6 +216,15 @@
                                                     @error('daya_barang')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="berkas_pdf">Berkas (dalam pdf)</label>
+                                                    <input type="file" name="berkas_pdf" class="form-control-file mb-1" id="berkas_pdf">
+                                                    @if ($k->berkas_pdf)
+                                                        <span>File: <a href="{{url($k->berkas_pdf)}}">{{get_filename($k->berkas_pdf)}}</a></span>
+                                                    @else 
+                                                        <span>File: -</span>
+                                                    @endif
                                                 </div>
                                         </div>
                                         <div class="col">

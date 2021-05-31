@@ -9,6 +9,12 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+if (!function_exists('get_filename')) {
+    function get_filename($path){
+        return basename($path);
+    }
+}
+
 if (!function_exists('days_diff')) {
     function days_diff($first_date,$second_date){
         $datediff = $first_date - $second_date;
