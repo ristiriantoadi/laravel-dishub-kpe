@@ -10,4 +10,10 @@ class Kendaraan extends Model
                             'dayaangkutorang','dayaangkutbarang','trayek','namaperusahaan',
                             'alamatperusahaan','namapemilik','nosk','kodeperusahaan',
                             'masaberlaku','tglawalsk','tglakhirsk'];
+    protected $attributes = [
+                                'status_kartu' => "belum_expired",
+                                'status_sk' => "belum_expired",
+                                'berkas_pdf'=>""
+                            ];
+                        
 }

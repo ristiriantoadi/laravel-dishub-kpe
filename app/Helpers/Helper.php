@@ -9,6 +9,17 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+if (!function_exists('upload_pdf')) {
+    function upload_pdf($kendaraan,$berkasPdf){
+        $savePath = "public/berkas_kendaraan/".$kendaraan->id;
+        $filename = $berkasPdf->getClientOriginalName();
+        $berkasPdf->storeAs($savePath,$filename);
+        $publicPathToFile = "/storage/"."berkas_kendaraan/".$kendaraan->id."/".$filename;
+        $kendaraan->berkas_pdf = $publicPathToFile;
+        $kendaraan->save();
+    }
+}
+
 if (!function_exists('get_filename')) {
     function get_filename($path){
         return basename($path);

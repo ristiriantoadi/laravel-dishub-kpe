@@ -58,7 +58,7 @@
     <div class="row">
 
         <div class="col">
-            <form method="post" action="/input">
+            <form enctype="multipart/form-data" method="post" action="/input">
                 @csrf
                 <div class="form-group">
                     <label for="nopol">TNKB / NOPOL</label>
@@ -129,6 +129,10 @@
                     @error('daya_barang')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label for="berkas_pdf">Berkas (dalam pdf)</label>
+                    <input type="file" name="berkas_pdf" class="form-control-file mb-1" id="berkas_pdf">
                 </div>
         </div>
         <div class="col">
