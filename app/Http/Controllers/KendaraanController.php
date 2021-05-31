@@ -139,8 +139,8 @@ class KendaraanController extends Controller
 
             //get kendaraan
             $kendaraan = Kendaraan::find($kendaraan->id);
-            check_status_sk($kendaraan);
             check_status_kartu($kendaraan);
+            check_status_sk($kendaraan);
             return redirect('/kendaraans')->with('status', 'Data Kendaraan Berhasil Diubah!');
     }
 
