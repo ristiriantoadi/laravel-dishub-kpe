@@ -21,6 +21,16 @@ body {
     margin: auto;
 }
 
+.containerr {
+    display: block;
+    position: relative;
+    width: 323px;
+    height: 204px;
+    border: 0px solid #000;
+    padding: 0;
+    margin: auto;
+}
+
 #table1 {
     margin-top: 8px;
     width: 100%;
@@ -171,7 +181,7 @@ body {
         </div>
     </div>
     <div class="page-break"></div>
-    <div class="container">
+    <div class="containerr">
         <div class="wrapper">
             <table id="table3">
                 <tbody>
