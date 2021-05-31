@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', 'PagesController@home');
 Route::get('/login', 'AuthController@login')->name('login');
@@ -37,3 +37,9 @@ Route::delete('/delete/{kendaraan}', 'DeleteController@destroy')->middleware('au
 
 Route::get('/profils', 'AdminController@index')->middleware('auth');
 Route::post('/profils', 'AdminController@store')->middleware('auth');
+
+//create symlink
+Route::get('/symlink', function () {
+    Artisan::call('storage:link');
+	return 'ok';
+});
