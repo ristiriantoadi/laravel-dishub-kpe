@@ -39,10 +39,17 @@ Route::get('/profils', 'AdminController@index')->middleware('auth');
 Route::post('/profils', 'AdminController@store')->middleware('auth');
 
 //create symlink
-Route::get('/symlink', function () {
-    Artisan::call('storage:link');
-	return 'ok';
+// Route::get('/symlink', function () {
+//     Artisan::call('storage:link');
+// 	return 'ok';
+// });
+
+Route::get('/info', function () {
+    // return "abc";
+    return phpinfo();
 });
+
+
 
 Route::get("/storage/{extra}", function ($extra) {
     return redirect('/public/storage/'.$extra);

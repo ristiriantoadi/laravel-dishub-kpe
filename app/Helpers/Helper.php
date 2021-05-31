@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('upload_pdf')) {
     function upload_pdf($kendaraan,$berkasPdf){
+        ini_set('upload_max_filesize', "50M"); 
+        ini_set('post_max_size', "55M");
+        ini_set('memory_limit','50M');
         $savePath = "berkas_kendaraan/".$kendaraan->id;
         $filename = $berkasPdf->getClientOriginalName();
         Storage::disk('public')->put($savePath."/".$filename, file_get_contents($berkasPdf));
