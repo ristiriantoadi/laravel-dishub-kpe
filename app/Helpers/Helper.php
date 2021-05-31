@@ -39,8 +39,7 @@ if (!function_exists('paginate')) {
 if (!function_exists('update_status')) {
     function update_status($expired_date){ // change status
         $current_date = time();
-        $datediff = $expired_date - $current_date;
-        $datediff = round($datediff / (60 * 60 * 24));
+        $datediff = days_diff($expired_date,$current_date);
         
         if($datediff<0){
             return "expired";
@@ -57,8 +56,7 @@ if (!function_exists('update_status')) {
 if (!function_exists('update_status_on_specified_date')) {
     function update_status_on_specified_date($expired_date,$specified_date){ // change status
         $current_date = $specified_date;
-        $datediff = $expired_date - $current_date;
-        $datediff = round($datediff / (60 * 60 * 24));
+        $datediff = days_diff($expired_date,$current_date);
         
         if($datediff<0){
             return "expired";
