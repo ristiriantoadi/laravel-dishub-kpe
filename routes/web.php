@@ -43,3 +43,7 @@ Route::get('/symlink', function () {
     Artisan::call('storage:link');
 	return 'ok';
 });
+
+Route::get("/storage/{extra}", function ($extra) {
+    return redirect('/public/storage/'.$extra);
+})->where("extra", ".*");
