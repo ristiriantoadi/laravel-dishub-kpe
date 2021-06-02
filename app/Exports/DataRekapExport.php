@@ -16,8 +16,14 @@ class DataRekapExport implements FromView
     public function view(): View
     {
         //get rekaps data
-        get_rekap_data();
-        $rekaps=[];
+        $rekaps=get_rekap_data();
+        // echo count($rekaps);
+        // print_r($rekaps);
+        // error_log("rekaps: ".str($rekaps));
+        foreach($rekaps as $rekap){
+            // print_r($rekap);
+            // echo "<br>";
+        }
         return view('rekap_export', [
             'rekaps' => $rekaps
         ]);
