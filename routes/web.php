@@ -25,6 +25,7 @@ Route::get('/cek_expired','NotificationController@checkExpired');
 
 //rekap data
 Route::get('/rekap', 'DataController@rekap')->middleware('auth');
+Route::get('/rekap/export', 'DataController@export')->middleware('auth');
 
 Route::get('/', 'DataController@search');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');

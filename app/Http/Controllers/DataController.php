@@ -119,6 +119,13 @@ class DataController extends Controller
     public function rekap(Request $request){
         return view('rekap');
     }
+    
+    public function export(Request $request){
+        // return view('rekap');
+        $kendaraans = Kendaraan::all();
+        $export = new DataRekapExport($kendaraans);    
+        return Excel::download($export, 'Rekap Data.xlsx');
+    }
 
     /**
      * Display the specified resource.
