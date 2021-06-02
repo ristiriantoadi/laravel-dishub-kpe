@@ -261,3 +261,14 @@ if (!function_exists('get_unread_notifications')) {
         return $kendaraans;        
     }
 }
+
+//helper rekap
+if (!function_exists('get_rekap_data')) {
+    function get_rekap_data(){
+        $namaPerusahaans=Kendaraan::select('namaperusahaan')->distinct()->pluck('namaperusahaan')->toArray();
+        // error_log("nama perusahaan: ".$namaPerusahaans);
+        foreach($namaPerusahaans as $namaPerusahaan){
+            error_log("namaperusahaan: ".$namaPerusahaan);
+        }
+    }
+}
