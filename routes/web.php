@@ -12,7 +12,6 @@ Route::post('/postlogin', 'AuthController@postlogin');
 
 Route::get('/input', 'DataController@input')->middleware('auth');
 Route::get('/dashboard', 'DataController@dashboard')->middleware('auth');
-//Route::get('/edit', 'DataController@');
 Route::post('/input', 'DataController@store')->middleware('auth');
 Route::get('/print', 'DataController@index')->middleware('auth');
 Route::get('/print/cari', 'DataController@cari')->middleware('auth');
@@ -23,6 +22,9 @@ Route::get('/expired/sk', 'NotificationController@skExpired')->middleware('auth'
 Route::get('/expired/{type}/cari', 'NotificationController@cariExpired');
 Route::get('/expired/{type}/export', 'NotificationController@exportExpired');
 Route::get('/cek_expired','NotificationController@checkExpired');
+
+//rekap data
+Route::get('/rekap', 'DataController@rekap')->middleware('auth');
 
 Route::get('/', 'DataController@search');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');

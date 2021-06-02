@@ -50,6 +50,9 @@
                         <a class="nav-link active" href="{{url('/expired/sk')}}">
                             <i class="fas fa-print"></i>
                             <span>SK Expired</span> | <span class="badge @if ($sk_expired_notif_length>0) badge-warning @else badge-light  @endif">{{$sk_expired_notif_length}}</span></a>
+                        <a class="nav-link active" href="{{url('/rekap')}}">
+                            <i class="fas fa-database"></i>
+                            <span>Rekap Data</span></a>
                         <!--
                         <a class="nav-link active" href="index.html">
                             <i class="icon ion-android-settings"></i>
