@@ -124,9 +124,9 @@ class DataController extends Controller
     
     public function export(Request $request){
         $namaFile = "Rekap Jumlah Kendaraan Angkutan AKDP di Provinsi NTB ".date('d-m-Y').".xlsx";
-        $kendaraans = Kendaraan::all();
-        $export = new DataRekapExport($kendaraans);    
-        return Excel::download($export, $namaFile);
+        // $kendaraans = Kendaraan::all();
+        // $export = new DataRekapExport();    
+        return Excel::download(new DataRekapExport, $namaFile);
     }
 
     /**
