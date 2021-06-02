@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\DataRekapExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataController extends Controller
 {
@@ -121,10 +123,10 @@ class DataController extends Controller
     }
     
     public function export(Request $request){
-        // return view('rekap');
+        $namaFile = "Rekap Jumlah Kendaraan Angkutan AKDP di Provinsi NTB ".date('d-m-Y').".xlsx";
         $kendaraans = Kendaraan::all();
         $export = new DataRekapExport($kendaraans);    
-        return Excel::download($export, 'Rekap Data.xlsx');
+        return Excel::download($export, $namaFile);
     }
 
     /**
