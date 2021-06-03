@@ -263,38 +263,66 @@ if (!function_exists('get_unread_notifications')) {
 }
 
 //helper rekap
+// if (!function_exists('get_rekap_data')) {
+//     function get_rekap_data(){
+//         $namaPerusahaans=Kendaraan::select('namaperusahaan')->distinct()->pluck('namaperusahaan')->toArray();
+//         $rekaps=[];
+//         foreach($namaPerusahaans as $namaPerusahaan){
+//             $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->orderBy('trayek','asc')->get();
+//             // $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->get();
+//             // $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->get()->sortBy('trayek');
+//             $currentTrayek=$kendaraans[0]->trayek;
+// 	        $count=0;
+//             $namaPemilik=$kendaraans[0]->namapemilik;
+//             $alamat=$kendaraans[0]->alamatperusahaan;
+//             $jumlahKendaraanPerPerusahaan = count($kendaraans);
+//             $trayeks=[];
+//             foreach($kendaraans as $kendaraan){
+//                 if(strcmp(trim($kendaraan->trayek),trim($currentTrayek)) != 0){
+//                     //new-trayek state, need to write the row of data and reset all variables
+//                     //write the row of data
+//                     $trayek = ['trayek'=>$currentTrayek,'jumlah'=>$count];
+//                     array_push($trayeks,$trayek);
+    
+//                     //reset stuff
+//                     $currentTrayek = $kendaraan->trayek;
+//                     $count=0;
+//                 }
+//                 $count++;    
+//             }
+//             $trayek = ['trayek'=>$currentTrayek,'jumlah'=>$count];
+//             array_push($trayeks,$trayek);
+//             $rekap = ['namaPerusahaan'=>$namaPerusahaan,'namaPemilik'=>$namaPemilik,"alamat"=>$alamat,"jumlahKendaraanPerPerusahaan"=>$jumlahKendaraanPerPerusahaan,"trayeks"=>$trayeks];
+//             array_push($rekaps,$rekap);
+//         }
+//         return $rekaps;
+//     }
+// }
+
 if (!function_exists('get_rekap_data')) {
     function get_rekap_data(){
+        //get all distinct nama perusahaan
         $namaPerusahaans=Kendaraan::select('namaperusahaan')->distinct()->pluck('namaperusahaan')->toArray();
+        
         $rekaps=[];
         foreach($namaPerusahaans as $namaPerusahaan){
-            $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->orderBy('trayek','asc')->get();
-            // $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->get();
-            // $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->get()->sortBy('trayek');
-            // print_r($kendaraans);
-            // exit();
-            $currentTrayek=$kendaraans[0]->trayek;
-	        $count=0;
+
+            //select namaPemilik, alamat, jumlahKendaraanPerPerusahaan
+            $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->get();
             $namaPemilik=$kendaraans[0]->namapemilik;
             $alamat=$kendaraans[0]->alamatperusahaan;
             $jumlahKendaraanPerPerusahaan = count($kendaraans);
-            $trayeks=[];
-            foreach($kendaraans as $kendaraan){
-                if(strcmp(trim($kendaraan->trayek),trim($currentTrayek)) != 0){
-                    //new-trayek state, need to write the row of data and reset all variables
-                    //write the row of data
-                    $trayek = ['trayek'=>$currentTrayek,'jumlah'=>$count];
-                    array_push($trayeks,$trayek);
-    
-                    //reset stuff
-                    $currentTrayek = $kendaraan->trayek;
-                    $count=0;
-                }
-                $count++;    
+            
+            //select all trayek in perusahaan
+            $trayeks = Kendaraan::select('trayek')->where('namaperusahaan',$namaPerusahaan)->orderBy('trayek','asc')->distinct()->pluck('trayek')->toArray();
+            $trayek_array=[];
+            foreach($trayeks as $trayek){
+                $kendaraans = Kendaraan::where('namaperusahaan',$namaPerusahaan)->where('trayek',$trayek)->get();
+                $jumlahKendaraanPerTrayek = count($kendaraans);
+                $trayek_row = ['trayek'=>$trayek,'jumlah'=>$jumlahKendaraanPerTrayek];
+                array_push($trayek_array,$trayek_row);
             }
-            $trayek = ['trayek'=>$currentTrayek,'jumlah'=>$count];
-            array_push($trayeks,$trayek);
-            $rekap = ['namaPerusahaan'=>$namaPerusahaan,'namaPemilik'=>$namaPemilik,"alamat"=>$alamat,"jumlahKendaraanPerPerusahaan"=>$jumlahKendaraanPerPerusahaan,"trayeks"=>$trayeks];
+            $rekap = ['namaPerusahaan'=>$namaPerusahaan,'namaPemilik'=>$namaPemilik,"alamat"=>$alamat,"jumlahKendaraanPerPerusahaan"=>$jumlahKendaraanPerPerusahaan,"trayeks"=>$trayek_array];
             array_push($rekaps,$rekap);
         }
         return $rekaps;
