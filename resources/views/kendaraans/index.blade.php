@@ -295,7 +295,8 @@
                                             <div class="form-group">
                                                 <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angkutan</label>
                                                 <select class="form-control" id="jenis_pelayanan_angkutan" name="jenis_pelayanan_angkutan">
-                                                    <option value="ICSPN" <?php if($k->jenis_pelayanan_angkutan == "ICSPN") echo "selected" ?> >ICSPN</option>
+                                                    <option value="" <?php if($k->jenis_pelayanan_angkutan == "") echo "selected" ?> >Pilih</option>
+                                                    <option value="kspn" <?php if($k->jenis_pelayanan_angkutan == "kspn") echo "selected" ?> >kspn</option>
                                                     <option value="AKDP" <?php if($k->jenis_pelayanan_angkutan == "AKDP") echo "selected" ?> >AKDP</option>
                                                     <option value="PARIWISATA" <?php if($k->jenis_pelayanan_angkutan == "PARIWISATA") echo "selected" ?> >PARIWISATA</option>
                                                     <option value="SEWA" <?php if($k->jenis_pelayanan_angkutan == "SEWA") echo "selected" ?> >SEWA</option>

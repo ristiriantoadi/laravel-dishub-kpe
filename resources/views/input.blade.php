@@ -192,7 +192,8 @@
             <div class="form-group">
                 <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angkutan</label>
                     <select class="form-control" id="jenis_pelayanan_angkutan" name="jenis_pelayanan_angkutan">
-                        <option value="ICSPN">ICSPN</option>
+                        <option value="">Pilih</option>
+                        <option value="kspn">kspn</option>
                         <option value="AKDP">AKDP</option>
                         <option value="PARIWISATA">PARIWISATA</option>
                         <option value="SEWA">SEWA</option>

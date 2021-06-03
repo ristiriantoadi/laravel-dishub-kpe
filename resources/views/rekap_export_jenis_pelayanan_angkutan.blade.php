@@ -24,9 +24,9 @@
     </thead>
     <tbody>
         <tr>
-            <td colspan="19"><b>ICSPN</b></td>
+            <td colspan="19"><b>KSPN</b></td>
         </tr>
-        @foreach($rekap['icspn'] as $kendaraan)
+        @foreach($rekap['kspn'] as $kendaraan)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$kendaraan->nopol}}</td>
@@ -51,7 +51,7 @@
         @endforeach
         <tr>
             <td><b>Total</b></td>
-            <td colspan="18" style="text-align:left">{{$rekap['jumlahIcspn']}}</td>
+            <td colspan="18" style="text-align:left">{{$rekap['jumlahkspn']}}</td>
         </tr>
         <tr>
             <td colspan="19"><b>AKDP</b></td>

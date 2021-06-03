@@ -331,9 +331,9 @@ if (!function_exists('get_rekap_data')) {
 
 if (!function_exists('get_rekap_data_jenis_pelayanan_angkutan')) {
     function get_rekap_data_jenis_pelayanan_angkutan(){
-        //get icspn
-        $icspn = Kendaraan::where('jenis_pelayanan_angkutan','ICSPN')->get();
-        $jumlahIcspn = count($icspn);
+        //get kspn
+        $kspn = Kendaraan::where('jenis_pelayanan_angkutan','kspn')->get();
+        $jumlahkspn = count($kspn);
 
         // get akdp
         $akdp = Kendaraan::where('jenis_pelayanan_angkutan','AKDP')->get();
@@ -364,9 +364,9 @@ if (!function_exists('get_rekap_data_jenis_pelayanan_angkutan')) {
         $jumlahTaksi = count($taksi);
 
         //merge the data
-        // $rekaps = $icspn->merge($akdp)->merge($pariwisata)->merge($sewa)->merge($sewaKhusus)->merge($antarJemput)->merge($pemaduModa)->merge($taksi);
-        $rekaps=['icspn'=>$icspn,'akdp'=>$akdp,'pariwisata'=>$pariwisata,'sewa'=>$sewa,'sewaKhusus'=>$sewaKhusus,'antarJemput'=>$antarJemput,'pemaduModa'=>$pemaduModa,'taksi'=>$taksi,
-                'jumlahIcspn'=>$jumlahIcspn,'jumlahAkdp'=>$jumlahAkdp,'jumlahPariwisata'=>$jumlahPariwisata,'jumlahSewa'=>$jumlahSewa,'jumlahSewaKhusus'=>$jumlahSewaKhusus,'jumlahAntarJemput'=>$jumlahAntarJemput,
+        // $rekaps = $kspn->merge($akdp)->merge($pariwisata)->merge($sewa)->merge($sewaKhusus)->merge($antarJemput)->merge($pemaduModa)->merge($taksi);
+        $rekaps=['kspn'=>$kspn,'akdp'=>$akdp,'pariwisata'=>$pariwisata,'sewa'=>$sewa,'sewaKhusus'=>$sewaKhusus,'antarJemput'=>$antarJemput,'pemaduModa'=>$pemaduModa,'taksi'=>$taksi,
+                'jumlahkspn'=>$jumlahkspn,'jumlahAkdp'=>$jumlahAkdp,'jumlahPariwisata'=>$jumlahPariwisata,'jumlahSewa'=>$jumlahSewa,'jumlahSewaKhusus'=>$jumlahSewaKhusus,'jumlahAntarJemput'=>$jumlahAntarJemput,
                 'jumlahPemaduModa'=>$jumlahPemaduModa,'jumlahTaksi'=>$jumlahTaksi];
         return $rekaps;
     }
