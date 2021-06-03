@@ -190,6 +190,19 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angutan</label>
+                    <select class="form-control" id="jenis_pelayanan_angkutan" name="jenis_pelayanan_angkutan">
+                        <option value="ICSPN">ICSPN</option>
+                        <option value="AKDP">AKDP</option>
+                        <option value="PARIWISATA">PARIWISATA</option>
+                        <option value="SEWA">SEWA</option>
+                        <option value="SEWA KHUSUS">SEWA KHUSUS</option>
+                        <option value="ANTAR JEMPUT">ANTAR JEMPUT</option>
+                        <option value="PEMADU MODA">PEMADU MODA</option>
+                        <option value="TAKSI">TAKSI</option>
+                    </select>
+            </div>
+            <div class="form-group">
                 <label for="masa_sk">MASA BERLAKU SK</label>
                 <input type="date" class="form-control @error('masa_sk') is-invalid @enderror" name="masa_sk"
                     aria-describedby="masa_sk" placeholder="Masukan Masa Berlaku SK" value="{{ old('masa_sk') }}">
