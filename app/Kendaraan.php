@@ -13,7 +13,8 @@ class Kendaraan extends Model
     protected $attributes = [
                                 'status_kartu' => "belum_expired",
                                 'status_sk' => "belum_expired",
-                                'berkas_pdf'=>""
+                                'berkas_pdf'=>"",
+                                'jenis_pelayanan_angkutan'=>""
                             ];
                         
 }
