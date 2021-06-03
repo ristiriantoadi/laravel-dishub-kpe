@@ -291,7 +291,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angutan</label>
+                                                <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angkutan</label>
                                                 <select class="form-control" id="jenis_pelayanan_angkutan" name="jenis_pelayanan_angkutan">
                                                     <option value="ICSPN" <?php if($k->jenis_pelayanan_angkutan == "ICSPN") echo "selected" ?> >ICSPN</option>
                                                     <option value="AKDP" <?php if($k->jenis_pelayanan_angkutan == "AKDP") echo "selected" ?> >AKDP</option>

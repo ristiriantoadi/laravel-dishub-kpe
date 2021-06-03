@@ -328,3 +328,46 @@ if (!function_exists('get_rekap_data')) {
         return $rekaps;
     }
 }
+
+if (!function_exists('get_rekap_data_jenis_pelayanan_angkutan')) {
+    function get_rekap_data_jenis_pelayanan_angkutan(){
+        //get icspn
+        $icspn = Kendaraan::where('jenis_pelayanan_angkutan','ICSPN')->get();
+        $jumlahIcspn = count($icspn);
+
+        // get akdp
+        $akdp = Kendaraan::where('jenis_pelayanan_angkutan','AKDP')->get();
+        $jumlahAkdp = count($akdp);
+
+        // get pariwisata
+        $pariwisata = Kendaraan::where('jenis_pelayanan_angkutan','PARIWISATA')->get();
+        $jumlahPariwisata = count($pariwisata);
+
+        // get sewa
+        $sewa = Kendaraan::where('jenis_pelayanan_angkutan','SEWA')->get();
+        $jumlahSewa = count($sewa);
+
+        // get sewa khusus
+        $sewaKhusus = Kendaraan::where('jenis_pelayanan_angkutan','SEWA KHUSUS')->get();
+        $jumlahSewaKhusus = count($sewaKhusus);
+
+        // get antar jemput
+        $antarJemput = Kendaraan::where('jenis_pelayanan_angkutan','ANTAR JEMPUT')->get();
+        $jumlahAntarJemput = count($antarJemput);
+
+        // get pemadu moda
+        $pemaduModa = Kendaraan::where('jenis_pelayanan_angkutan','PEMADU MODA')->get();
+        $jumlahPemaduModa = count($pemaduModa);
+
+        // get taksi
+        $taksi = Kendaraan::where('jenis_pelayanan_angkutan','TAKSI')->get();
+        $jumlahTaksi = count($taksi);
+
+        //merge the data
+        // $rekaps = $icspn->merge($akdp)->merge($pariwisata)->merge($sewa)->merge($sewaKhusus)->merge($antarJemput)->merge($pemaduModa)->merge($taksi);
+        $rekaps=['icspn'=>$icspn,'akdp'=>$akdp,'pariwisata'=>$pariwisata,'sewa'=>$sewa,'sewaKhusus'=>$sewaKhusus,'antarJemput'=>$antarJemput,'pemaduModa'=>$pemaduModa,'taksi'=>$taksi,
+                'jumlahIcspn'=>$jumlahIcspn,'jumlahAkdp'=>$jumlahAkdp,'jumlahPariwisata'=>$jumlahPariwisata,'jumlahSewa'=>$jumlahSewa,'jumlahSewaKhusus'=>$jumlahSewaKhusus,'jumlahAntarJemput'=>$jumlahAntarJemput,
+                'jumlahPemaduModa'=>$jumlahPemaduModa,'jumlahTaksi'=>$jumlahTaksi];
+        return $rekaps;
+    }
+}

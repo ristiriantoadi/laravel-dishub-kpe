@@ -190,7 +190,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angutan</label>
+                <label for="jenis_pelayanan_angkutan">Jenis Pelayanan Angkutan</label>
                     <select class="form-control" id="jenis_pelayanan_angkutan" name="jenis_pelayanan_angkutan">
                         <option value="ICSPN">ICSPN</option>
                         <option value="AKDP">AKDP</option>

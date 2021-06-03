@@ -11,14 +11,14 @@ if (file_exists("app/Helpers/Helper.php")){
     include "app/Helpers/Helper.php";
 }
 
-class DataRekapExport implements FromView
+class DataRekapExportJenisPelayananAngkutan implements FromView
 {
     public function view(): View
     {
         //get rekaps data
-        $rekaps=get_rekap_data();
-        return view('rekap_export', [
-            'rekaps' => $rekaps
+        $rekap=get_rekap_data_jenis_pelayanan_angkutan();
+        return view('rekap_export_jenis_pelayanan_angkutan', [
+            'rekap' => $rekap
         ]);
     }
 

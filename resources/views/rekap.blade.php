@@ -64,7 +64,8 @@
     </div>
 	<div class="card shadow border-left-primary py-2">
         <div class="card-body">
-            <a href="{{url('/rekap/export')}}" class="btn btn-info"><i class="fas fa-database"></i> Rekap Data</a>
+            <a href="{{url('/rekap/export')}}" class="btn btn-info"><i class="fas fa-database"></i> Rekap Data (Perusahaan dan Trayek)</a>
+            <a href="{{url('/rekap/export/jenis_pelayanan_angkutan')}}" class="btn btn-success"><i class="fas fa-database"></i> Rekap Data (Jenis Pelayanan Angkutan)</a>
         </div>
 	</div>
 </div>

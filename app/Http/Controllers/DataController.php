@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Kendaraan;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\DataRekapExport;
+use App\Exports\DataRekapExportJenisPelayananAngkutan;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DataController extends Controller
@@ -124,9 +125,12 @@ class DataController extends Controller
     
     public function export(Request $request){
         $namaFile = "Rekap Jumlah Kendaraan Angkutan AKDP di Provinsi NTB ".date('d-m-Y').".xlsx";
-        // $kendaraans = Kendaraan::all();
-        // $export = new DataRekapExport();    
         return Excel::download(new DataRekapExport, $namaFile);
+    }
+
+    public function exportJenisPelayananAngkutan(Request $request){
+        $namaFile = "Rekap Kendaraan berdasarkan Jenis Pelayanan Angkutan di Provinsi NTB ".date('d-m-Y').".xlsx";
+        return Excel::download(new DataRekapExportJenisPelayananAngkutan, $namaFile);
     }
 
     /**
