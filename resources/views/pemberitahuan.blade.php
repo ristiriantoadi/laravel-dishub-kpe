@@ -1,3 +1,9 @@
+<?php 
+    if (file_exists("app/Helpers/Helper.php")){
+        include "app/Helpers/Helper.php";
+    }
+?>
+
 @extends('layout/admin')
 
 @section('title', 'Upload Pemberitahuan')
@@ -44,7 +50,7 @@
                     <li>
                         <div class="mb-5">
                             <h5>{{$pemberitahuan->judul}}</h5>
-                            <form method="POST" action="/pemberitahuan/edit/{{$pemberitahuan->id}}">
+                            <form method="POST" enctype="multipart/form-data" action="/pemberitahuan/edit/{{$pemberitahuan->id}}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="judul">Judul</label>
