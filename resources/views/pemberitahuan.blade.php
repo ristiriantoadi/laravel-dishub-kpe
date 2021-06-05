@@ -44,14 +44,15 @@
                     <li>
                         <div class="mb-5">
                             <h5>{{$pemberitahuan->judul}}</h5>
-                            <form action="/pemberitahuan/edit/{{$pemberitahuan->id}}">
+                            <form method="POST" action="/pemberitahuan/edit/{{$pemberitahuan->id}}">
+                                @csrf
                                 <div class="form-group">
                                     <label for="judul">Judul</label>
-                                    <input type="text" name="judul" value="{{$pemberitahuan->judul}}" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
+                                    <input type="text" required name="judul" value="{{$pemberitahuan->judul}}" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
                                 </div>
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
-                                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{$pemberitahuan->keterangan}}</textarea>
+                                    <textarea required class="form-control" id="keterangan" name="keterangan" rows="3">{{$pemberitahuan->keterangan}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="file">Berkas</label>

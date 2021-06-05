@@ -26,7 +26,7 @@ Route::get('/cek_expired','NotificationController@checkExpired');
 // pemberitahuan
 Route::get('/pemberitahuan', 'PemberitahuanController@index')->middleware('auth');
 Route::post('/pemberitahuan', 'PemberitahuanController@add')->middleware('auth');
-Route::post('/pemberitahuan/edit/{id}', 'PemberitahuanController@delete')->middleware('auth');
+Route::post('/pemberitahuan/edit/{id}', 'PemberitahuanController@edit')->middleware('auth');
 Route::get('/pemberitahuan/delete/{id}', 'PemberitahuanController@delete')->middleware('auth');
 
 //rekap data

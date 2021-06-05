@@ -26,6 +26,16 @@ class PemberitahuanController extends Controller
         return redirect('/pemberitahuan');
     }
 
+    public function edit(Request $request,$id){
+        $judul = $request->judul;
+        $keterangan = $request->keterangan;
+        $pemberitahuan = Pemberitahuan::find($id);
+        $pemberitahuan->judul = $judul;
+        $pemberitahuan->keterangan = $keterangan;
+        $pemberitahuan->save();
+        return redirect('/pemberitahuan');
+    }
+
     public function delete(Request $request,$id){        
         // return "Endpoint delete pemberitahuan";
         $pemberitahuan = Pemberitahuan::find($id);
