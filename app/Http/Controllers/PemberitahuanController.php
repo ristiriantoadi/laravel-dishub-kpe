@@ -56,10 +56,10 @@ class PemberitahuanController extends Controller
     }
 
     public function delete(Request $request,$id){        
-        // return "Endpoint delete pemberitahuan";
         $pemberitahuan = Pemberitahuan::find($id);
         $result = $pemberitahuan->delete();
         if($result == 1){
+            
             return redirect("/pemberitahuan");
         }
     }

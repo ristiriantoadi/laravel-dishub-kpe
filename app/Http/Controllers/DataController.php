@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Kendaraan;
+use App\Pemberitahuan;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\DataRekapExport;
 use App\Exports\DataRekapExportJenisPelayananAngkutan;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class DataController extends Controller
 {
@@ -54,7 +56,10 @@ class DataController extends Controller
         
         $kendaraans = Kendaraan::where('nomesin', $cari)->get();
 
-        return view('index', ['kendaraans' => $kendaraans, 'cari' => $cari]);
+        //get pemberitahuanss
+        $pemberitahuans = Pemberitahuan::all();
+
+        return view('index', ['kendaraans' => $kendaraans, 'cari' => $cari,'pemberitahuans'=>$pemberitahuans]);
     }
 
     public function create()
