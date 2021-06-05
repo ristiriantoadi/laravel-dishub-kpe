@@ -66,7 +66,9 @@
                                 <span>
                                     <!-- <a href="#" class="btn btn-success">Simpan</a> -->
                                     <button type="submit" class="btn btn-success">Simpan</button>
-                                    <a href="/pemberitahuan/delete/{{$pemberitahuan->id}}" class="btn btn-danger">Hapus</a>
+                                    <button type="button" onclick="hapus({{$pemberitahuan->id}})" class="btn btn-danger">Hapus</button>
+                                    <!-- <button type="button" class="btn btn-danger">Hapus</button> -->
+                                    <!-- <a href="/pemberitahuan/delete/{{$pemberitahuan->id}}" class="btn btn-danger">Hapus</a> -->
                                     <!-- <button type="button" class="btn btn-success">Simpan</button> -->
                                     <!-- <button type="button" class="btn btn-danger">Hapus</button> -->
                                 </span>
@@ -99,4 +101,13 @@
         </div>
     </div>
 </div>
+<script>
+    console.log("f");
+    function hapus(id){
+        if(confirm("Anda yakin ingin menghapus pemberitahuan?")){
+            // console.log("yes");
+            window.location.replace(`/pemberitahuan/delete/${id}`);
+        }
+    }
+</script>
 @endsection
