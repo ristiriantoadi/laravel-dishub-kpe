@@ -125,26 +125,28 @@
                     </div> -->
                 </div>
                 <div class="text-dark text-left col-md-4">
-                    <div class="card" style="max-height:500px;overflow:scroll">
-                        <div class="card-body">
-                            <h5 class="card-title">Pemberitahuan</h5>
-                            <ol>
-                                @foreach($pemberitahuans as $pemberitahuan)
-                                    <li>
-                                        <div>
-                                            <b>{{$pemberitahuan->judul}}</b>
-                                            <p class="mb-0">{{$pemberitahuan->keterangan}}</p>
-                                            @if($pemberitahuan->file_upload)
-                                                <span>File: <a href="{{url($pemberitahuan->file_upload)}}">{{get_filename($pemberitahuan->file_upload)}}</a></span>
-                                            @else
-                                            <span>File: -</span>
-                                            @endif
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ol>
+                    @if(count($pemberitahuans)>0)
+                        <div class="card" style="max-height:500px;overflow:scroll">
+                            <div class="card-body">
+                                <h5 class="card-title">Pemberitahuan</h5>
+                                <ol>
+                                    @foreach($pemberitahuans as $pemberitahuan)
+                                        <li>
+                                            <div>
+                                                <b>{{$pemberitahuan->judul}}</b>
+                                                <p class="mb-0">{{$pemberitahuan->keterangan}}</p>
+                                                @if($pemberitahuan->file_upload)
+                                                    <span>File: <a href="{{url($pemberitahuan->file_upload)}}">{{get_filename($pemberitahuan->file_upload)}}</a></span>
+                                                @else
+                                                <span>File: -</span>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
