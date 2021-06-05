@@ -38,9 +38,6 @@
                 <img src="home/img/logo.png" height="50px" width="250px">
             </a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <a class="btn btn-primary ml-auto" role="button" href="/login">Admin</a>
-            </div>
         </div>
     </nav>
 
