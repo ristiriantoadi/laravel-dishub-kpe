@@ -23,6 +23,11 @@ Route::get('/expired/{type}/cari', 'NotificationController@cariExpired');
 Route::get('/expired/{type}/export', 'NotificationController@exportExpired');
 Route::get('/cek_expired','NotificationController@checkExpired');
 
+// pemberitahuan
+Route::get('/pemberitahuan', 'PemberitahuanController@index')->middleware('auth');
+Route::get('/pemberitahuan/add', 'PemberitahuanController@add')->middleware('auth');
+Route::get('/pemberitahuan/delete', 'PemberitahuanController@delete')->middleware('auth');
+
 //rekap data
 Route::get('/rekap', 'DataController@rekap')->middleware('auth');
 Route::get('/rekap/export', 'DataController@export')->middleware('auth');
