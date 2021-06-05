@@ -8,7 +8,8 @@ class PemberitahuanController extends Controller
 {
     //
     public function index(Request $request){        
-        return "Halaman upload pemberitahuan";
+        // return "Halaman upload pemberitahuan";
+        return view('pemberitahuan');
     }
     
     public function add(Request $request){        

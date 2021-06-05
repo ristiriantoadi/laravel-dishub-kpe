@@ -54,7 +54,7 @@
                             <i class="fas fa-database"></i>
                             <span>Rekap Data</span></a>
                         <a class="nav-link active" href="{{url('/pemberitahuan')}}">
-                            <i class="fas fa-database"></i>
+                            <i class="fas fa-upload"></i>
                             <span>Upload Pemberitahuan</span></a>
                         <!--
                         <a class="nav-link active" href="index.html">
