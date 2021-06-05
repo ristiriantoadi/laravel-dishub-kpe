@@ -3,20 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pemberitahuan;
 
 class PemberitahuanController extends Controller
 {
     //
     public function index(Request $request){        
-        // return "Halaman upload pemberitahuan";
-        return view('pemberitahuan');
+
+        //get all pemberitahuans
+        $pemberitahuans = Pemberitahuan::all();
+
+        return view('pemberitahuan',['pemberitahuans'=>$pemberitahuans]);
     }
     
-    public function add(Request $request){        
-        return "Endpoint add pemberitahuan";
+    public function add(Request $request){
+        $judul = $request->judul;
+        $keterangan = $request->keterangan;
+        $pemberitahuan = Pemberitahuan::create([
+            'judul' => $judul,
+            'keterangan'=>$keterangan,
+        ]);
+        return redirect('/pemberitahuan');
     }
 
-    public function delete(Request $request){        
-        return "Endpoint delete pemberitahuan";
+    public function delete(Request $request,$id){        
+        // return "Endpoint delete pemberitahuan";
+        $pemberitahuan = Pemberitahuan::find($id);
+        $result = $pemberitahuan->delete();
+        if($result == 1){
+            return redirect("/pemberitahuan");
+        }
     }
 }

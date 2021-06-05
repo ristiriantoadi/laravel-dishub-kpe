@@ -40,69 +40,57 @@
                 <h4 class="text-dark mb-0">Daftar Pemberitahuan</h4>
             </div>
             <ol>
-            <li>
-                    <div class="mb-5">
-                        <h5>Pemberitahuan 1</h5>
-                        <form>
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" name="judul" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
-                            </div>
-                            <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="file">File</label>
-                                <input type="file" class="form-control-file" id="file" name="file">
-                            </div>
-                            <span>
-                                <button type="button" class="btn btn-success">Simpan</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                            </span>
-                        </form>
-                    </div>
-                </li>
-                <li>
-                    <div class="mb-5">
-                        <h5>Pemberitahuan 2</h5>
-                        <form>
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" name="judul" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
-                            </div>
-                            <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="file">File</label>
-                                <input type="file" class="form-control-file" id="file" name="file">
-                            </div>
-                            <span>
-                                <button type="button" class="btn btn-success">Simpan</button>
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                            </span>
-                        </form>
-                    </div>
-                </li>
+                @foreach($pemberitahuans as $pemberitahuan)
+                    <li>
+                        <div class="mb-5">
+                            <h5>{{$pemberitahuan->judul}}</h5>
+                            <form action="/pemberitahuan/edit/{{$pemberitahuan->id}}">
+                                <div class="form-group">
+                                    <label for="judul">Judul</label>
+                                    <input type="text" name="judul" value="{{$pemberitahuan->judul}}" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="keterangan">Keterangan</label>
+                                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{$pemberitahuan->keterangan}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="file">Berkas</label>
+                                    <input type="file" class="form-control-file mb-1" id="file" name="file">
+                                    @if($pemberitahuan->file_upload)
+                                        <span>File: <a href="{{url($pemberitahuan->file_upload)}}">{{get_filename($pemberitahuan->file_upload)}}</a></span>
+                                    @else
+                                        <span>File: -</span>
+                                    @endif
+                                </div>
+                                <span>
+                                    <!-- <a href="#" class="btn btn-success">Simpan</a> -->
+                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                    <a href="/pemberitahuan/delete/{{$pemberitahuan->id}}" class="btn btn-danger">Hapus</a>
+                                    <!-- <button type="button" class="btn btn-success">Simpan</button> -->
+                                    <!-- <button type="button" class="btn btn-danger">Hapus</button> -->
+                                </span>
+                            </form>
+                        </div>
+                    </li>
+                @endforeach
             </ol>
         </div>
         <div class="col">
             <div class="d-sm-flex justify-content-between align-items-center mb-3">
                 <h4 class="text-dark mb-0">Upload Pemberitahuan</h4>
             </div>
-            <form>
+            <form action="/pemberitahuan" enctype="multipart/form-data" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="judul">Judul</label>
-                    <input type="text" name="judul" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
+                    <input required type="text" name="judul" class="form-control" id="judul" placeholder="Judul pemberitahuan ... ">
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                    <textarea required class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="file">File</label>
+                    <label for="file">Berkas</label>
                     <input type="file" class="form-control-file" id="file" name="file">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
