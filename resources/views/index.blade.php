@@ -70,18 +70,52 @@
                             </div>
                         </div>
                         <div id="box-pencarian-trayek" class="box-pencarian">
-                            <form class="mt-3" action="/" method="get">
-                                @csrf
+                            <div class="mt-3">
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
                                         <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
-                                            type="text" id="input-nama-trayek" placeholder="Masukkan nama trayek...">
+                                                type="text" id="input-nama-trayek" placeholder="Masukkan nama trayek...">
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <button class="btn btn-primary btn-block btn-lg" type="button">Cari</button>
                                     </div>
+                                </div> 
+                            </div>
+                            <div class="card mt-4">
+                                <div class="card-body">                                
+                                    <table class="table table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">No</th>
+                                                <th scope="col">Nama Trayek</th>
+                                                <th scope="col">Jumlah Armada</th>
+                                                <th colspan="2" scope="col">Perusahaan yang Melayani</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td rowspan="3">1</td>
+                                                <td rowspan="3">Terminal Mandalika - Pancor - PP</td>
+                                                <td rowspan="3">60</td>
+                                                <td>PO Adi Sobri</td>
+                                                <td>2 Unit</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PO Amanah Express</td>
+                                                <td>3 Unit</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PO Colombia</td>
+                                                <td>1 Unit</td>
+                                            </tr>            
+                                            <tr>
+                                                <td colspan="4"><b>Total</b></td>
+                                                <td>6 Unit</td>
+                                            </tr>                                
+                                       </tbody>
+                                    </table>
                                 </div>
-                            </form> 
+                            </div>
                         </div>
                     </div>
                     <!-- <div class="col-md-10 col-lg-8 col-xl-7">
@@ -240,6 +274,42 @@
             </div>
         </div>
     </footer>
+    <template id="row-perusahaan">
+        <tr>
+            <td>PO Amanah Express</td>
+            <td>3 Unit</td>
+        </tr>
+    </template>
+    <template id="row-total">
+        <tr>
+            <td colspan="4"><b>Total</b></td>
+            <td>6 Unit</td>
+        </tr>   
+    </template
+    <template id="template-hasil-pencarian-trayek">
+        <div class="card mt-4">
+            <div class="card-body">                                
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nama Trayek</th>
+                            <th scope="col">Jumlah Armada</th>
+                            <th colspan="2" scope="col">Perusahaan yang Melayani</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-table-pencarian-trayek">
+                        <tr>
+                            <td rowspan="3" id="kolom-trayek">Terminal Mandalika - Pancor - PP</td>
+                            <td rowspan="3" id="kolom-jumlah-armada">60</td>
+                            <td id="first-perusahaan">PO Adi Sobri</td>
+                            <td id="first-jumlah-unit-per-perusahaan">2 Unit</td>
+                        </tr>                                
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
     <template id="template-hasil-cek-nomor-mesin">
         <div id="hasil-cek-nomor-mesin" class="mt-4">
             <div class="alert alert-danger" role="alert">
@@ -276,6 +346,12 @@
 
                 document.getElementById("box-pencarian-trayek").classList.add("visible");
                 document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+            }
+
+            //reset hasil box
+            var noMesin = document.getElementById("hasil-cek-nomor-mesin");
+            if(noMesin){
+                noMesin.parentNode.removeChild(noMesin);
             }
         }
 
