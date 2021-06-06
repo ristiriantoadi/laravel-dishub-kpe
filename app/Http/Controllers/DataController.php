@@ -147,6 +147,30 @@ class DataController extends Controller
         ]);
     }
 
+    public function pencarianTrayek(Request $request){
+        $trayek = $request->namaTrayek;
+        $jumlahArmada = count(Kendaraan::where('trayek',$trayek)->get());
+        $namaPerusahaans=Kendaraan::where('trayek',$trayek)->select('namaperusahaan')->distinct()->pluck('namaperusahaan')->toArray();
+        $perusahaan_array=[];
+        foreach($namaPerusahaans as $namaPerusahaan){
+            $jumlahUnit = count(Kendaraan::where('trayek',$trayek)->where('namaperusahaan',$namaPerusahaan)->get());
+            $perusahaan_row = ['namaPerusahaan'=>$namaPerusahaan,'jumlahUnit'=>$jumlahUnit];
+            array_push($perusahaan_array,$perusahaan_row);
+        }
+
+        return response()->json([
+            'trayek' => $trayek,
+            'jumlahArmada' => $jumlahArmada,
+            'perusahaans'=>$perusahaan_array
+        ]);
+
+        // return $namaPerusahaans;
+
+        // return response()->json([
+        //     'kendaraan' => $kendaraan
+        // ]);
+    }
+
     /**
      * Display the specified resource.
      *

@@ -73,15 +73,15 @@
                             <div class="mt-3">
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
+                                        <input class="form-control form-control-lg" name="namaTrayek"
                                                 type="text" id="input-nama-trayek" placeholder="Masukkan nama trayek...">
                                     </div>
                                     <div class="col-12 col-md-3">
-                                        <button class="btn btn-primary btn-block btn-lg" type="button">Cari</button>
+                                        <button class="btn btn-primary btn-block btn-lg" onclick="cariTrayek()" type="button">Cari</button>
                                     </div>
                                 </div> 
                             </div>
-                            <div class="card mt-4">
+                            <!-- <div class="card mt-4">
                                 <div class="card-body">                                
                                     <table class="table table-bordered">
                                         <thead class="thead-light">
@@ -115,7 +115,7 @@
                                        </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- <div class="col-md-10 col-lg-8 col-xl-7">
@@ -285,9 +285,9 @@
             <td colspan="4"><b>Total</b></td>
             <td>6 Unit</td>
         </tr>   
-    </template
+    </template>
     <template id="template-hasil-pencarian-trayek">
-        <div class="card mt-4">
+        <div id="hasil-pencarian-trayek" class="card mt-4">
             <div class="card-body">                                
                 <table class="table table-bordered">
                     <thead class="thead-light">
@@ -331,27 +331,75 @@
     <script src="home/bootstrap/js/bootstrap.min.js"></script>
     <script src="home/js/bs-animation.js"></script>
     <script>
+        var state="pengecekan-nomor-mesin";
         function buttonPencarianClicked(item) {
             var targetElement = item
-            console.log("id element",targetElement.id)
             if(targetElement.id == "pengecekan-nomor-mesin"){
-                document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
-                document.getElementById("pencarian-trayek").classList.remove("aktif");
+                if(state == "pencarian-trayek"){
+                    document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
+                    document.getElementById("pencarian-trayek").classList.remove("aktif");
 
-                document.getElementById("box-pengecekan-nomor-mesin").classList.add("visible");
-                document.getElementById("box-pencarian-trayek").classList.remove("visible");
+                    document.getElementById("box-pengecekan-nomor-mesin").classList.add("visible");
+                    document.getElementById("box-pencarian-trayek").classList.remove("visible");
+
+                    //reset box-pencarian-trayek
+                    var element = document.getElementById("hasil-pencarian-trayek");
+                    if(element){
+                        element.parentNode.removeChild(element);
+                    }
+
+                    state="pengecekan-nomor-mesin"
+                }
             }else{
-                document.getElementById("pencarian-trayek").classList.add("aktif");
-                document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
+                if(state == "pengecekan-nomor-mesin"){
+                    document.getElementById("pencarian-trayek").classList.add("aktif");
+                    document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
 
-                document.getElementById("box-pencarian-trayek").classList.add("visible");
-                document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+                    document.getElementById("box-pencarian-trayek").classList.add("visible");
+                    document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+                    
+                    //reset box-pengecekan-nomor-mesin
+                    var element = document.getElementById("hasil-cek-nomor-mesin");
+                    if(element){
+                        element.parentNode.removeChild(element);
+                    }
+
+                    state="pencarian-trayek";
+                }
             }
 
             //reset hasil box
-            var noMesin = document.getElementById("hasil-cek-nomor-mesin");
-            if(noMesin){
-                noMesin.parentNode.removeChild(noMesin);
+            // var noMesin = document.getElementById("hasil-cek-nomor-mesin");
+            // if(noMesin){
+            //     noMesin.parentNode.removeChild(noMesin);
+            // }
+        }
+
+        function renderHasilPencarianTrayek(data){
+            if ('content' in document.createElement('template')) {
+                //delete old element
+                var element=document.getElementById("hasil-pencarian-trayek");
+                if(element){
+                    element.parentNode.removeChild(element);
+                }
+
+                //clone template
+                var template = document.getElementById("template-hasil-pencarian-trayek")
+                var clone = template.content.cloneNode(true)
+
+                //insert data to template
+                var rowspan=data.perusahaans.length.toString();
+                console.log("rowspan",rowspan);
+                clone.querySelector('#kolom-trayek').innerHTML=data.trayek;
+                clone.querySelector('#kolom-trayek').rowSpan=rowspan;
+                clone.querySelector('#kolom-jumlah-armada').innerHTML=data.jumlahArmada;
+                clone.querySelector('#kolom-jumlah-armada').rowSpan=rowspan;
+                clone.querySelector('#first-perusahaan').innerHTML=data.perusahaans[0].namaPerusahaan;
+                clone.querySelector('#first-jumlah-unit-per-perusahaan').innerHTML=data.perusahaans[0].jumlahUnit;
+
+                var containingElement = document.getElementById("box-pencarian-trayek")
+                containingElement.appendChild(clone)
+
             }
         }
 
@@ -387,10 +435,28 @@
 
         }
 
+        function cariTrayek(){
+            var namaTrayek = document.getElementById("input-nama-trayek").value
+            fetch(`/pencarian-trayek?namaTrayek=${namaTrayek}`,{
+                method:"GET",
+            })
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                console.log("data",data);
+                console.log("jumlah armada",data.jumlahArmada);
+                console.log("perusahaans",data.perusahaans);
+                renderHasilPencarianTrayek(data);
+            })
+            .catch((error)=>{
+                console.log("error",error)
+            });
+        }
+
         function cekNomorMesin(){
             var nomorMesin = document.getElementById("input-nomor-mesin").value
-            // console.log("nomor mesin",nomorMesin);
-            fetch(`http://localhost:8000/cek-nomor-mesin?nomorMesin=${nomorMesin}`,{
+            fetch(`/cek-nomor-mesin?nomorMesin=${nomorMesin}`,{
                 method:"GET",
             })
             .then(res=>{

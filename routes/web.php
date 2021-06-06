@@ -36,6 +36,7 @@ Route::get('/rekap/export/jenis_pelayanan_angkutan', 'DataController@exportJenis
 
 Route::get('/', 'DataController@search');
 Route::get('/cek-nomor-mesin', 'DataController@cekNomorMesin');
+Route::get('/pencarian-trayek', 'DataController@pencarianTrayek');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');
 Route::get('/cetak_pdf', 'KendaraanController@cetak_pdf')->middleware('auth');
 Route::get('/cetak_pdf2', 'KendaraanController@cetak_pdf2')->middleware('auth');
