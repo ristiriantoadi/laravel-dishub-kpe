@@ -48,7 +48,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <!-- <div class="col-xl-10"> -->
                     <div>
                         <h1 class="mb-5">DINAS PERHUBUNGAN PROVINSI NUSA TENGGARA BARAT</h1>
                         <h2 class="mb-1">SISTEM INFORMASI KARTU PENGAWASAN ELEKTRONIK</h2>
@@ -57,16 +56,62 @@
                             <button type="button" onclick="buttonPencarianClicked(this)" id="pencarian-trayek" class="btn btn-secondary btn-pencarian">Pencarian Trayek</button>
                         </span>
                         <div id="box-pengecekan-nomor-mesin" class="box-pencarian visible"> 
-                            <div class="mt-3">
+                            <form class="mt-3" action="/" method="get">
+                                @csrf
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <input class="form-control form-control-lg" id="input-nomor-mesin" value="{{ old('cari') }}" name="cari"
+                                        <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
                                             type="text" placeholder="Masukan Nomer Mesin...">
                                     </div>
                                     <div class="col-12 col-md-3">
-                                        <button class="btn btn-primary btn-block btn-lg" onclick="cekNomorMesin()" type="button">CEK</button>
+                                        <button class="btn btn-primary btn-block btn-lg" type="submit">CEK</button>
                                     </div>
                                 </div>
+                            </form>
+                            <div class="mt-4">
+                                <input type="hidden" value="{{ $sekarang = date('Y-m-d') }}">
+                                @foreach($kendaraans as $p)
+                                    <input type="hidden" value="{{ $masa_sk = $p->masaberlaku }}">
+                                    @if($sekarang > $masa_sk)
+                                    <div class="alert alert-danger" role="alert">
+                                        Nomor Mesin <b>{{$p->nomesin}}</b> <b>TIDAK AKTIF</b>
+                                        </br>
+                                        Nomor TNBK : <b>{{$p->nopol}}</b>
+                                        </br>
+                                        Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
+                                        </br>
+                                        Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
+                                        </br>
+                                        Trayek : <b>{{$p->trayek}}</b>
+                                        </br>
+                                        Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
+                                    </div>
+                                    @else
+                                    <div class="alert alert-success" role="alert">
+                                        Nomor Mesin <b>{{$p->nomesin}}</b> <b>AKTIF</b>
+                                        </br>
+                                        Nomor TNBK <b>{{$p->nopol}}</b>
+                                        </br>
+                                        Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
+                                        </br>
+                                        Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
+                                        </br>
+                                        Trayek : <b>{{$p->trayek}}</b>
+                                        </br>
+                                        Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            <!--
+                            @if($cari != "")
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Nomer Mesin <strong>TIDAK DITEMUKAN!</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
+                            -->
                             </div>
                         </div>
                         <div id="box-pencarian-trayek" class="box-pencarian">
@@ -79,12 +124,6 @@
                                             @foreach($trayeks as $trayek)
                                                 <option value="{{$trayek}}">
                                             @endforeach
-                                            <!-- <option value="Chrome">
-                                            <option value="Firefox">
-                                            <option value="Internet Explorer">
-                                            <option value="Opera">
-                                            <option value="Safari">
-                                            <option value="Microsoft Edge"> -->
                                         </datalist>
                                     </div>
                                     <div class="col-12 col-md-3">
