@@ -59,7 +59,10 @@ class DataController extends Controller
         //get pemberitahuanss
         $pemberitahuans = Pemberitahuan::all();
 
-        return view('index', ['kendaraans' => $kendaraans, 'cari' => $cari,'pemberitahuans'=>$pemberitahuans]);
+        //get distinct list of trayeks
+        $trayeks=Kendaraan::select('trayek')->distinct()->pluck('trayek')->toArray();
+
+        return view('index', ['trayeks'=>$trayeks,'kendaraans' => $kendaraans, 'cari' => $cari,'pemberitahuans'=>$pemberitahuans]);
     }
 
     public function create()

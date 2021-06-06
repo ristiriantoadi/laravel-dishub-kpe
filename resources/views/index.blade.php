@@ -73,8 +73,19 @@
                             <div class="mt-3">
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                        <input class="form-control form-control-lg" name="namaTrayek"
+                                        <input list="trayeks" class="form-control form-control-lg" name="namaTrayek"
                                                 type="text" id="input-nama-trayek" placeholder="Masukkan nama trayek...">
+                                        <datalist id="trayeks">
+                                            @foreach($trayeks as $trayek)
+                                                <option value="{{$trayek}}">
+                                            @endforeach
+                                            <!-- <option value="Chrome">
+                                            <option value="Firefox">
+                                            <option value="Internet Explorer">
+                                            <option value="Opera">
+                                            <option value="Safari">
+                                            <option value="Microsoft Edge"> -->
+                                        </datalist>
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <button class="btn btn-primary btn-block btn-lg" onclick="cariTrayek()" type="button">Cari</button>
@@ -274,16 +285,16 @@
             </div>
         </div>
     </footer>
-    <template id="row-perusahaan">
+    <template id="template-row-perusahaan">
         <tr>
-            <td>PO Amanah Express</td>
-            <td>3 Unit</td>
+            <td id="kolom-nama-perusahaan">PO Amanah Express</td>
+            <td id="kolom-jumlah-unit">3 Unit</td>
         </tr>
     </template>
-    <template id="row-total">
+    <template id="template-row-total">
         <tr>
-            <td colspan="4"><b>Total</b></td>
-            <td>6 Unit</td>
+            <td colspan="3"><b>Total</b></td>
+            <td id="jumlah-unit-total">6 Unit</td>
         </tr>   
     </template>
     <template id="template-hasil-pencarian-trayek">
@@ -389,13 +400,42 @@
 
                 //insert data to template
                 var rowspan=data.perusahaans.length.toString();
-                console.log("rowspan",rowspan);
                 clone.querySelector('#kolom-trayek').innerHTML=data.trayek;
                 clone.querySelector('#kolom-trayek').rowSpan=rowspan;
                 clone.querySelector('#kolom-jumlah-armada').innerHTML=data.jumlahArmada;
                 clone.querySelector('#kolom-jumlah-armada').rowSpan=rowspan;
                 clone.querySelector('#first-perusahaan').innerHTML=data.perusahaans[0].namaPerusahaan;
                 clone.querySelector('#first-jumlah-unit-per-perusahaan').innerHTML=data.perusahaans[0].jumlahUnit;
+
+                //render the remaining rows
+                for (i = 1; i < data.perusahaans.length; i++) {
+                    var namaPerusahaan = data.perusahaans[i].namaPerusahaan;
+                    var jumlahUnit = data.perusahaans[i].jumlahUnit;
+                    
+                    //clone template
+                    var template = document.getElementById("template-row-perusahaan");
+                    var cloneRowPerusahaan = template.content.cloneNode(true)
+
+                    //insert data to template
+                    cloneRowPerusahaan.querySelector('#kolom-nama-perusahaan').innerHTML=namaPerusahaan;
+                    cloneRowPerusahaan.querySelector('#kolom-jumlah-unit').innerHTML=jumlahUnit;
+
+                    var containingElement = clone.querySelector("#body-table-pencarian-trayek")
+                    containingElement.appendChild(cloneRowPerusahaan);
+
+                } 
+
+                //render row total
+                //clone template
+                var template = document.getElementById("template-row-total")
+                var cloneRowTotal = template.content.cloneNode(true)
+
+                //insert data to template
+                cloneRowTotal.querySelector('#jumlah-unit-total').innerHTML=data.jumlahArmada;
+                
+                var containingElement = clone.querySelector("#body-table-pencarian-trayek")
+                containingElement.appendChild(cloneRowTotal);
+
 
                 var containingElement = document.getElementById("box-pencarian-trayek")
                 containingElement.appendChild(clone)
