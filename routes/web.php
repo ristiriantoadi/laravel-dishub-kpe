@@ -40,6 +40,7 @@ Route::get('/cetak_pdf', 'KendaraanController@cetak_pdf')->middleware('auth');
 Route::get('/cetak_pdf2', 'KendaraanController@cetak_pdf2')->middleware('auth');
 Route::get('/kendaraans/cari', 'KendaraanController@cari')->middleware('auth');
 Route::patch('/kendaraans/{kendaraan}', 'KendaraanController@update')->middleware('auth');
+
 //delete
 Route::get('/delete/cari', 'DeleteController@cari')->middleware('auth');
 Route::get('/delete', 'DeleteController@index')->middleware('auth');

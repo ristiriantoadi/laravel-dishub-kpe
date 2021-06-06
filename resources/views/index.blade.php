@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="home/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="home/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
     .map-responsive {
@@ -50,8 +51,12 @@
                     <!-- <div class="col-xl-10"> -->
                     <div>
                         <h1 class="mb-5">DINAS PERHUBUNGAN PROVINSI NUSA TENGGARA BARAT</h1>
-                        <h2 class="mb-5">SISTEM INFORMASI KARTU PENGAWASAN ELEKTRONIK</h2>
-                        <form action="/" method="get">
+                        <h2 class="mb-1">SISTEM INFORMASI KARTU PENGAWASAN ELEKTRONIK</h2>
+                        <span style="display:flex;justify-content: center;">
+                            <button type="button" onclick="buttonPencarianClicked(this)" id="pengecekan-nomor-mesin" class="btn btn-secondary btn-pencarian aktif">Pengecekan Nomor Mesin</button>
+                            <button type="button" onclick="buttonPencarianClicked(this)" id="pencarian-trayek" class="btn btn-secondary btn-pencarian">Pencarian Trayek</button>
+                        </span>
+                        <form class="mt-3" action="/" method="get">
                             @csrf
                             <div class="form-row">
                                 <div class="col-12 col-md-9 mb-2 mb-md-0">
@@ -277,6 +282,19 @@
     <script src="home/js/jquery.min.js"></script>
     <script src="home/bootstrap/js/bootstrap.min.js"></script>
     <script src="home/js/bs-animation.js"></script>
+    <script>
+        function buttonPencarianClicked(item) {
+            var targetElement = item
+            console.log("id element",targetElement.id)
+            if(targetElement.id == "pengecekan-nomor-mesin"){
+                document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
+                document.getElementById("pencarian-trayek").classList.remove("aktif");
+            }else{
+                document.getElementById("pencarian-trayek").classList.add("aktif");
+                document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
+            }
+        }
+    </script>
 </body>
 
 </html>

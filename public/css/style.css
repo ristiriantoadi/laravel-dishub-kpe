@@ -15,3 +15,11 @@
 .belum-expired{
 
 }
+
+.btn-pencarian{
+    width:50%;
+}
+
+.btn-pencarian.aktif{
+    background-color:#1ed760;
+}
