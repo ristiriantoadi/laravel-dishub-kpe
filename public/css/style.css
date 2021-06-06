@@ -23,3 +23,11 @@
 .btn-pencarian.aktif{
     background-color:#1ed760;
 }
+
+.box-pencarian{
+    display: none;
+}
+
+.box-pencarian.visible{
+    display: block;
+}

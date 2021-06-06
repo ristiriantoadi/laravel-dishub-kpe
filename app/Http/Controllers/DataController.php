@@ -138,6 +138,15 @@ class DataController extends Controller
         return Excel::download(new DataRekapExportJenisPelayananAngkutan, $namaFile);
     }
 
+    public function cekNomorMesin(Request $request){
+        error_log("nomor mesin: ".$request->nomorMesin);
+        $nomesin = $request->nomorMesin;
+        $kendaraan = Kendaraan::where('nomesin', $nomesin)->get();
+        return response()->json([
+            'kendaraan' => $kendaraan
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *

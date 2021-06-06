@@ -56,62 +56,32 @@
                             <button type="button" onclick="buttonPencarianClicked(this)" id="pengecekan-nomor-mesin" class="btn btn-secondary btn-pencarian aktif">Pengecekan Nomor Mesin</button>
                             <button type="button" onclick="buttonPencarianClicked(this)" id="pencarian-trayek" class="btn btn-secondary btn-pencarian">Pencarian Trayek</button>
                         </span>
-                        <form class="mt-3" action="/" method="get">
-                            @csrf
-                            <div class="form-row">
-                                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                    <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
-                                        type="text" placeholder="Masukan Nomer Mesin...">
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <button class="btn btn-primary btn-block btn-lg" type="submit">CEK</button>
+                        <div id="box-pengecekan-nomor-mesin" class="box-pencarian visible"> 
+                            <div class="mt-3">
+                                <div class="form-row">
+                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
+                                        <input class="form-control form-control-lg" id="input-nomor-mesin" value="{{ old('cari') }}" name="cari"
+                                            type="text" placeholder="Masukan Nomer Mesin...">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <button class="btn btn-primary btn-block btn-lg" onclick="cekNomorMesin()" type="button">CEK</button>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-                        <div class="mt-4">
-                            <input type="hidden" value="{{ $sekarang = date('Y-m-d') }}">
-                            @foreach($kendaraans as $p)
-                                <input type="hidden" value="{{ $masa_sk = $p->masaberlaku }}">
-                                @if($sekarang > $masa_sk)
-                                <div class="alert alert-danger" role="alert">
-                                    Nomor Mesin <b>{{$p->nomesin}}</b> <b>TIDAK AKTIF</b>
-                                    </br>
-                                    Nomor TNBK : <b>{{$p->nopol}}</b>
-                                    </br>
-                                    Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
-                                    </br>
-                                    Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
-                                    </br>
-                                    Trayek : <b>{{$p->trayek}}</b>
-                                    </br>
-                                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
-                                </div>
-                                @else
-                                <div class="alert alert-success" role="alert">
-                                    Nomor Mesin <b>{{$p->nomesin}}</b> <b>AKTIF</b>
-                                    </br>
-                                    Nomor TNBK <b>{{$p->nopol}}</b>
-                                    </br>
-                                    Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
-                                    </br>
-                                    Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
-                                    </br>
-                                    Trayek : <b>{{$p->trayek}}</b>
-                                    </br>
-                                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
-                                </div>
-                                @endif
-                            @endforeach
-                        <!--
-                        @if($cari != "")
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            Nomer Mesin <strong>TIDAK DITEMUKAN!</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                         </div>
-                        @endif
-                        -->
+                        <div id="box-pencarian-trayek" class="box-pencarian">
+                            <form class="mt-3" action="/" method="get">
+                                @csrf
+                                <div class="form-row">
+                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
+                                        <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
+                                            type="text" id="input-nama-trayek" placeholder="Masukkan nama trayek...">
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <button class="btn btn-primary btn-block btn-lg" type="button">Cari</button>
+                                    </div>
+                                </div>
+                            </form> 
                         </div>
                     </div>
                     <!-- <div class="col-md-10 col-lg-8 col-xl-7">
@@ -270,15 +240,23 @@
             </div>
         </div>
     </footer>
-    <!--
-    <div class="container-fluid">
-        <div class="map-responsive">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.1668172623827!2d116.09143231451759!3d-8.57995428944314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdc0844ead0e71%3A0xff712bee1ea5f8f2!2sDinas%20Perhubungan%20Provinsi%20NTB!5e0!3m2!1sid!2sid!4v1593129366275!5m2!1sid!2sid"
-                width="500" height="200" frameborder="0" style="border:0;" allowfullscreen></iframe>
+    <template id="template-hasil-cek-nomor-mesin">
+        <div id="hasil-cek-nomor-mesin" class="mt-4">
+            <div class="alert alert-danger" role="alert">
+                Nomor Mesin <b id="nomesin">nomesin</b> <b id="status-kendaraan">TIDAK AKTIF</b>
+                </br>
+                Nomor TNBK : <b id="nopol">nopol</b>
+                </br>
+                Kode Perusahaan : <b id="kodeperusahaan">kodeperusahaan</b>
+                </br>
+                Nama Perusahaan : <b id="namaperusahaan">namaperusahaan</b>
+                </br>
+                Trayek : <b id="trayek">trayek</b>
+                </br>
+                Masa Berlaku S/D : <b id="masaberlaku">masaberlaku</b>
+            </div>
         </div>
-    </div>
-    -->
+    </template>    
     <script src="home/js/jquery.min.js"></script>
     <script src="home/bootstrap/js/bootstrap.min.js"></script>
     <script src="home/js/bs-animation.js"></script>
@@ -289,10 +267,67 @@
             if(targetElement.id == "pengecekan-nomor-mesin"){
                 document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
                 document.getElementById("pencarian-trayek").classList.remove("aktif");
+
+                document.getElementById("box-pengecekan-nomor-mesin").classList.add("visible");
+                document.getElementById("box-pencarian-trayek").classList.remove("visible");
             }else{
                 document.getElementById("pencarian-trayek").classList.add("aktif");
                 document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
+
+                document.getElementById("box-pencarian-trayek").classList.add("visible");
+                document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
             }
+        }
+
+        function renderHasilCekNomorMesin(data){
+            if ('content' in document.createElement('template')) {
+
+                //delete old element
+                var element=document.getElementById("hasil-cek-nomor-mesin");
+                if(element){
+                    element.parentNode.removeChild(element);
+                }
+                
+                //clone template
+                var template = document.getElementById("template-hasil-cek-nomor-mesin")
+                var clone = template.content.cloneNode(true)
+
+                //insert data to template
+                clone.querySelector('#nomesin').innerHTML=data.nomesin;
+                clone.querySelector('#status-kendaraan').innerHTML="Aktif";
+                clone.querySelector('#nopol').innerHTML=data.nopol;
+                clone.querySelector('#kodeperusahaan').innerHTML=data.kodeperusahaan;
+                clone.querySelector('#namaperusahaan').innerHTML=data.namaperusahaan;
+                clone.querySelector('#trayek').innerHTML=data.trayek;
+                clone.querySelector('#masaberlaku').innerHTML=data.masaberlaku;
+
+                
+                //add to containing element
+                var containingElement = document.getElementById("box-pengecekan-nomor-mesin")
+                containingElement.appendChild(clone)
+            }else{
+            //find another way not using template tag
+            }
+
+        }
+
+        function cekNomorMesin(){
+            var nomorMesin = document.getElementById("input-nomor-mesin").value
+            // console.log("nomor mesin",nomorMesin);
+            fetch(`http://localhost:8000/cek-nomor-mesin?nomorMesin=${nomorMesin}`,{
+                method:"GET",
+            })
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                console.log("data nopol",data["kendaraan"][0].nopol)
+                //render the data
+                renderHasilCekNomorMesin(data["kendaraan"][0]);
+            })
+            .catch((error)=>{
+                console.log("error",error)
+            });
         }
     </script>
 </body>
