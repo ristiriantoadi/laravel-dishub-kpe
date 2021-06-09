@@ -114,8 +114,87 @@
                 </a>
             </div>
         </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <a href="{{url('/expired/kartu')}}">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
+                                    <span>Kartu Expired</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-print fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <a href="{{url('/expired/sk')}}">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
+                                    <span>SK Expired</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-print fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <a href="{{url('/rekap')}}">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
+                                    <span>Rekap Data</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-database fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <a href="{{url('/rekap/spm')}}">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
+                                    <span>Rekap Uji SPM</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-database fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card shadow border-left-warning py-2">
+                <a href="{{url('/pemberitahuan')}}">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-info font-weight-bold text-xs mb-1">
+                                    <span>Upload Pemberitahuan</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
+                            </div>
+                            <div class="col-auto"><i class="fas fa-upload fa-2x text-gray-300"></i></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-
 </div>
 </div>
 @endsection
