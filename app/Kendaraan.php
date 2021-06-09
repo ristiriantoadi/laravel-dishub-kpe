@@ -16,7 +16,8 @@ class Kendaraan extends Model
                                 'status_sk' => "belum_expired",
                                 'berkas_pdf'=>"",
                                 'berkas_spm'=>"",
-                                'jenis_pelayanan_angkutan'=>""
+                                'jenis_pelayanan_angkutan'=>"",
+                                'no_telepon'=>""
                             ];
                         
 }

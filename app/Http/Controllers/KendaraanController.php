@@ -151,6 +151,12 @@ class KendaraanController extends Controller
             $kendaraan->save();
         }
 
+        //update nomor telepon
+        if($request->no_telepon){
+            $kendaraan->no_telepon=$request->no_telepon;
+            $kendaraan->save();
+        }
+
         //update jenis pelayanan angkutan
         // if($request->jenis_pelayanan_angkutan){
         //     $kendaraan->jenis_pelayanan_angkutan=$request->jenis_pelayanan_angkutan;

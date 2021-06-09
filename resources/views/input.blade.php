@@ -176,6 +176,10 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="no_telepon">NOMOR TELEPON</label>
+                <input type="text" class="form-control" id="no_telepon" placeholder="Masukkan nomor telepon" name="no_telepon" />
+            </div>
+            <div class="form-group">
                 <label for="nomor_sk">NOMOR SK</label>
                 <input type="text" class="form-control @error('nomor_sk') is-invalid @enderror" id="nomer_sk"
                     name="nomor_sk" aria-describedby="nomor_sk" placeholder="Masukan Nomor SK"

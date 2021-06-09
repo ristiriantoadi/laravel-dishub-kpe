@@ -119,8 +119,8 @@ class DataController extends Controller
             'tglakhirsk' => $request->akhir,
             'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan,
             'tglawalspm' => $request->awal_spm,
-            'tglakhirspm' => $request->akhir_spm,
-        ]);
+            'tglakhirspm' => $request->akhir_spm
+    ]);
 
         //upload pdf
         if($request->file("berkas_pdf")){
@@ -130,6 +130,12 @@ class DataController extends Controller
         //upload spm
         if($request->file("berkas_spm")){
             upload_spm($kendaraan,$request->file("berkas_spm"));
+        }
+
+        //add nomor telepon
+        if($request->no_telepon){
+            $kendaraan->no_telepon = $request->no_telepon;
+            $kendaraan->save();
         }
 
         return redirect('/input')->with('status', 'Data Kendaraan Berhasil Ditambahkan!');
