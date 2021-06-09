@@ -96,6 +96,8 @@ class DeleteController extends Controller
     public function destroy(Kendaraan $kendaraan)
     {
         Kendaraan::destroy($kendaraan->id);
+        delete_notifications($kendaraan->id,"App\Notifications\KartuExpired");
+        delete_notifications($kendaraan->id,"App\Notifications\SkExpired");
         return redirect('/delete')->with('status','Data Kendaraan Berhasil Dihapus!');
     }
 }
