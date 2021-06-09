@@ -312,11 +312,11 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="masa_sk">MASA BERLAKU SK</label>
+                                                <label for="masa_sk">MASA BERLAKU KPE</label>
                                                 <input type="date"
                                                     class="form-control @error('masa_sk') is-invalid @enderror"
                                                     id="masa_sk" name="masa_sk" aria-describedby="masa_sk"
-                                                    placeholder="Masa Berlaku SK" value="{{ $k->masaberlaku }}">
+                                                    placeholder="Masa Berlaku KPE" value="{{ $k->masaberlaku }}">
                                                 @error('masa_sk')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
