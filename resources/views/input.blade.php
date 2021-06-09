@@ -134,6 +134,10 @@
                     <label for="berkas_pdf">Berkas (dalam pdf)</label>
                     <input type="file" name="berkas_pdf" class="form-control-file mb-1" id="berkas_pdf">
                 </div>
+                <div class="form-group">
+                    <label for="berkas_spm">Berkas Uji SPM (dalam jpg/png atau pdf)</label>
+                    <input type="file" name="berkas_spm" class="form-control-file mb-1" id="berkas_spm">
+                </div>
         </div>
         <div class="col">
             <div class="form-group">

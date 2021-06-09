@@ -141,18 +141,14 @@ class KendaraanController extends Controller
         //get kendaraan
         $kendaraan = Kendaraan::find($kendaraan->id);
         
-
-        //upload berkas pdf
-        // if($request->file("berkas_pdf")){
-        //     $savePath = "public/berkas_kendaraan/".$kendaraan->id;
-        //     $filename = $request->file('berkas_pdf')->getClientOriginalName();
-        //     $request->file('berkas_pdf')->storeAs($savePath,$filename);
-        //     $publicPathToFile = "/storage/"."berkas_kendaraan/".$kendaraan->id."/".$filename;
-        //     $kendaraan->berkas_pdf = $publicPathToFile;
-        //     $kendaraan->save();
-        // }
+        //upload berkas pdf / upload pdf
         if($request->file("berkas_pdf")){
             upload_pdf($kendaraan,$request->file("berkas_pdf"));
+        }
+
+        //upload berkas spm / upload spm
+        if($request->file("berkas_spm")){
+            upload_spm($kendaraan,$request->file("berkas_spm"));
         }
 
         check_status_kartu($kendaraan);

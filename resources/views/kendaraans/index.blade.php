@@ -226,6 +226,15 @@
                                                         <span>File: -</span>
                                                     @endif
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="berkas_spm">Berkas Uji SPM (dalam jpg/png atau pdf)</label>
+                                                    <input type="file" name="berkas_spm" class="form-control-file mb-1" id="berkas_spm">
+                                                    @if ($k->berkas_spm)
+                                                        <span>File: <a href="{{url($k->berkas_spm)}}">{{get_filename($k->berkas_spm)}}</a></span>
+                                                    @else 
+                                                        <span>File: -</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">

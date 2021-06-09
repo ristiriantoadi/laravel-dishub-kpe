@@ -22,6 +22,18 @@ if (!function_exists('upload_pdf')) {
     }
 }
 
+if (!function_exists('upload_spm')) {
+    function upload_spm($kendaraan,$berkasSpm){
+        $savePath = "berkas_kendaraan/".$kendaraan->id;
+        $filename = $berkasSpm->getClientOriginalName();
+        Storage::disk('public')->put($savePath."/".$filename, file_get_contents($berkasSpm));
+        // $berkasPdf->storeAs($savePath,$filename);
+        $publicPathToFile = "/storage/"."berkas_kendaraan/".$kendaraan->id."/".$filename;
+        $kendaraan->berkas_spm = $publicPathToFile;
+        $kendaraan->save();
+    }
+}
+
 if (!function_exists('upload_file_pemberitahuan')) {
     function upload_file_pemberitahuan($pemberitahuan,$berkas){
         $savePath = "berkas_pemberitahuan/".$pemberitahuan->id;

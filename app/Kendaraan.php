@@ -14,6 +14,7 @@ class Kendaraan extends Model
                                 'status_kartu' => "belum_expired",
                                 'status_sk' => "belum_expired",
                                 'berkas_pdf'=>"",
+                                'berkas_spm'=>"",
                                 'jenis_pelayanan_angkutan'=>""
                             ];
                         

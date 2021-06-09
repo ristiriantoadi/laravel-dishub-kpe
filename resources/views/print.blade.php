@@ -217,6 +217,20 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
+                                                <div class="form-group">
+                                                    @if ($k->berkas_pdf)
+                                                        <span>File: <a href="{{url($k->berkas_pdf)}}">{{get_filename($k->berkas_pdf)}}</a></span>
+                                                    @else 
+                                                        <span>File: -</span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group">
+                                                    @if ($k->berkas_spm)
+                                                        <span>File Berkas SPM: <a href="{{url($k->berkas_spm)}}">{{get_filename($k->berkas_spm)}}</a></span>
+                                                    @else 
+                                                        <span>File Berkas SPM: -</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
@@ -444,6 +458,20 @@
                                                     @error('daya_barang')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    @if ($k->berkas_pdf)
+                                                        <span>File: <a href="{{url($k->berkas_pdf)}}">{{get_filename($k->berkas_pdf)}}</a></span>
+                                                    @else 
+                                                        <span>File: -</span>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group">
+                                                    @if ($k->berkas_spm)
+                                                        <span>File Berkas SPM: <a href="{{url($k->berkas_spm)}}">{{get_filename($k->berkas_spm)}}</a></span>
+                                                    @else 
+                                                        <span>File Berkas SPM: -</span>
+                                                    @endif
                                                 </div>
                                         </div>
                                         <div class="col">

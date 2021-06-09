@@ -123,6 +123,11 @@ class DataController extends Controller
             upload_pdf($kendaraan,$request->file("berkas_pdf"));
         }
 
+        //upload spm
+        if($request->file("berkas_spm")){
+            upload_spm($kendaraan,$request->file("berkas_spm"));
+        }
+
         return redirect('/input')->with('status', 'Data Kendaraan Berhasil Ditambahkan!');
 
     }

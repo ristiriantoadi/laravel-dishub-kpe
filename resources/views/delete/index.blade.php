@@ -224,6 +224,13 @@
                                                         <span>File: -</span>
                                                     @endif
                                                 </div>
+                                                <div class="form-group">
+                                                    @if ($k->berkas_spm)
+                                                        <span>File Berkas SPM: <a href="{{url($k->berkas_spm)}}">{{get_filename($k->berkas_spm)}}</a></span>
+                                                    @else 
+                                                        <span>File Berkas SPM: -</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
