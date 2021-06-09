@@ -155,6 +155,9 @@ class KendaraanController extends Controller
         if($request->no_telepon){
             $kendaraan->no_telepon=$request->no_telepon;
             $kendaraan->save();
+        }else{
+            $kendaraan->no_telepon="";
+            $kendaraan->save();
         }
 
         //update jenis pelayanan angkutan
