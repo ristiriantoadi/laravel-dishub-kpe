@@ -61,7 +61,7 @@
                                 <div class="form-row">
                                     <div class="col-12 col-md-9 mb-2 mb-md-0">
                                         <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
-                                            type="text" placeholder="Masukan Nomer Mesin...">
+                                            type="text" placeholder="Masukan nopol atau Nomer Mesin...">
                                     </div>
                                     <div class="col-12 col-md-3">
                                         <button class="btn btn-primary btn-block btn-lg" type="submit">CEK</button>

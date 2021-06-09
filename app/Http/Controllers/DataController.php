@@ -54,7 +54,7 @@ class DataController extends Controller
     {
         $cari = $request->cari;
         
-        $kendaraans = Kendaraan::where('nomesin', $cari)->get();
+        $kendaraans = Kendaraan::where('nomesin', $cari)->orWhere('nopol', $cari)->get();
 
         //get pemberitahuanss
         $pemberitahuans = Pemberitahuan::all();
