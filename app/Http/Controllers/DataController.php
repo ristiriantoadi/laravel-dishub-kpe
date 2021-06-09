@@ -10,6 +10,8 @@ use App\Pemberitahuan;
 use Illuminate\Support\Facades\Validator;
 use App\Exports\DataRekapExport;
 use App\Exports\DataRekapExportJenisPelayananAngkutan;
+use App\Exports\DataRekapExportSpmAktif;
+use App\Exports\DataRekapExportSpmNonaktif;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -137,7 +139,21 @@ class DataController extends Controller
     public function rekap(Request $request){
         return view('rekap');
     }
+
+    public function rekapSpm(Request $request){
+        return view('rekap_spm');
+    }
+
+    public function exportSpmAktif(Request $request){
+        $namaFile = "Rekap Jumlah Kendaraan SPM Aktif di Provinsi NTB ".date('d-m-Y').".xlsx";
+        return Excel::download(new DataRekapExportSpmAktif, $namaFile);
+    }
     
+    public function exportSpmNonaktif(Request $request){
+        $namaFile = "Rekap Jumlah Kendaraan SPM Nonaktif di Provinsi NTB ".date('d-m-Y').".xlsx";
+        return Excel::download(new DataRekapExportSpmNonaktif, $namaFile);
+    }
+
     public function export(Request $request){
         $namaFile = "Rekap Jumlah Kendaraan Angkutan AKDP di Provinsi NTB ".date('d-m-Y').".xlsx";
         return Excel::download(new DataRekapExport, $namaFile);

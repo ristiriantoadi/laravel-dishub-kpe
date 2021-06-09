@@ -208,9 +208,9 @@
                     </select>
             </div>
             <div class="form-group">
-                <label for="masa_sk">MASA BERLAKU SK</label>
+                <label for="masa_sk">MASA BERLAKU KPE</label>
                 <input type="date" class="form-control @error('masa_sk') is-invalid @enderror" name="masa_sk"
-                    aria-describedby="masa_sk" placeholder="Masukan Masa Berlaku SK" value="{{ old('masa_sk') }}">
+                    aria-describedby="masa_sk" placeholder="Masukan Masa Berlaku KPE" value="{{ old('masa_sk') }}">
                 @error('masa_sk')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

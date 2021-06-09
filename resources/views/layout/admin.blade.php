@@ -56,6 +56,9 @@
                         <a class="nav-link active" href="{{url('/pemberitahuan')}}">
                             <i class="fas fa-upload"></i>
                             <span>Upload Pemberitahuan</span></a>
+                        <a class="nav-link active" href="{{url('/rekap/spm')}}">
+                            <i class="fas fa-database"></i>
+                            <span>Rekap Uji SPM</span></a>
                         <!--
                         <a class="nav-link active" href="index.html">
                             <i class="icon ion-android-settings"></i>

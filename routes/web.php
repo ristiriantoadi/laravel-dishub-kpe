@@ -34,6 +34,11 @@ Route::get('/rekap', 'DataController@rekap')->middleware('auth');
 Route::get('/rekap/export', 'DataController@export')->middleware('auth');
 Route::get('/rekap/export/jenis_pelayanan_angkutan', 'DataController@exportJenisPelayananAngkutan')->middleware('auth');
 
+//rekap spm
+Route::get('/rekap/spm', 'DataController@rekapSpm')->middleware('auth');
+Route::get('/rekap/spm/export/aktif', 'DataController@exportSpmAktif')->middleware('auth');
+Route::get('/rekap/spm/export/nonaktif', 'DataController@exportSpmNonaktif')->middleware('auth');
+
 Route::get('/', 'DataController@search');
 Route::get('/cek-nomor-mesin', 'DataController@cekNomorMesin');
 Route::get('/pencarian-trayek', 'DataController@pencarianTrayek');

@@ -319,6 +319,22 @@ if (!function_exists('get_unread_notifications')) {
 //     }
 // }
 
+if (!function_exists('get_rekap_data_spm_aktif')) {
+    function get_rekap_data_spm_aktif(){
+        error_log("date: ".date('Y-m-d'));
+        $kendaraans = Kendaraan::whereDate('tglakhirspm', '>=', date('Y-m-d'))->get();
+        return $kendaraans;
+    }
+}
+
+if (!function_exists('get_rekap_data_spm_nonaktif')) {
+    function get_rekap_data_spm_nonaktif(){
+        error_log("date: ".date('Y-m-d'));
+        $kendaraans = Kendaraan::whereDate('tglakhirspm', '<', date('Y-m-d'))->get();
+        return $kendaraans;
+    }
+}
+
 if (!function_exists('get_rekap_data')) {
     function get_rekap_data(){
         //get all distinct nama perusahaan
