@@ -135,12 +135,29 @@ class KendaraanController extends Controller
             'masaberlaku' => $request->masa_sk,
             'tglawalsk' => $request->awal,
             'tglakhirsk' => $request->akhir,
-            'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan
+            // 'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan
             ]);
         
         //get kendaraan
         $kendaraan = Kendaraan::find($kendaraan->id);
         
+        //update tgl spm
+        if($request->awal_spm){
+            $kendaraan->tglawalspm=$request->awal_spm;
+            $kendaraan->save();
+        }
+        if($request->akhir_spm){
+            $kendaraan->tglakhirspm=$request->akhir_spm;
+            $kendaraan->save();
+        }
+
+        //update jenis pelayanan angkutan
+        if($request->jenis_pelayanan_angkutan){
+            $kendaraan->jenis_pelayanan_angkutan=$request->jenis_pelayanan_angkutan;
+            $kendaraan->save();
+        }
+
+
         //upload berkas pdf / upload pdf
         if($request->file("berkas_pdf")){
             upload_pdf($kendaraan,$request->file("berkas_pdf"));

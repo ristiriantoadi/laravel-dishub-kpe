@@ -328,8 +328,17 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
-
+                                            <div class="form-group">
+                                                <label for="tanggal_sk">TANGGAL UJI SPM</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="awal_spm"
+                                                    aria-describedby="awal" value="{{ $k->tglawalspm }}" placeholder="Awal">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="akhir_spm"
+                                                    aria-describedby="awal" placeholder="Awal" value="{{ $k->tglakhirspm }}">
+                                            </div>
                                         </div>
                                     </div>
 
@@ -570,8 +579,17 @@
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
-
+                                            <div class="form-group">
+                                                <label for="tanggal_sk">TANGGAL UJI SPM</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="awal_spm"
+                                                    aria-describedby="awal" value="{{ $k->tglawalspm }}" placeholder="Awal">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" name="akhir_spm"
+                                                    aria-describedby="awal" placeholder="Awal" value="{{ $k->tglakhirspm }}">
+                                            </div>
                                         </div>
                                     </div>
 

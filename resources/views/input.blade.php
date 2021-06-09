@@ -232,6 +232,17 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="tanggal_sk">TANGGAL UJI SPM</label>
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" name="awal_spm"
+                    aria-describedby="awal" placeholder="Awal">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" name="akhir_spm"
+                    aria-describedby="awal" placeholder="Awal">
+            </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
             </form>
         </div>

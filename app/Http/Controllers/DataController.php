@@ -115,7 +115,9 @@ class DataController extends Controller
             'masaberlaku' => $request->masa_sk,
             'tglawalsk' => $request->awal,
             'tglakhirsk' => $request->akhir,
-            'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan
+            'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan,
+            'tglawalspm' => $request->awal_spm,
+            'tglakhirspm' => $request->akhir_spm,
         ]);
 
         //upload pdf
