@@ -135,7 +135,7 @@ class KendaraanController extends Controller
             'masaberlaku' => $request->masa_sk,
             'tglawalsk' => $request->awal,
             'tglakhirsk' => $request->akhir,
-            // 'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan
+            'jenis_pelayanan_angkutan'=>$request->jenis_pelayanan_angkutan
             ]);
         
         //get kendaraan
@@ -152,10 +152,10 @@ class KendaraanController extends Controller
         }
 
         //update jenis pelayanan angkutan
-        if($request->jenis_pelayanan_angkutan){
-            $kendaraan->jenis_pelayanan_angkutan=$request->jenis_pelayanan_angkutan;
-            $kendaraan->save();
-        }
+        // if($request->jenis_pelayanan_angkutan){
+        //     $kendaraan->jenis_pelayanan_angkutan=$request->jenis_pelayanan_angkutan;
+        //     $kendaraan->save();
+        // }
 
 
         //upload berkas pdf / upload pdf
