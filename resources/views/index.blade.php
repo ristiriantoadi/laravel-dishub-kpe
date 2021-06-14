@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        .swiper-container{
+            /* height:300px; */
+            /* width:100%; */
+        }
+    </style>
+
+
     <style>
     .map-responsive {
         overflow: hidden;
@@ -126,12 +138,39 @@
                         <div class="card" style="height:600px;overflow:scroll">
                             <div class="card-body">
                                 <h5 class="card-title">Pemberitahuan</h5>
-                                @foreach($pemberitahuans as $pemberitahuan)
+                                <div class="swiper-container">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        @foreach($pemberitahuans as $pemberitahuan)
+                                            <div class="swiper-slide">
+                                                <div class="mt-3">
+                                                    <a href="{{$pemberitahuan->file_upload}}"><h6>{{$pemberitahuan->judul}}</h6></a>
+                                                    <img style="max-width:100%;text-align:center;display:block;margin: 0 auto" src="{{$pemberitahuan->file_upload}}"/>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <!-- <div class="swiper-slide">Slide 1</div>
+                                        <div class="swiper-slide">Slide 2</div>
+                                        <div class="swiper-slide">Slide 3</div> -->
+                                        <!-- ... -->
+                                    </div>
+                                    <!-- If we need pagination -->
+                                    <div class="swiper-pagination"></div>
+
+                                    <!-- If we need navigation buttons -->
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+
+                                    <!-- If we need scrollbar -->
+                                    <div class="swiper-scrollbar"></div>
+                                </div>
+                                <!-- @foreach($pemberitahuans as $pemberitahuan)
                                     <div class="mt-3">
                                         <a href="{{$pemberitahuan->file_upload}}"><h6>{{$pemberitahuan->judul}}</h6></a>
                                         <img style="max-width:90%;text-align:center;display:block;margin: 0 auto" src="{{$pemberitahuan->file_upload}}"/>
                                     </div>
-                                @endforeach
+                                @endforeach -->
                                 <!-- <ol>
                                     @foreach($pemberitahuans as $pemberitahuan)
                                         <li>
@@ -407,6 +446,29 @@
                 console.log("error",error)
             });
         }
+    </script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            // scrollbar: {
+            //     el: '.swiper-scrollbar',
+            // },
+        });
     </script>
 </body>
 
