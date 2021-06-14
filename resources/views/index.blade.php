@@ -123,11 +123,11 @@
                 </div>
                 <div style="padding-top:15px;padding-bottom:15px" class="text-dark text-left col-md-4 pemberitahuan">
                     @if(count($pemberitahuans)>0)
-                        <div class="card" style="max-height:600px;overflow:scroll">
+                        <div class="card" style="height:600px;overflow:scroll">
                             <div class="card-body">
                                 <h5 class="card-title">Pemberitahuan</h5>
                                 @foreach($pemberitahuans as $pemberitahuan)
-                                    <div>
+                                    <div class="mt-3">
                                         <a href="{{$pemberitahuan->file_upload}}"><h6>{{$pemberitahuan->judul}}</h6></a>
                                         <img style="max-width:90%;text-align:center;display:block;margin: 0 auto" src="{{$pemberitahuan->file_upload}}"/>
                                     </div>
