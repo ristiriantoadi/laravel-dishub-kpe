@@ -453,6 +453,11 @@
             direction: 'horizontal',
             loop: true,
 
+            autoplay: {
+                delay: 20000,
+                disableOnInteraction: false,
+            },
+
             // If we need pagination
             pagination: {
                 el: '.swiper-pagination',
