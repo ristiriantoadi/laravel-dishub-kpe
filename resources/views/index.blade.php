@@ -454,7 +454,7 @@
             loop: true,
 
             autoplay: {
-                delay: 20000,
+                delay: 5000,
                 disableOnInteraction: false,
             },
 
