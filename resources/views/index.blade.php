@@ -29,9 +29,7 @@
         position: absolute;
     }
     </style>
-
 </head>
-
 <body>
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
         <div class="container">
@@ -41,14 +39,13 @@
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"></button>
         </div>
     </nav>
-
-    <header class="masthead text-white text-center"
+    <header class="text-white text-center"
         style="background:url('home/img/tesaja.jpg')no-repeat center center;background-size:cover;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <div>
+                    <div style="padding-top:120px;padding-bottom:120px">
                         <h1 class="mb-5">DINAS PERHUBUNGAN PROVINSI NUSA TENGGARA BARAT</h1>
                         <h2 class="mb-1">SISTEM INFORMASI KARTU PENGAWASAN ELEKTRONIK</h2>
                         <span style="display:flex;justify-content: center;">
@@ -102,16 +99,6 @@
                                     </div>
                                     @endif
                                 @endforeach
-                            <!--
-                            @if($cari != "")
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                Nomer Mesin <strong>TIDAK DITEMUKAN!</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                            -->
                             </div>
                         </div>
                         <div id="box-pencarian-trayek" class="box-pencarian">
@@ -131,64 +118,21 @@
                                     </div>
                                 </div> 
                             </div>
-                            <!-- <div class="card mt-4">
-                                <div class="card-body">                                
-                                    <table class="table table-bordered">
-                                        <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">No</th>
-                                                <th scope="col">Nama Trayek</th>
-                                                <th scope="col">Jumlah Armada</th>
-                                                <th colspan="2" scope="col">Perusahaan yang Melayani</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td rowspan="3">1</td>
-                                                <td rowspan="3">Terminal Mandalika - Pancor - PP</td>
-                                                <td rowspan="3">60</td>
-                                                <td>PO Adi Sobri</td>
-                                                <td>2 Unit</td>
-                                            </tr>
-                                            <tr>
-                                                <td>PO Amanah Express</td>
-                                                <td>3 Unit</td>
-                                            </tr>
-                                            <tr>
-                                                <td>PO Colombia</td>
-                                                <td>1 Unit</td>
-                                            </tr>            
-                                            <tr>
-                                                <td colspan="4"><b>Total</b></td>
-                                                <td>6 Unit</td>
-                                            </tr>                                
-                                       </tbody>
-                                    </table>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
-                    <!-- <div class="col-md-10 col-lg-8 col-xl-7">
-                        <form action="/" method="get">
-                            @csrf
-                            <div class="form-row">
-                                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                                    <input class="form-control form-control-lg" value="{{ old('cari') }}" name="cari"
-                                        type="text" placeholder="Masukan Nomer Mesin...">
-                                </div>
-                                <div class="col-12 col-md-3">
-                                    <button class="btn btn-primary btn-block btn-lg" type="submit">CEK</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div> -->
                 </div>
-                <div class="text-dark text-left col-md-4">
+                <div style="padding-top:15px;padding-bottom:15px" class="text-dark text-left col-md-4 pemberitahuan">
                     @if(count($pemberitahuans)>0)
-                        <div class="card" style="max-height:500px;overflow:scroll">
+                        <div class="card" style="max-height:600px;overflow:scroll">
                             <div class="card-body">
                                 <h5 class="card-title">Pemberitahuan</h5>
-                                <ol>
+                                @foreach($pemberitahuans as $pemberitahuan)
+                                    <div>
+                                        <a href="{{$pemberitahuan->file_upload}}"><h6>{{$pemberitahuan->judul}}</h6></a>
+                                        <img style="max-width:90%;text-align:center;display:block;margin: 0 auto" src="{{$pemberitahuan->file_upload}}"/>
+                                    </div>
+                                @endforeach
+                                <!-- <ol>
                                     @foreach($pemberitahuans as $pemberitahuan)
                                         <li>
                                             <div>
@@ -202,101 +146,14 @@
                                             </div>
                                         </li>
                                     @endforeach
-                                </ol>
+                                </ol> -->
                             </div>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
-        <div class="container">
-            <!-- <div class="col-md-5 mt-4 mx-auto">
-                <input type="hidden" value="{{ $sekarang = date('Y-m-d') }}">
-                @foreach($kendaraans as $p)
-                <input type="hidden" value="{{ $masa_sk = $p->masaberlaku }}">
-
-
-                @if($sekarang > $masa_sk)
-                <div class="alert alert-danger" role="alert">
-                    Nomor Mesin <b>{{$p->nomesin}}</b> <b>TIDAK AKTIF</b>
-                    </br>
-                    Nomor TNBK : <b>{{$p->nopol}}</b>
-                    </br>
-                    Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
-                    </br>
-                    Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
-                    </br>
-                    Trayek : <b>{{$p->trayek}}</b>
-                    </br>
-                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
-                </div>
-                @else
-                <div class="alert alert-success" role="alert">
-                    Nomor Mesin <b>{{$p->nomesin}}</b> <b>AKTIF</b>
-                    </br>
-                    Nomor TNBK <b>{{$p->nopol}}</b>
-                    </br>
-                    Kode Perusahaan : <b>{{$p->kodeperusahaan}}</b>
-                    </br>
-                    Nama Perusahaan : <b>{{$p->namaperusahaan}}</b>
-                    </br>
-                    Trayek : <b>{{$p->trayek}}</b>
-                    </br>
-                    Masa Berlaku S/D : <b>{{ date("d-m-Y", strtotime($p->masaberlaku)) }}</b>
-                </div>
-                @endif
-
-                @endforeach -->
-
-                <!--
-                @if($cari != "")
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Nomer Mesin <strong>TIDAK DITEMUKAN!</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-                -->
-
-
-            <!-- </div> -->
-        </div>
     </header>
-    <!--
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><i class="icon-screen-desktop m-auto text-primary"
-                                data-bs-hover-animate="pulse"></i></div>
-                        <h3>VISI MISI</h3>
-                        <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><i class="icon-layers m-auto text-primary"
-                                data-bs-hover-animate="pulse"></i></div>
-                        <h3>Struktur Organisasi</h3>
-                        <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><i class="icon-check m-auto text-primary"
-                                data-bs-hover-animate="pulse"></i></div>
-                        <h3>Profil Pimpinan</h3>
-                        <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="showcase"></section>
-    -->
     <footer class="footer bg-light">
         <div class="container">
             <div class="row">
