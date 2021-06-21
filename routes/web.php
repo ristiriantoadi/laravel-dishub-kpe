@@ -42,6 +42,7 @@ Route::get('/rekap/spm/export/nonaktif', 'DataController@exportSpmNonaktif')->mi
 Route::get('/', 'DataController@search');
 Route::get('/cek-nomor-mesin', 'DataController@cekNomorMesin');
 Route::get('/pencarian-trayek', 'DataController@pencarianTrayek');
+Route::get('/pencarian-perusahaan', 'DataController@pencarianPerusahaan');
 Route::get('/kendaraans', 'KendaraanController@index')->middleware('auth');
 Route::get('/cetak_pdf', 'KendaraanController@cetak_pdf')->middleware('auth');
 Route::get('/cetak_pdf2', 'KendaraanController@cetak_pdf2')->middleware('auth');

@@ -64,7 +64,10 @@ class DataController extends Controller
         //get distinct list of trayeks
         $trayeks=Kendaraan::select('trayek')->distinct()->pluck('trayek')->toArray();
 
-        return view('index', ['trayeks'=>$trayeks,'kendaraans' => $kendaraans, 'cari' => $cari,'pemberitahuans'=>$pemberitahuans]);
+        //get distinct list of perusahaans
+        $namaPerusahaans=Kendaraan::select('namaperusahaan')->distinct()->pluck('namaperusahaan')->toArray();
+
+        return view('index', ['trayeks'=>$trayeks,'namaPerusahaans'=>$namaPerusahaans,'kendaraans' => $kendaraans, 'cari' => $cari,'pemberitahuans'=>$pemberitahuans]);
     }
 
     public function create()
@@ -196,11 +199,17 @@ class DataController extends Controller
             'perusahaans'=>$perusahaan_array
         ]);
 
-        // return $namaPerusahaans;
+    }
 
-        // return response()->json([
-        //     'kendaraan' => $kendaraan
-        // ]);
+    public function pencarianPerusahaan(Request $request){
+        $namaPerusahaan = $request->namaPerusahaan;
+        
+        // get all trayeks by THIS perusahaan
+        $trayeks=Kendaraan::where('namaperusahaan',$namaPerusahaan)->select('trayek')->distinct()->pluck('trayek')->toArray();
+
+        return response()->json([
+            'trayeks' => $trayeks,
+        ]);
     }
 
     /**

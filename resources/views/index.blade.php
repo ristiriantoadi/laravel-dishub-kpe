@@ -41,6 +41,11 @@
         position: absolute;
     }
     </style>
+    <style>
+        .btn-pencarian{
+            /* border: 1px solid #ccc; */
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
@@ -63,6 +68,7 @@
                         <span style="display:flex;justify-content: center;">
                             <button type="button" onclick="buttonPencarianClicked(this)" id="pengecekan-nomor-mesin" class="btn btn-secondary btn-pencarian aktif">Pengecekan Nomor Mesin</button>
                             <button type="button" onclick="buttonPencarianClicked(this)" id="pencarian-trayek" class="btn btn-secondary btn-pencarian">Pencarian Trayek</button>
+                            <button type="button" onclick="buttonPencarianClicked(this)" id="pencarian-perusahaan" class="btn btn-secondary btn-pencarian">Pencarian Perusahaan</button>
                         </span>
                         <div id="box-pengecekan-nomor-mesin" class="box-pencarian visible"> 
                             <form class="mt-3" action="/" method="get">
@@ -131,6 +137,24 @@
                                 </div> 
                             </div>
                         </div>
+                        <div id="box-pencarian-perusahaan" class="box-pencarian">
+                            <div class="mt-3">
+                                <div class="form-row">
+                                    <div class="col-12 col-md-9 mb-2 mb-md-0">
+                                        <input list="namaPerusahaans" class="form-control form-control-lg" name="namaPerusahaan"
+                                                type="text" id="input-nama-perusahaan" placeholder="Masukkan nama perusahaan ...">
+                                        <datalist id="namaPerusahaans">
+                                            @foreach($namaPerusahaans as $namaPerusahaan)
+                                                <option value="{{$namaPerusahaan}}">
+                                            @endforeach
+                                        </datalist>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <button class="btn btn-primary btn-block btn-lg" onclick="cariPerusahaan()" type="button">Cari</button>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="padding-top:15px;padding-bottom:15px" class="text-dark text-left col-md-4 pemberitahuan">
@@ -150,10 +174,6 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        <!-- <div class="swiper-slide">Slide 1</div>
-                                        <div class="swiper-slide">Slide 2</div>
-                                        <div class="swiper-slide">Slide 3</div> -->
-                                        <!-- ... -->
                                     </div>
                                     <!-- If we need pagination -->
                                     <div class="swiper-pagination"></div>
@@ -165,27 +185,6 @@
                                     <!-- If we need scrollbar -->
                                     <div class="swiper-scrollbar"></div>
                                 </div>
-                                <!-- @foreach($pemberitahuans as $pemberitahuan)
-                                    <div class="mt-3">
-                                        <a href="{{$pemberitahuan->file_upload}}"><h6>{{$pemberitahuan->judul}}</h6></a>
-                                        <img style="max-width:90%;text-align:center;display:block;margin: 0 auto" src="{{$pemberitahuan->file_upload}}"/>
-                                    </div>
-                                @endforeach -->
-                                <!-- <ol>
-                                    @foreach($pemberitahuans as $pemberitahuan)
-                                        <li>
-                                            <div>
-                                                <b>{{$pemberitahuan->judul}}</b>
-                                                <p class="mb-0">{{$pemberitahuan->keterangan}}</p>
-                                                @if($pemberitahuan->file_upload)
-                                                    <span>File: <a href="{{url($pemberitahuan->file_upload)}}">{{get_filename($pemberitahuan->file_upload)}}</a></span>
-                                                @else
-                                                <span>File: -</span>
-                                                @endif
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ol> -->
                             </div>
                         </div>
                     @endif
@@ -226,6 +225,7 @@
             <td id="kolom-jumlah-unit">3 Unit</td>
         </tr>
     </template>
+
     <template id="template-row-total">
         <tr>
             <td colspan="3"><b>Total</b></td>
@@ -256,6 +256,27 @@
             </div>
         </div>
     </template>
+    <template id="template-row-trayek">
+        <tr>
+            <td id="kolom-trayek">Terminal Mandalika - Pancor - PP</td>
+        </tr>        
+    </template>
+    <template id="template-hasil-pencarian-perusahaan">
+        <div id="hasil-pencarian-perusahaan" class="card mt-4">
+            <div class="card-body">                                
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Trayek yang Dilayani</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-table-pencarian-perusahaan">
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
     <template id="template-hasil-cek-nomor-mesin">
         <div id="hasil-cek-nomor-mesin" class="mt-4">
             <div class="alert alert-danger" role="alert">
@@ -277,52 +298,76 @@
     <script src="home/bootstrap/js/bootstrap.min.js"></script>
     <script src="home/js/bs-animation.js"></script>
     <script>
-        var state="pengecekan-nomor-mesin";
+        //there are three possible states:
+        //1. pengecekan-nomor-mesin
+        //2. pencarian-trayek
+        //3. pencarian-perusahaan
+        var state="pengecekan-nomor-mesin"; 
         function buttonPencarianClicked(item) {
             var targetElement = item
             if(targetElement.id == "pengecekan-nomor-mesin"){
-                if(state == "pencarian-trayek"){
-                    document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
+                if(state != "pengecekan-nomor-mesin"){
+
+                    //remove all boxes EXCEPT pengecekan-nomor-mesin
                     document.getElementById("pencarian-trayek").classList.remove("aktif");
-
-                    document.getElementById("box-pengecekan-nomor-mesin").classList.add("visible");
+                    document.getElementById("pencarian-perusahaan").classList.remove("aktif");
                     document.getElementById("box-pencarian-trayek").classList.remove("visible");
+                    document.getElementById("box-pencarian-perusahaan").classList.remove("visible");
 
+                    //initialized pengecekan-nomor-mesiin
+                    document.getElementById("pengecekan-nomor-mesin").classList.add("aktif");
+                    document.getElementById("box-pengecekan-nomor-mesin").classList.add("visible");
+                    
                     //reset box-pencarian-trayek
-                    var element = document.getElementById("hasil-pencarian-trayek");
-                    if(element){
-                        element.parentNode.removeChild(element);
-                    }
+                    // var element = document.getElementById("hasil-pencarian-trayek");
+                    // if(element){
+                    //     element.parentNode.removeChild(element);
+                    // }
 
                     state="pengecekan-nomor-mesin"
                 }
-            }else{
-                if(state == "pengecekan-nomor-mesin"){
-                    document.getElementById("pencarian-trayek").classList.add("aktif");
-                    document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
-
-                    document.getElementById("box-pencarian-trayek").classList.add("visible");
-                    document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+            }else if(targetElement.id == "pencarian-trayek"){
+                if(state != "pencarian-trayek"){
                     
+                    //remove all boxes EXCEPT pencarian-trayek
+                    document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
+                    document.getElementById("pencarian-perusahaan").classList.remove("aktif");
+                    document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+                    document.getElementById("box-pencarian-perusahaan").classList.remove("visible");
+
+                    //initialized pencarian-trayek
+                    document.getElementById("pencarian-trayek").classList.add("aktif");
+                    document.getElementById("box-pencarian-trayek").classList.add("visible");
+
                     //reset box-pengecekan-nomor-mesin
-                    var element = document.getElementById("hasil-cek-nomor-mesin");
-                    if(element){
-                        element.parentNode.removeChild(element);
-                    }
+                    // var element = document.getElementById("hasil-cek-nomor-mesin");
+                    // if(element){
+                    //     element.parentNode.removeChild(element);
+                    // }
 
                     state="pencarian-trayek";
                 }
-            }
+            }else{
+                if(state != "pencarian-perusahaan"){
 
-            //reset hasil box
-            // var noMesin = document.getElementById("hasil-cek-nomor-mesin");
-            // if(noMesin){
-            //     noMesin.parentNode.removeChild(noMesin);
-            // }
+                    //remove all boxes EXCEPT pencarian-perusahaan
+                    document.getElementById("pengecekan-nomor-mesin").classList.remove("aktif");
+                    document.getElementById("pencarian-trayek").classList.remove("aktif");
+                    document.getElementById("box-pengecekan-nomor-mesin").classList.remove("visible");
+                    document.getElementById("box-pencarian-trayek").classList.remove("visible");
+
+                    //initialized pencarian-perusahaan
+                    document.getElementById("pencarian-perusahaan").classList.add("aktif");
+                    document.getElementById("box-pencarian-perusahaan").classList.add("visible");
+
+                    state="pencarian-perusahaan"
+                }
+            }
         }
 
         function renderHasilPencarianTrayek(data){
             if ('content' in document.createElement('template')) {
+                
                 //delete old element
                 var element=document.getElementById("hasil-pencarian-trayek");
                 if(element){
@@ -371,10 +416,42 @@
                 var containingElement = clone.querySelector("#body-table-pencarian-trayek")
                 containingElement.appendChild(cloneRowTotal);
 
-
                 var containingElement = document.getElementById("box-pencarian-trayek")
                 containingElement.appendChild(clone)
+            }
+        }
 
+        function renderHasilPencarianPerusahaan(data){
+            if ('content' in document.createElement('template')) {
+                
+                //delete old element
+                var element=document.getElementById("hasil-pencarian-perusahaan");
+                if(element){
+                    element.parentNode.removeChild(element);
+                }
+
+                //clone template hasil pencarian
+                var template = document.getElementById("template-hasil-pencarian-perusahaan")
+                var cloneHasilPencarianPerusahaan = template.content.cloneNode(true)
+
+                //insert data to template
+                //render rows
+                for (i = 0; i < data.trayeks.length; i++) {
+                    var trayek = data.trayeks[i];
+                    
+                    //clone template
+                    var template = document.getElementById("template-row-trayek");
+                    var cloneRowTrayek = template.content.cloneNode(true)
+
+                    //insert data to template
+                    cloneRowTrayek.querySelector('#kolom-trayek').innerHTML=trayek;
+                    
+                    var containingElement = cloneHasilPencarianPerusahaan.querySelector("#body-table-pencarian-perusahaan")
+                    containingElement.appendChild(cloneRowTrayek);
+                } 
+
+                var containingElement = document.getElementById("box-pencarian-perusahaan")
+                containingElement.appendChild(cloneHasilPencarianPerusahaan)
             }
         }
 
@@ -423,6 +500,22 @@
                 console.log("jumlah armada",data.jumlahArmada);
                 console.log("perusahaans",data.perusahaans);
                 renderHasilPencarianTrayek(data);
+            })
+            .catch((error)=>{
+                console.log("error",error)
+            });
+        }
+
+        function cariPerusahaan(){
+            var namaPerusahaan = document.getElementById("input-nama-perusahaan").value
+            fetch(`/pencarian-perusahaan?namaPerusahaan=${namaPerusahaan}`,{
+                method:"GET",
+            })
+            .then(res=>{
+                return res.json()
+            })
+            .then(data=>{
+                renderHasilPencarianPerusahaan(data);
             })
             .catch((error)=>{
                 console.log("error",error)
