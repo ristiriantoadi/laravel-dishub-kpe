@@ -217,11 +217,14 @@
                     </ul>
                 </div>
             </div>
-            <p class="text-muted small mb-2">
-                Ingin mencoba aplikasi? Silakan kunjungi
-                <a href="{{ url('/login') }}">halaman login</a>
-                untuk masuk sebagai administrator.
-            </p>
+            <!-- <p class="text-muted small mb-2 text-center py-3"> -->
+            <div class="text-center py-3">
+                <h5 class="text-muted">
+                    Ingin mencoba aplikasi? Silakan kunjungi
+                    <a href="{{ url('/login') }}">halaman login</a>
+                    untuk masuk sebagai administrator.
+                </h5>
+            </div>
         </div>
     </footer>
     <template id="template-row-perusahaan">
