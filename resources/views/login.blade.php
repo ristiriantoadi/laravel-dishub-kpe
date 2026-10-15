@@ -29,6 +29,18 @@
                 <button class="btn btn-primary btn-block" type="submit">Log In</button>
             </div>
             <a class="forgot" href="{{ url('/') }}">Kembali</a>
+            <hr>
+            <div class="text-center mt-3">
+                <p class="text-muted small mb-2">
+                    <strong>Akun untuk mencoba aplikasi:</strong>
+                </p>
+                <p class="text-muted small mb-1">
+                    Email: <strong>admin@example.com</strong>
+                </p>
+                <p class="text-muted small mb-0">
+                    Password: <strong>password</strong>
+                </p>
+            </div>
         </form>
     </div>
     <div class="footer-basic">

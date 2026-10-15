@@ -217,6 +217,11 @@
                     </ul>
                 </div>
             </div>
+            <p class="text-muted small mb-2">
+                Ingin mencoba aplikasi? Silakan kunjungi
+                <a href="{{ url('/login') }}">halaman login</a>
+                untuk masuk sebagai administrator.
+            </p>
         </div>
     </footer>
     <template id="template-row-perusahaan">
