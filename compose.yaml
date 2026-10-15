@@ -1,0 +1,29 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: dishub-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: pass
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - dishub_mysql_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: dishub-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - "127.0.0.1:8082:80"
+    depends_on:
+      - mysql
+
+volumes:
+  dishub_mysql_data:
